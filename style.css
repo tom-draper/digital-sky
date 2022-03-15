@@ -1,0 +1,24 @@
+
+body {
+    margin: 0;
+}
+
+#main {
+    display: grid;
+    height: 100vh;
+}
+
+#sky {
+    display: grid;
+}
+
+.pixel {
+    height: 1px;
+    width: 1px;
+    position: relative;
+}
+
+.cloud {
+    /* opacity: 0.5; */
+    position: absolute;
+}
