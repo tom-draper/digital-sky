@@ -404,52 +404,59 @@ function getRGBValues(str) {
   return [parseInt(vals[0]), parseInt(vals[1]), parseInt(vals[2])];
 }
 
-function sunsetSpread(x, y, minY, colour, toPaint, seen) {
+function sunsetSpread(x, y, colour, toPaint, seen) {
   let nextColour = mutateColour(colour, 1);
 
-  if (y > minY) {
-    if (y < h - 1 && !seen.has([x, y + 1])) {
-      seen.add([x, y + 1]);
-      toPaint.push([x, y + 1, nextColour]);
-    }
-
-    if (!seen.has([x, y - 1])) {
-      seen.add([x, y - 1]);
-      toPaint.push([x, y - 1, nextColour]);
-    }
-
-    if (x < w - 1 && !seen.has([x + 1, y])) {
-      seen.add([x + 1, y]);
-      toPaint.push([x + 1, y, nextColour]);
-    }
-
-    if (x > 0 && !seen.has([x - 1, y])) {
-      seen.add([x - 1, y]);
-      toPaint.push([x - 1, y, nextColour]);
-    }
+  if (y < h - 1 && !seen.has([x, y + 1])) {
+    seen.add([x, y + 1]);
+    toPaint.push([x, y + 1, nextColour]);
   }
+
+  if (y > 0 && !seen.has([x, y - 1])) {
+    seen.add([x, y - 1]);
+    toPaint.push([x, y - 1, nextColour]);
+  }
+
+  if (x < w - 1 && !seen.has([x + 1, y])) {
+    seen.add([x + 1, y]);
+    toPaint.push([x + 1, y, nextColour]);
+  }
+
+  if (x > 0 && !seen.has([x - 1, y])) {
+    seen.add([x - 1, y]);
+    toPaint.push([x - 1, y, nextColour]);
+  }
+}
+
+function warpedDistance(x1, y1, x2, y2) {
+  let x = y2 - y1;
+  let y = (x2 - x1) * 0.3;
+  return Math.sqrt(x * x + y * y);
 }
 
 function createSunset(grid) {
   console.log("Creating sunset...");
-  let proportion = 0.5;
-  let minY = h * (1-proportion);
+  let maxD = h * 0.7;
 
   let seen = new TupleSet();
   let toPaint = [];
 
-  let maxOpacity = 0.5;
+  let maxOpacity = 0.45;
   let colour = [253, 94, 83, maxOpacity];
   
-  let start = [randInt(0, w), randInt(minY, h)];
+  let start = [randInt(0, w), h - 1];
   toPaint.push([start[0], start[1], colour]);
   seen.add(start);
   
+  let scale;
   while (toPaint.length > 0) {
     [x, y, colour] = nextPixel(toPaint);
-    colour[3] = maxOpacity * (1 - ((h-y+1)/(h*proportion)));
-    grid[y][x].appendChild(createSunsetPixel(colour));
-    sunsetSpread(x, y, minY, colour, toPaint, seen);
+    scale = 1 - (warpedDistance(x, y, start[0], start[1])/maxD);
+    if (scale > 0) {
+      colour[3] = maxOpacity * scale;
+      grid[y][x].appendChild(createSunsetPixel(colour));
+      sunsetSpread(x, y, colour, toPaint, seen);
+    }
   }
 
   console.log("Complete");
