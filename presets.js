@@ -1,7 +1,7 @@
 /* jshint esversion: 6 */
 
 let defaultHeight = 980;
-let defaultWidth = 1400;
+let defaultWidth = 1742;
 
 // Light day
 let presetLightDay = {
@@ -455,7 +455,7 @@ let presetNight = {
         colour: [173, 216, 230],
         opacity: 0.1,
         minSize: 100,
-        maxSize: 1000,
+        maxSize: 10000,
         pH: 0.6,
         pV: 0.2,
       },
