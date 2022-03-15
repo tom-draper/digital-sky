@@ -43,6 +43,7 @@ function randInt(min, max) {
 }
 
 function initSky(pixelSize) {
+  console.log("Initialising sky...");
   let grid = createGrid(h, w);
   let sky = document.getElementById("sky");
 
@@ -58,7 +59,7 @@ function initSky(pixelSize) {
       grid[y][x] = pixel;
     }
   }
-
+  console.log("Complete");
   return grid;
 }
 
@@ -88,7 +89,7 @@ function mutateColour(colour, step) {
   return mutatedColour;
 }
 
-function mutateColour2(colour, step) {
+function mutateColourInPlace(colour, step) {
   /// Modifies the original starting colour
   switch (randInt(0, 50)) {
     case 0:
@@ -151,6 +152,8 @@ function colourSpread(x, y, colour, seen, toPaint) {
 }
 
 function colourSky(grid, startColour) {
+  console.log("Colouring sky...");
+
   let startX = randInt(0, w - 1);
   let startY = randInt(0, h - 1);
   // let startColour = [255, 192, 203];  // Pink
@@ -163,14 +166,12 @@ function colourSky(grid, startColour) {
   seen.add([startX, startY]);
 
   let x, y, colour;
-  let idx;
   while (toPaint.length > 0) {
-    idx = Math.floor(Math.random() * toPaint.length);
-    [x, y, colour] = toPaint[idx];
-    toPaint.splice(idx, 1);
+    [x, y, colour] = nextPixel(toPaint);
     grid[y][x].style.background = formatColour(...colour);
     colourSpread(x, y, colour, seen, toPaint);
   }
+  console.log("Complete");
 }
 
 function inRange(cloudSize, sizeRange) {
@@ -235,7 +236,7 @@ function createCloudPixel(colour) {
   return cloudPixel;
 }
 
-function nextCloudPixel(toPaint) {
+function nextPixel(toPaint) {
   idx = Math.floor(Math.random() * toPaint.length);
   next = toPaint[idx];
   toPaint.splice(idx, 1);
@@ -259,7 +260,7 @@ function createCloudBase(grid, cloud, startColour, sizeRange, pH, pV) {
   let cloudSize = 1;
   let x, y, colour;
   while (toPaint.length > 0) {
-    [x, y, colour] = nextCloudPixel(toPaint);
+    [x, y, colour] = nextPixel(toPaint);
     let cloudPixel = createCloudPixel(colour);
     grid[y][x].appendChild(cloudPixel);
     cloud.level[0].push([x, y]);
@@ -291,7 +292,7 @@ function addCloudLayer(grid, cloud, startColour, sizeRange, pH, pV) {
   let x, y, colour;
   let cloudSize = 1;
   while (toPaint.length > 0) {
-    [x, y, colour] = nextCloudPixel(toPaint);
+    [x, y, colour] = nextPixel(toPaint);
     let cloudPixel = createCloudPixel(colour);
     grid[y][x].appendChild(cloudPixel);
     cloud.level[cloudLevel].push([x, y]);
@@ -336,10 +337,13 @@ function createCloud(grid, layers) {
 }
 
 function createClouds(grid, cloudConfig) {
+  console.log("Creating clouds...");
+
   let clouds = [];
   for (let i = 0; i < cloudConfig.quantity; i++) {
     clouds[i] = createCloud(grid, cloudConfig.layers);
   }
+  console.log("Complete");
   return clouds;
 }
 
@@ -377,20 +381,88 @@ function createStar(x, y, grid) {
 }
 
 function createStars(grid, density) {
+  console.log("Creating stars...");
   let stars = [];
   let n = h * w * density;
   for (let i = 0; i < n; i++) {
     let star = createStar(randInt(0, w - 1), randInt(0, h - 1), grid);
     stars.push(star);
   }
+  console.log("Complete");
   return stars;
 }
 
+function createSunsetPixel(colour) {
+  let sunsetPixel = document.createElement("div");
+  sunsetPixel.className = "pixel sunset";
+  sunsetPixel.style.background = formatColour(...colour);
+  return sunsetPixel;
+}
+
+function getRGBValues(str) {
+  var vals = str.substring(str.indexOf('(') +1, str.length -1).split(', ');
+  return [parseInt(vals[0]), parseInt(vals[1]), parseInt(vals[2])];
+}
+
+function sunsetSpread(x, y, minY, colour, toPaint, seen) {
+  let nextColour = mutateColour(colour, 1);
+
+  if (y > minY) {
+    if (y < h - 1 && !seen.has([x, y + 1])) {
+      seen.add([x, y + 1]);
+      toPaint.push([x, y + 1, nextColour]);
+    }
+
+    if (!seen.has([x, y - 1])) {
+      seen.add([x, y - 1]);
+      toPaint.push([x, y - 1, nextColour]);
+    }
+
+    if (x < w - 1 && !seen.has([x + 1, y])) {
+      seen.add([x + 1, y]);
+      toPaint.push([x + 1, y, nextColour]);
+    }
+
+    if (x > 0 && !seen.has([x - 1, y])) {
+      seen.add([x - 1, y]);
+      toPaint.push([x - 1, y, nextColour]);
+    }
+  }
+}
+
+function createSunset(grid) {
+  console.log("Creating sunset...");
+  let proportion = 0.5;
+  let minY = h * (1-proportion);
+
+  let seen = new TupleSet();
+  let toPaint = [];
+
+  let maxOpacity = 0.5;
+  let colour = [253, 94, 83, maxOpacity];
+  
+  let start = [randInt(0, w), randInt(minY, h)];
+  toPaint.push([start[0], start[1], colour]);
+  seen.add(start);
+  
+  while (toPaint.length > 0) {
+    [x, y, colour] = nextPixel(toPaint);
+    colour[3] = maxOpacity * (1 - ((h-y+1)/(h*proportion)));
+    grid[y][x].appendChild(createSunsetPixel(colour));
+    sunsetSpread(x, y, minY, colour, toPaint, seen);
+  }
+
+  console.log("Complete");
+}
 
 function createSky(config) {
   let grid = initSky(config.sky.pixelSize);
   
   colourSky(grid, [...config.sky.colour, config.sky.opacity]);
+
+  if (config.sunset) {
+    createSunset(grid);
+  }
   
   if (config.stars.include) {
     createStars(grid, config.stars.density);
@@ -409,7 +481,7 @@ let skyColours = {
 };
 
 
-let config = presetNight;
+let config = presetSunset;
 
 // Check for preset sky colour
 if (config.sky.colour in skyColours) {
