@@ -46,12 +46,12 @@ function randInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function initSky() {
+function initSky(pixelSize) {
   let grid = createGrid(h, w);
   let sky = document.getElementById("sky");
 
-  sky.style.height = h * size + "px";
-  sky.style.width = w * size + "px";
+  sky.style.height = h * pixelSize + "px";
+  sky.style.width = w * pixelSize + "px";
   sky.style.gridTemplateColumns = "repeat(" + w + ", 1fr)";
 
   for (let y = 0; y < h; y++) {
@@ -256,7 +256,9 @@ function createCloudBase(grid, cloud, startColour, sizeRange, pH, pV) {
   seen.add(start);
 
   cloud.start = start;
-  cloud.level = { 0: [start] };
+  cloud.level = [
+    [start]
+  ];
 
   let cloudSize = 1;
   let x, y, colour;
@@ -288,7 +290,6 @@ function addCloudLayer(grid, cloud, startColour, sizeRange, pH, pV) {
   seen.add(cloud.start);
 
   let cloudLevel = cloud.level.length;
-  console.log(cloudLevel);
   cloud.level[cloudLevel] = [cloud.start];
 
   let x, y, colour;
@@ -313,31 +314,122 @@ function addCloudLayer(grid, cloud, startColour, sizeRange, pH, pV) {
   }
 }
 
-function createCloud(grid) {
+function createCloud(grid, cloudConfig) {
   let cloud = {};
-  createCloudBase(grid, cloud, [235, 235, 235, 0.1], [100, 10000], 0.7, 0.3);
-  addCloudLayer(grid, cloud, [235, 235, 235, 0.1], [100, 10000], 0.7, 0.3);
-  addCloudLayer(grid, cloud, [235, 235, 235, 0.1], [100, 10000], 0.7, 0.3);
-  addCloudLayer(grid, cloud, [235, 235, 235, 0.1], [100, 10000], 0.7, 0.3);
-  addCloudLayer(grid, cloud, [240, 211, 201, 0.1], [100, 2000], 0.6, 0.2);
-  addCloudLayer(grid, cloud, [240, 211, 201, 0.1], [100, 2000], 0.6, 0.2);
-  addCloudLayer(grid, cloud, [173, 216, 230, 0.1], [100, 1000], 0.6, 0.2);
-  addCloudLayer(grid, cloud, [173, 216, 230, 0.1], [100, 1000], 0.6, 0.2);
-  console.log(cloud);
+
+  let baseLayer = cloudConfig.layers[0];
+  createCloudBase(
+    grid, 
+    cloud, 
+    [...baseLayer.colour, baseLayer.opacity], 
+    [baseLayer.minSize, baseLayer.maxSize], 
+    baseLayer.pH, 
+    baseLayer.pV
+  );
+  
+  for (let i = 1; i < cloudConfig.layers.length; i++) {
+    let layer = cloudConfig.layers[i];
+    addCloudLayer(
+      grid, 
+      cloud, 
+      [...layer.colour, layer.opacity], 
+      [layer.minSize, layer.maxSize], 
+      layer.pH, 
+      layer.pV);
+  }
+
   return cloud;
 }
 
-function createClouds(grid, n) {
-  clouds = {};
-  for (i = 0; i < n; i++) {
-    clouds[i] = createCloud(grid);
+function createClouds(grid, n, cloudConfig) {
+  clouds = [];
+  for (let i = 0; i < n; i++) {
+    clouds[i] = createCloud(grid, cloudConfig);
   }
   return clouds;
 }
 
-let h = 600;
-let w = 600;
-let size = 1;
-let grid = initSky();
-colourSky(grid);
-createClouds(grid, 10);
+
+let config = {
+  sky: {
+    height: 600,
+    width: 600,
+    pixelSize: 1
+  },
+  clouds: {
+    // Cloud layers are created in order
+    layers: [
+      {
+        colour: [235, 235, 235],
+        opacity: 0.2,
+        minSize: 100,
+        maxSize: 10000,
+        pH: 0.7,  // Probability of horizontal expansion
+        pV: 0.3,  // Probability of vertical expansion
+      },
+      {
+        colour: [235, 235, 235],
+        opacity: 0.15,
+        minSize: 100,
+        maxSize: 10000,
+        pH: 0.7,
+        pV: 0.3,
+      },
+      {
+        colour: [235, 235, 235],
+        opacity: 0.15,
+        minSize: 100,
+        maxSize: 10000,
+        pH: 0.7,
+        pV: 0.3,
+      },
+      {
+        colour: [235, 235, 235],
+        opacity: 0.15,
+        minSize: 100,
+        maxSize: 10000,
+        pH: 0.7, 
+        pV: 0.3,
+      },
+      {
+        colour: [240, 211, 201],
+        opacity: 0.3,
+        minSize: 100,
+        maxSize: 2000,
+        pH: 0.6, 
+        pV: 0.2,
+      },
+      {
+        colour: [240, 211, 201],
+        opacity: 0.15,
+        minSize: 100,
+        maxSize: 2000,
+        pH: 0.6, 
+        pV: 0.2,
+      },
+      {
+        colour: [173, 216, 230],
+        opacity: 0.15,
+        minSize: 100,
+        maxSize: 1000,
+        pH: 0.6, 
+        pV: 0.2,
+      },
+      {
+        colour: [173, 216, 230],
+        opacity: 0.15,
+        minSize: 100,
+        maxSize: 1000,
+        pH: 0.6, 
+        pV: 0.2,
+      },
+    ]
+  }
+};
+
+let w = config.sky.width;
+let h = config.sky.height;
+
+let grid = initSky(config.sky.pixelSize);
+colourSky(grid, config.sky);
+createClouds(grid, 10, config.clouds);
