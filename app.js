@@ -34,12 +34,8 @@ function createGrid(h, w) {
   return grid;
 }
 
-function randomColour() {
-  return `rgb(${randInt(0, 255)},${randInt(0, 255)},${randInt(0, 255)})`;
-}
-
-function formatColour(r, g, b) {
-  return `rgb(${r},${g},${b})`;
+function formatColour(r, g, b, a) {
+  return `rgba(${r},${g},${b},${a})`;
 }
 
 function randInt(min, max) {
@@ -172,7 +168,7 @@ function colourSky(grid, startColour) {
     idx = Math.floor(Math.random() * toPaint.length);
     [x, y, colour] = toPaint[idx];
     toPaint.splice(idx, 1);
-    grid[y][x].style.background = formatColour(colour[0], colour[1], colour[2]);
+    grid[y][x].style.background = formatColour(...colour);
     colourSpread(x, y, colour, seen, toPaint);
   }
 }
@@ -234,8 +230,8 @@ function cloudsSpread(
 function createCloudPixel(colour) {
   let cloudPixel = document.createElement("div");
   cloudPixel.className = "pixel cloud";
-  cloudPixel.style.background = formatColour(colour[0], colour[1], colour[2]);
-  cloudPixel.style.opacity = colour[3].toString();
+  cloudPixel.style.background = formatColour(...colour);
+  // cloudPixel.style.opacity = colour[3].toString();
   return cloudPixel;
 }
 
@@ -314,132 +310,112 @@ function addCloudLayer(grid, cloud, startColour, sizeRange, pH, pV) {
   }
 }
 
-function createCloud(grid, cloudConfig) {
+function createCloud(grid, layers) {
   let cloud = {};
 
-  let baseLayer = cloudConfig.layers[0];
   createCloudBase(
     grid, 
     cloud, 
-    [...baseLayer.colour, baseLayer.opacity], 
-    [baseLayer.minSize, baseLayer.maxSize], 
-    baseLayer.pH, 
-    baseLayer.pV
+    [...layers[0].colour, layers[0].opacity], 
+    [layers[0].minSize, layers[0].maxSize], 
+    layers[0].pH, 
+    layers[0].pV
   );
   
-  for (let i = 1; i < cloudConfig.layers.length; i++) {
-    let layer = cloudConfig.layers[i];
+  for (let i = 1; i < layers.length; i++) {
     addCloudLayer(
       grid, 
       cloud, 
-      [...layer.colour, layer.opacity], 
-      [layer.minSize, layer.maxSize], 
-      layer.pH, 
-      layer.pV);
+      [...layers[i].colour, layers[i].opacity], 
+      [layers[i].minSize, layers[i].maxSize], 
+      layers[i].pH, 
+      layers[i].pV);
   }
 
   return cloud;
 }
 
-function createClouds(grid, n, cloudConfig) {
-  clouds = [];
-  for (let i = 0; i < n; i++) {
-    clouds[i] = createCloud(grid, cloudConfig);
+function createClouds(grid, cloudConfig) {
+  let clouds = [];
+  for (let i = 0; i < cloudConfig.quantity; i++) {
+    clouds[i] = createCloud(grid, cloudConfig.layers);
   }
   return clouds;
 }
 
+function createStarPixel(colour) {
+  let starPixel = document.createElement("div");
+  starPixel.className = "pixel star";
+  starPixel.style.background = formatColour(...colour);
+  return starPixel;
+}
 
-let config = {
-  sky: {
-    height: 600,
-    width: 1000,
-    pixelSize: 1,
-    colour: [135, 206, 235],
-    opacity: 1,
-  },
-  clouds: {
-    // Cloud layers are created in order
-    layers: [
-      {
-        colour: [235, 235, 235],
-        opacity: 0.2,
-        minSize: 100,
-        maxSize: 10000,
-        pH: 0.7,  // Probability of horizontal expansion
-        pV: 0.3,  // Probability of vertical expansion
-      },
-      {
-        colour: [235, 235, 235],
-        opacity: 0.15,
-        minSize: 100,
-        maxSize: 10000,
-        pH: 0.7,
-        pV: 0.3,
-      },
-      {
-        colour: [235, 235, 235],
-        opacity: 0.15,
-        minSize: 100,
-        maxSize: 10000,
-        pH: 0.7,
-        pV: 0.3,
-      },
-      {
-        colour: [235, 235, 235],
-        opacity: 0.15,
-        minSize: 100,
-        maxSize: 10000,
-        pH: 0.7, 
-        pV: 0.3,
-      },
-      {
-        colour: [240, 211, 201],
-        opacity: 0.3,
-        minSize: 100,
-        maxSize: 2000,
-        pH: 0.6, 
-        pV: 0.2,
-      },
-      {
-        colour: [240, 211, 201],
-        opacity: 0.15,
-        minSize: 100,
-        maxSize: 2000,
-        pH: 0.6, 
-        pV: 0.2,
-      },
-      {
-        colour: [173, 216, 230],
-        opacity: 0.15,
-        minSize: 100,
-        maxSize: 1000,
-        pH: 0.6, 
-        pV: 0.2,
-      },
-      {
-        colour: [173, 216, 230],
-        opacity: 0.15,
-        minSize: 100,
-        maxSize: 1000,
-        pH: 0.6, 
-        pV: 0.2,
-      },
-      {
-        colour: [240, 240, 240],
-        opacity: 0.2,
-        minSize: 100,
-        maxSize: 1000,
-        pH: 0.6, 
-        pV: 0.2,
-      },
-    ]
+function onSky(x, y) {
+  return (x >= 0) && (y >= 0) && (x < w) && (y < h);
+}
+
+function starColour() {
+  return [randInt(230, 255), randInt(210, 240), randInt(220, 255), 1];
+}
+
+function createStar(x, y, grid) {
+  let star = [[x, y]];
+  let colour = starColour();
+  let starPixel = createStarPixel(colour);
+  grid[y][x].appendChild(starPixel);
+
+  let p = 0.1;
+  [[x+1, y], [x, y+1], [x-1, y], [x, y-1]].forEach(coord => {
+    if (Math.random() < p && onSky(...coord)) {
+      starPixel = createStarPixel(colour);
+      grid[coord[1]][coord[0]].appendChild(starPixel);
+      star.push(coord);
+    }
+  });
+
+  return star;
+}
+
+function createStars(grid, density) {
+  let stars = [];
+  let n = h * w * density;
+  for (let i = 0; i < n; i++) {
+    let star = createStar(randInt(0, w - 1), randInt(0, h - 1), grid);
+    stars.push(star);
   }
+  return stars;
+}
+
+
+function createSky(config) {
+  let grid = initSky(config.sky.pixelSize);
+  
+  colourSky(grid, [...config.sky.colour, config.sky.opacity]);
+  
+  if (config.stars.include) {
+    createStars(grid, config.stars.density);
+  }
+  
+  if (config.clouds.include) {
+    createClouds(grid, config.clouds);
+  }
+}
+
+
+let skyColours = {
+  daytime: [135, 206, 235],
+  evening: [255, 192, 203],
+  nighttime: [19, 19, 19]
 };
+
+
+let config = presetNight;
+
+// Check for preset sky colour
+if (config.sky.colour in skyColours) {
+  config.sky.colour = skyColours[config.sky.colour];
+}
 
 let w = config.sky.width;
 let h = config.sky.height;
-
-let grid = initSky(config.sky.pixelSize);
-colourSky(grid, [...config.sky.colour, config.sky.opacity]);
-createClouds(grid, 10, config.clouds);
+createSky(config);

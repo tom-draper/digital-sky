@@ -19,6 +19,9 @@ body {
 }
 
 .cloud {
-    /* opacity: 0.5; */
+    position: absolute;
+}
+
+.star {
     position: absolute;
 }
