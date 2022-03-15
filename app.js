@@ -94,7 +94,7 @@ function mutateColour(colour, step) {
 
 function mutateColour2(colour, step) {
   /// Modifies the original starting colour
-  switch (randInt(0, 60)) {
+  switch (randInt(0, 50)) {
     case 0:
       colour[0] = Math.min(colour[0] + step, 255);
       break;
@@ -154,11 +154,11 @@ function colourSpread(x, y, colour, seen, toPaint) {
   }
 }
 
-function colourSky(grid) {
+function colourSky(grid, startColour) {
   let startX = randInt(0, w - 1);
   let startY = randInt(0, h - 1);
   // let startColour = [255, 192, 203];  // Pink
-  let startColour = [135, 206, 235, 1]; // Blue
+  // let startColour = [135, 206, 235, 1]; // Blue
 
   let seen = new TupleSet();
   let toPaint = [];
@@ -353,8 +353,10 @@ function createClouds(grid, n, cloudConfig) {
 let config = {
   sky: {
     height: 600,
-    width: 600,
-    pixelSize: 1
+    width: 1000,
+    pixelSize: 1,
+    colour: [135, 206, 235],
+    opacity: 1,
   },
   clouds: {
     // Cloud layers are created in order
@@ -423,6 +425,14 @@ let config = {
         pH: 0.6, 
         pV: 0.2,
       },
+      {
+        colour: [240, 240, 240],
+        opacity: 0.2,
+        minSize: 100,
+        maxSize: 1000,
+        pH: 0.6, 
+        pV: 0.2,
+      },
     ]
   }
 };
@@ -431,5 +441,5 @@ let w = config.sky.width;
 let h = config.sky.height;
 
 let grid = initSky(config.sky.pixelSize);
-colourSky(grid, config.sky);
+colourSky(grid, [...config.sky.colour, config.sky.opacity]);
 createClouds(grid, 10, config.clouds);
