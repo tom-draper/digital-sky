@@ -150,22 +150,6 @@ let clouds1 = {
       pH: 0.7,
       pV: 0.3,
     },
-    // {
-    //   colour: [240, 211, 201],
-    //   opacity: 0.3,
-    //   minSize: 100,
-    //   maxSize: 20000,
-    //   pH: 0.6,
-    //   pV: 0.2,
-    // },
-    // {
-    //   colour: [240, 211, 201],
-    //   opacity: 0.15,
-    //   minSize: 100,
-    //   maxSize: 20000,
-    //   pH: 0.6,
-    //   pV: 0.2,
-    // },
     {
       colour: [173, 216, 230],
       opacity: 0.15,
@@ -187,6 +171,69 @@ let clouds1 = {
       opacity: 0.2,
       minSize: 100,
       maxSize: 10000,
+      pH: 0.6,
+      pV: 0.2,
+    },
+  ],
+};
+let cloudsBig = {
+  include: true,
+  quantity: 10,
+  // Cloud layers are created in order
+  layers: [
+    {
+      colour: [235, 235, 235],
+      opacity: 0.2,
+      minSize: 100,
+      maxSize: 20000,
+      pH: 0.7, // Probability of horizontal expansion
+      pV: 0.3, // Probability of vertical expansion
+    },
+    {
+      colour: [235, 235, 235],
+      opacity: 0.15,
+      minSize: 100,
+      maxSize: 20000,
+      pH: 0.7,
+      pV: 0.3,
+    },
+    {
+      colour: [235, 235, 235],
+      opacity: 0.15,
+      minSize: 100,
+      maxSize: 20000,
+      pH: 0.7,
+      pV: 0.3,
+    },
+    {
+      colour: [235, 235, 235],
+      opacity: 0.15,
+      minSize: 100,
+      maxSize: 20000,
+      pH: 0.7,
+      pV: 0.3,
+    },
+    {
+      colour: [173, 216, 230],
+      opacity: 0.15,
+      minSize: 100,
+      maxSize: 20000,
+      pH: 0.6,
+      pV: 0.2,
+    },
+    {
+      colour: [173, 216, 230],
+      opacity: 0.15,
+      minSize: 100,
+      maxSize: 20000,
+      pH: 0.6,
+      pV: 0.2,
+    },
+    {
+      colour: [240, 240, 240],
+      opacity: 0.2,
+      minSize: 100,
+      maxSize: 20000,
       pH: 0.6,
       pV: 0.2,
     },
@@ -353,14 +400,15 @@ let presetSunset = {
 };
 
 let presetLateEvening = {
-  animate: false,
+  animate: true,
   wind: noWind,
   sky: defaultSky([8, 43, 94]),
   stars: starsFaint,
   sun: false,
   moon: false,
-  sunset: sunset2,
-  clouds: clouds1
+  // sunset: sunset2,
+  sunset: noSunset,
+  clouds: cloudsBig
 };
 
 let presetPinkSky = {

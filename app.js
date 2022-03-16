@@ -48,7 +48,6 @@ function randInt(min, max) {
 }
 
 function initSky(pixelSize) {
-  console.log("Initialising sky...");
   let grid = createGrid(h, w);
   let sky = document.getElementById("sky");
 
@@ -64,7 +63,6 @@ function initSky(pixelSize) {
       grid[y][x] = pixel;
     }
   }
-  console.log("Complete");
   return grid;
 }
 
@@ -158,8 +156,6 @@ function colourSpread(x, y, colour, seen, toPaint) {
 }
 
 function colourSky(grid, skyConfig) {
-  console.log("Colouring sky...");
-
   let start = [randInt(0, w - 1), randInt(0, h - 1)];
   let startColour = [...skyConfig.colour, skyConfig.opacity];
 
@@ -175,7 +171,29 @@ function colourSky(grid, skyConfig) {
     grid[y][x].style.background = formatColour2(colour);
     colourSpread(x, y, colour, seen, toPaint);
   }
-  console.log("Complete");
+}
+
+function moveCloud(grid, cloud) {
+  let movedCloud = {};
+  for (let y in cloud.pixels) {
+    movedCloud[y] = {};
+    for (let x in cloud.pixels[y]) {
+      grid[y][x].removeChild(cloud.pixels[y][x].div);
+      if (x-10 >= 0) {
+        grid[y][x-10].appendChild(cloud.pixels[y][x].div);
+        movedCloud[y][x-10] = cloud.pixels[y][x];
+      }
+    }
+  }
+  return movedCloud;
+}
+
+function moveClouds(grid, clouds) {
+  console.log("Moving clouds...");
+  for (let i = 0; i < clouds.length; i++) {
+    console.log("Cloud", i);
+    clouds[i].pixels = moveCloud(grid, clouds[i]);
+  }
 }
 
 function inRange(cloudSize, sizeRange) {
@@ -257,7 +275,7 @@ function createCloudBase(grid, cloud, startColour, sizeRange, pH, pV) {
   seen.add(start);
 
   cloud.start = start;
-  cloud.level = [[start]];
+  cloud.pixels = {};
 
   let cloudSize = 1;
   let x, y, colour;
@@ -265,7 +283,13 @@ function createCloudBase(grid, cloud, startColour, sizeRange, pH, pV) {
     [x, y, colour] = nextPixel(toPaint);
     let cloudPixel = createCloudPixel(colour);
     grid[y][x].appendChild(cloudPixel);
-    cloud.level[0].push([x, y]);
+    if (!(y in cloud.pixels)) {
+      cloud.pixels[y] = {};
+    }
+    cloud.pixels[y][x] = {
+      div: cloudPixel,
+      colour: colour
+    };
 
     cloudSize = cloudsSpread(
       x,
@@ -288,16 +312,28 @@ function addCloudLayer(grid, cloud, startColour, sizeRange, pH, pV) {
   toPaint.push([cloud.start[0], cloud.start[1], startColour]);
   seen.add(cloud.start);
 
-  let cloudLevel = cloud.level.length;
-  cloud.level[cloudLevel] = [cloud.start];
-
   let x, y, colour;
   let cloudSize = 1;
   while (toPaint.length > 0) {
     [x, y, colour] = nextPixel(toPaint);
-    let cloudPixel = createCloudPixel(colour);
-    grid[y][x].appendChild(cloudPixel);
-    cloud.level[cloudLevel].push([x, y]);
+
+    if (!(y in cloud.pixels) || !(x in cloud.pixels[y])) {
+      // If a cloud pixel at this position doesn't exist, create a new cloud pixel
+      let cloudPixel = createCloudPixel(colour);
+      grid[y][x].appendChild(cloudPixel);
+      if (!(y in cloud.pixels)) {
+        cloud.pixels[y] = {};
+      }
+      cloud.pixels[y][x] = {
+        div: cloudPixel,
+        colour: colour
+      };
+    } else {
+      // If a cloud pixel at this position exists, apply a colour over the top
+      let combinedColour = combineColours(colour, cloud.pixels[y][x].colour);
+      cloud.pixels[y][x].div.style.background = formatColour2(combinedColour);
+      cloud.pixels[y][x].colour = combinedColour;
+    }
 
     cloudSize = cloudsSpread(
       x,
@@ -494,28 +530,35 @@ function createSunset(grid, sunsetConfig) {
 }
 
 function createSky(config) {
+  console.log("Initialising sky...");
   let grid = initSky(config.sky.pixelSize);
-
+  
+  console.log("Colouring sky...");
   colourSky(grid, config.sky);
 
   if (config.sunset.include) {
     console.log("Creating sunset...");
     createSunset(grid, config.sunset);
-    console.log("Complete");
   }
 
   if (config.stars.include) {
     console.log("Creating stars...");
     createStars(grid, config.stars);
-    console.log("Complete");
   }
-
+  
+  let clouds;
   if (config.clouds.include) {
     console.log("Creating clouds...");
-    createClouds(grid, config.clouds);
-    console.log("Complete");
+    clouds = createClouds(grid, config.clouds);
   }
   console.log("Rendering sky...");
+
+  if (config.animate) {
+    console.log("Animating scene...");
+    setTimeout(function() {
+      moveClouds(grid, clouds);
+    }, 35000);
+  }
 }
 
 let skyColours = {
