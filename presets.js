@@ -13,16 +13,33 @@ function defaultSky(colour) {
   };
 } 
 
+let wind1 = {
+  speed: 0.1,
+  direction: 'left'
+};
+let noWind = {
+  speed: null,
+  direction: null
+};
+
 let stars1 = {
   include: true,
+  opacity: 1,
   density: 0.005,
 };
 let starsDense = {
   include: true,
+  opacity: 1,
   density: 0.01,
 };
-let starsNone = {
+let starsFaint = {
+  include: true,
+  opacity: 0.5,
+  density: 0.002,
+};
+let noStars = {
   include: false,
+  opacity: null,
   density: null,
 };
 
@@ -49,7 +66,46 @@ let sunset1 = {
     }
   ]
 };
-let sunsetNone = {
+let sunset2 = {
+  include: true,
+  layers: [
+    {
+      colour: [99, 197, 218],
+      maxOpacity: 0.25,
+      proportion: 0.6,
+      colourMutationSpeed: 1,
+      xStretch: 0.3,
+      yStretch: 0.5,
+    },
+    {
+      colour: [33, 89, 136],
+      maxOpacity: 0.4,
+      proportion: 0.9,
+      colourMutationSpeed: 3,
+      xStretch: 0.2,
+      yStretch: 0.4,
+    },
+    {
+      colour: [253, 94, 83],
+      maxOpacity: 0.45,
+      // The proportion of the height used as the max distance that the sunset travels
+      proportion: 0.7,
+      // Magnitude of the inc/dec of one rgb value with each colour step
+      colourMutationSpeed: 1,
+      xStretch: 0.5,  // >1 (thinner), <1 (wider) 
+      yStretch: 1,  // >1 (shorter), <1 (taller) 
+    },
+    {
+      colour: [255, 201, 34],
+      maxOpacity: 0.4,
+      proportion: 0.7,
+      colourMutationSpeed: 1,
+      xStretch: 0.3,
+      yStretch: 1,
+    },
+  ]
+};
+let noSunset = {
   include: false,
   colour: null,
   maxOpacity: null,
@@ -98,7 +154,7 @@ let clouds1 = {
       colour: [240, 211, 201],
       opacity: 0.3,
       minSize: 100,
-      maxSize: 2000,
+      maxSize: 20000,
       pH: 0.6,
       pV: 0.2,
     },
@@ -262,48 +318,70 @@ let cloudsMild = {
     }
   ],
 };
-
-// Light day
-let presetLightDay = {
-  animate: false,
-  windspeed: 0.2,
-  sky: defaultSky([135, 206, 235]),
-  stars: starsNone,
-  sun: false,
-  moon: false,
-  sunset: sunsetNone,
-  clouds: clouds1
+let noClouds = {
+  include: false,
+  quantity: null,
+  layers: null
 };
 
 
+
+
+
+// ----------------------- PRESETS -----------------------
+
+let presetLightDay = {
+  animate: false,
+  wind: noWind,
+  sky: defaultSky([135, 206, 235]),
+  stars: noStars,
+  sun: false,
+  moon: false,
+  sunset: noSunset,
+  clouds: clouds1
+};
+
 let presetSunset = {
   animate: false,
-  windspeed: 0.2,
+  wind: noWind,
   sky: defaultSky([135, 206, 235]),
-  stars: starsNone,
+  stars: starsFaint,
   sun: false,
   moon: false,
   sunset: sunset1,
   clouds: clouds1
 };
 
-let presetPinkSky = {
+let presetLateEvening = {
   animate: false,
-  sky: defaultSky([255, 192, 203]),
-  stars: starsNone,
+  wind: noWind,
+  sky: defaultSky([8, 43, 94]),
+  stars: starsFaint,
   sun: false,
   moon: false,
-  sunset: sunsetNone,
+  sunset: sunset2,
+  clouds: clouds1
+};
+
+let presetPinkSky = {
+  animate: false,
+  wind: noWind,
+  sky: defaultSky([255, 192, 203]),
+  stars: noStars,
+  sun: false,
+  moon: false,
+  sunset: noSunset,
   clouds: clouds1
 };
 
 let presetLightDayCloudy = {
   animate: false,
+  wind: noWind,
   sky: defaultSky([135, 206, 235]),
-  stars: starsNone,
+  stars: noStars,
   sun: false,
   moon: false,
-  sunset: sunsetNone,
+  sunset: noSunset,
   clouds: {
     include: true,
     quantity: 10,
@@ -387,36 +465,33 @@ let presetLightDayCloudy = {
 
 let presetLightDayStarry = {
   animate: false,
+  wind: noWind,
   sky: defaultSky([135, 206, 235]),
   stars: stars1,
   sun: false,
   moon: false,
-  sunset: sunsetNone,
+  sunset: noSunset,
   clouds: clouds1
 };
 
 let presetNight = {
   animate: false,
+  wind: noWind,
   sky: defaultSky([40, 30, 45]),
   stars: stars1,
   sun: false,
   moon: false,
-  sunset: sunsetNone,
+  sunset: noSunset,
   clouds: cloudsMild
 };
 
 let presetCloudy = {
   animate: false,
-  sky: {
-    height: defaultHeight,
-    width: defaultWidth,
-    pixelSize: 1,
-    colour: [115, 160, 200],
-    opacity: 1,
-  },
+  wind: noWind,
+  sky: defaultSky([115, 160, 200]),
   stars: starsDense,
   sun: false,
   moon: false,
-  sunset: sunsetNone,
+  sunset: noSunset,
   clouds: cloudsCloudy
 };

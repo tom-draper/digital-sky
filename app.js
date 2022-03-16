@@ -358,13 +358,13 @@ function onSky(x, y) {
   return x >= 0 && y >= 0 && x < w && y < h;
 }
 
-function starColour() {
-  return [randInt(230, 255), randInt(210, 240), randInt(220, 255), 1];
+function starColour(opacity) {
+  return [randInt(230, 255), randInt(210, 240), randInt(220, 255), opacity];
 }
 
-function createStar(x, y, grid) {
+function createStar(x, y, grid, opacity) {
   let star = [[x, y]];
-  let colour = starColour();
+  let colour = starColour(opacity);
   let starPixel = createStarPixel(colour);
   grid[y][x].appendChild(starPixel);
 
@@ -389,7 +389,7 @@ function createStars(grid, starsConfig) {
   let stars = [];
   let n = h * w * starsConfig.density;
   for (let i = 0; i < n; i++) {
-    let star = createStar(randInt(0, w - 1), randInt(0, h - 1), grid);
+    let star = createStar(randInt(0, w - 1), randInt(0, h - 1), grid, starsConfig.opacity);
     stars.push(star);
   }
   return stars;
@@ -524,7 +524,7 @@ let skyColours = {
   nighttime: [19, 19, 19],
 };
 
-let config = presetSunset;
+let config = presetLateEvening;
 
 // Check for preset sky colour
 if (config.sky.colour in skyColours) {
