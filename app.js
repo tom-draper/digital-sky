@@ -529,6 +529,44 @@ function createSunset(grid, sunsetConfig) {
   }
 }
 
+
+function distance(x1, y1, x2, y2) {
+  let x = y2 - y1;
+  let y = x2 - x1;
+  return Math.sqrt(x * x + y * y);
+}
+
+function createMoonPixel(colour) {
+  let moonPixel = document.createElement("div");
+  moonPixel.className = "pixel moon";
+  moonPixel.style.background = formatColour(...colour);
+  return moonPixel;
+}
+
+function createMoon(grid, moonConfig) {
+  let r = moonConfig.radius;
+
+  let border = Math.round(1.5 * r);
+  let start = [randInt(border, w - 1 - border), randInt(border, h - 1 - border)];
+  
+  let toPaint = [];
+  for (let y = start[1] - r; y < start[1] + r; y++) {
+    for (let x = start[0] - r; x < start[0] + r; x++) {
+      if (distance(x, y, start[0], start[1]) < r && onSky(x, y)) {
+        toPaint.push([x, y]);
+      }
+    }
+  }
+  
+  let colour = [...moonConfig.colour, 1];
+  while (toPaint.length > 0) {
+    [x, y] = nextPixel(toPaint);
+    let moonPixel = createMoonPixel(colour);
+    grid[y][x].appendChild(moonPixel);
+    colour = mutateColourInPlace(colour, 5);
+  }
+}
+
 function createSky(config) {
   console.log("Initialising sky...");
   let grid = initSky(config.sky.pixelSize);
@@ -545,6 +583,11 @@ function createSky(config) {
     console.log("Creating stars...");
     createStars(grid, config.stars);
   }
+
+  if (config.moon.include) {
+    console.log("Creating moon...");
+    createMoon(grid, config.moon);
+  }
   
   let clouds;
   if (config.clouds.include) {
@@ -553,12 +596,12 @@ function createSky(config) {
   }
   console.log("Rendering sky...");
 
-  if (config.animate) {
-    console.log("Animating scene...");
-    setTimeout(function() {
-      moveClouds(grid, clouds);
-    }, 35000);
-  }
+  // if (config.animate) {
+  //   console.log("Animating scene...");
+  //   setTimeout(function() {
+  //     moveClouds(grid, clouds);
+  //   }, 35000);
+  // }
 }
 
 let skyColours = {
@@ -567,7 +610,7 @@ let skyColours = {
   nighttime: [19, 19, 19],
 };
 
-let config = presetLateEvening;
+let config = presetMoonAndStars;
 
 // Check for preset sky colour
 if (config.sky.colour in skyColours) {

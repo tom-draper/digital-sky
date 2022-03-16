@@ -399,6 +399,21 @@ let presetSunset = {
   clouds: clouds1
 };
 
+let presetMoonAndStars = {
+  animate: true,
+  wind: noWind,
+  sky: defaultSky([8, 43, 94]),
+  stars: starsFaint,
+  sun: false,
+  moon: {
+    include: true,
+    colour: [244, 246, 240],
+    radius: 45,
+  },
+  sunset: noSunset,
+  clouds: noClouds
+};
+
 let presetLateEvening = {
   animate: true,
   wind: noWind,
@@ -406,8 +421,7 @@ let presetLateEvening = {
   stars: starsFaint,
   sun: false,
   moon: false,
-  // sunset: sunset2,
-  sunset: noSunset,
+  sunset: sunset2,
   clouds: cloudsBig
 };
 
