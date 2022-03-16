@@ -407,8 +407,11 @@ let presetMoonAndStars = {
   sun: false,
   moon: {
     include: true,
-    colour: [244, 246, 240],
-    radius: 45,
+    // colour: [244, 246, 240],
+    colour: [248, 250, 244],
+    radius: 40,
+    halfMoon: true,
+    noise: 2,
   },
   sunset: noSunset,
   clouds: noClouds

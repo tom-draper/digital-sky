@@ -543,6 +543,38 @@ function createMoonPixel(colour) {
   return moonPixel;
 }
 
+function fullMoon(grid, toPaint, moonConfig) {
+  let colour = [...moonConfig.colour, 1];
+  while (toPaint.length > 0) {
+    [x, y] = nextPixel(toPaint);
+    let moonPixel = createMoonPixel(colour);
+    grid[y][x].appendChild(moonPixel);
+    colour = mutateColourInPlace(colour, moonConfig.noise);
+  }
+}
+
+function halfMoon(grid, toPaint, moonConfig, start) {
+  let r = moonConfig.radius;
+  let position = randInt(0.25*r, r*0.9);
+  let edge = [start[0] - position, start[1] - position];
+  
+  let colour = [...moonConfig.colour, 1];
+  while (toPaint.length > 0) {
+    [x, y] = nextPixel(toPaint);
+    if (distance(x, y, edge[0], edge[1]) >= r) {
+      let moonPixel = createMoonPixel(colour);
+      grid[y][x].appendChild(moonPixel);
+      colour = mutateColourInPlace(colour, moonConfig.noise);
+    } else {
+      for (let i = 0; i < grid[y][x].children.length; i++) {
+        if (grid[y][x].children[i].className == "pixel star") {
+          grid[y][x].removeChild(grid[y][x].children[i]);
+        }
+      }
+    }
+  }
+}
+
 function createMoon(grid, moonConfig) {
   let r = moonConfig.radius;
 
@@ -557,13 +589,11 @@ function createMoon(grid, moonConfig) {
       }
     }
   }
-  
-  let colour = [...moonConfig.colour, 1];
-  while (toPaint.length > 0) {
-    [x, y] = nextPixel(toPaint);
-    let moonPixel = createMoonPixel(colour);
-    grid[y][x].appendChild(moonPixel);
-    colour = mutateColourInPlace(colour, 5);
+
+  if (moonConfig.halfMoon) {
+    halfMoon(grid, toPaint, moonConfig, start); 
+  } else {
+    fullMoon(grid, toPaint, moonConfig);
   }
 }
 
