@@ -1,4 +1,3 @@
-/* jshint esversion: 6 */
 
 function TupleSet() {
   this.data = new Map();
@@ -118,8 +117,8 @@ function mutateColourInPlace(colour, step) {
   return colour;
 }
 
-function colourSpread(x, y, colour, seen, toPaint) {
-  let nextColour = mutateColour(colour, 1);
+function colourSpread(x, y, colour, seen, toPaint, mutationSpeed) {
+  let nextColour = mutateColour(colour, mutationSpeed);
 
   if (y < h - 1 && !seen.has([x, y + 1])) {
     toPaint.push([x, y + 1, nextColour]);
@@ -169,7 +168,7 @@ function colourSky(grid, skyConfig) {
   while (toPaint.length > 0) {
     [x, y, colour] = nextPixel(toPaint);
     grid[y][x].style.background = formatColour2(colour);
-    colourSpread(x, y, colour, seen, toPaint);
+    colourSpread(x, y, colour, seen, toPaint, skyConfig.mutationSpeed);
   }
 }
 
@@ -599,39 +598,32 @@ function createMoon(grid, moonConfig) {
 
 function createSky(config) {
   console.log("Initialising sky...");
-  let grid = initSky(config.sky.pixelSize);
+  let grid = initSky(config.sky.properties.pixelSize);
   
   console.log("Colouring sky...");
-  colourSky(grid, config.sky);
+  colourSky(grid, config.sky.properties);
 
   if (config.sunset.include) {
     console.log("Creating sunset...");
-    createSunset(grid, config.sunset);
+    console.log(config.sunset);
+    createSunset(grid, config.sunset.properties);
   }
 
   if (config.stars.include) {
     console.log("Creating stars...");
-    createStars(grid, config.stars);
+    createStars(grid, config.stars.properties);
   }
 
   if (config.moon.include) {
     console.log("Creating moon...");
-    createMoon(grid, config.moon);
+    createMoon(grid, config.moon.properties);
   }
   
-  let clouds;
   if (config.clouds.include) {
     console.log("Creating clouds...");
-    clouds = createClouds(grid, config.clouds);
+    createClouds(grid, config.clouds.properties);
   }
   console.log("Rendering sky...");
-
-  // if (config.animate) {
-  //   console.log("Animating scene...");
-  //   setTimeout(function() {
-  //     moveClouds(grid, clouds);
-  //   }, 35000);
-  // }
 }
 
 let skyColours = {
@@ -640,13 +632,13 @@ let skyColours = {
   nighttime: [19, 19, 19],
 };
 
-let config = presetMoonAndStars;
+let config = generateConfig();
 
 // Check for preset sky colour
-if (config.sky.colour in skyColours) {
-  config.sky.colour = skyColours[config.sky.colour];
+if (config.sky.properties.colour in skyColours) {
+  config.sky.properties.colour = skyColours[config.sky.properties.colour];
 }
 
-let w = config.sky.width;
-let h = config.sky.height;
+let w = config.sky.properties.width;
+let h = config.sky.properties.height;
 createSky(config);
