@@ -12,6 +12,11 @@ body {
     display: grid;
 }
 
+#canvas {
+    height: 720px;
+    width: 1280px;
+}
+
 .pixel {
     height: 1px;
     width: 1px;

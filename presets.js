@@ -4,11 +4,14 @@ let defaultWidth = 1280;
 
 function defaultSky(colour) {
   return {
-    height: defaultHeight,
-    width: defaultWidth,
-    pixelSize: 1,
-    colour: colour,
-    opacity: 1
+    properties: {
+      height: defaultHeight,
+      width: defaultWidth,
+      pixelSize: 1,
+      colour: colour,
+      mutationSpeed: 3,
+      opacity: 1
+    }
   };
 }
 
