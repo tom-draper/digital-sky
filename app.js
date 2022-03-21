@@ -30,7 +30,7 @@ function TupleSet() {
 }
 
 function createGrid(h, w) {
-  let grid = new Array(h).fill(new Array(w));
+  let grid = [...Array(h)].map(e => Array(w));
   return grid;
 }
 
@@ -117,7 +117,6 @@ function mutateColourInPlace(colour, step) {
 
 function colourSpread(x, y, colour, seen, toPaint, mutationSpeed) {
   let nextColour = mutateColour(colour, mutationSpeed);
-  console.log(nextColour);
 
   if (y < h - 1 && !seen.has([x, y + 1])) {
     toPaint.push([x, y + 1, nextColour]);
@@ -163,15 +162,15 @@ function colourSky(grid, skyConfig) {
   toPaint.push([start[0], start[1], startColour]);
   seen.add(start);
 
+  let x, y, colour;
   while (toPaint.length > 0) {
-    let [x, y, colour] = nextPixel(toPaint);
+    [x, y, colour] = nextPixel(toPaint);
     grid[y][x] = [{
       type: 'sky', 
       colour: colour
     }];
     colourSpread(x, y, colour, seen, toPaint, skyConfig.mutationSpeed);
   }
-  console.log(grid);
 }
 
 function moveCloud(grid, cloud) {
@@ -610,33 +609,15 @@ function createSky(config) {
   return grid;
 }
 
-function buildCanvas(grid) {
-  const canvas = document.getElementById('canvas');
-  const ctx = canvas.getContext('2d');
-
-  const imageData = ctx.createImageData(w, h);
-  console.log(imageData);
-
-  // Iterate through every pixel
-  console.log(imageData.data.length, h*w);
-  for (let i = 0; i < imageData.data.length; i += 4) {
-    let x = (i/4) % w;
-    let y = Math.floor((i/4) / w);
-    let colour = grid[y][x][0];
-    for (let j = 1; j < grid[y][x].length; j++) {
-      colour = combineColours(colour, grid[y][x][j]);
-    }
-
-    imageData.data[i] = colour[0];
-    imageData.data[i+1] = colour[1];
-    imageData.data[i+2] = colour[2];
-    imageData.data[i+3] = colour[3];
+function collapsePixel(pixel) {
+  let colour = pixel[0].colour;
+  for (let j = 1; j < pixel.length; j++) {
+    colour = combineColours(pixel[j].colour, colour);
   }
-
-  ctx.putImageData(imageData, w, h);
+  return colour;
 }
 
-function buildCanvas2(grid) {
+function buildCanvas(grid) {
   const canvas = document.getElementById('canvas');
   const ctx = canvas.getContext('2d');
 
@@ -646,20 +627,15 @@ function buildCanvas2(grid) {
   for (let y = 0; y < h; y++) {
     for (let x = 0; x < w; x++) {
       let i = (x + w * y) * 4;
-
-      let colour = grid[y][x][0].colour;
-      for (let j = 1; j < grid[y][x].length; j++) {
-        colour = combineColours(colour, grid[y][x][j].colour);
-      }
-
+      
+      let colour = collapsePixel(grid[y][x]);
+      
       imageData.data[i] = colour[0];
       imageData.data[i + 1] = colour[1];
       imageData.data[i + 2] = colour[2];
       imageData.data[i + 3] = colour[3] * 255;
     }
   }
-
-  console.log(imageData);
 
   ctx.putImageData(imageData, 0, 0);
 }
@@ -670,8 +646,7 @@ let skyColours = {
   nighttime: [19, 19, 19],
 };
 
-let config = presetPinkSky;
-// let config = generateConfig();
+let config = presetLateEvening;
 
 // Check for preset sky colour
 if (config.sky.properties.colour in skyColours) {
@@ -682,5 +657,5 @@ let w = config.sky.properties.width;
 let h = config.sky.properties.height;
 
 let grid = createSky(config);
-buildCanvas2(grid);
+buildCanvas(grid);
 console.log("Complete");
