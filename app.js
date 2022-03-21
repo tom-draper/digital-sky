@@ -605,7 +605,6 @@ function createSky(config) {
 
   if (config.sunset.include) {
     console.log("Creating sunset...");
-    console.log(config.sunset);
     createSunset(grid, config.sunset.properties);
   }
 

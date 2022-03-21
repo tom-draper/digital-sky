@@ -3,15 +3,29 @@ function randomColour() {
   return [randInt(0, 255), randInt(0, 255), randInt(0, 255)];
 }
 
+function randomSkyColourNight() {
+ return [randInt(0, 100), randInt(0, 100), randInt(0, 100)];
+}
+function randomSkyColourDay() {
+  return [randInt(150, 250), randInt(140, 240), randInt(160, 255)];
+}
+
 function randomSkyColour() {
-  return [randInt(160, 255), randInt(150, 240), randInt(180, 255)];
+  let colour;
+  let pNight = 0.3;
+  if (Math.random() < pNight) {
+    colour = randomSkyColourNight();
+  } else {
+    colour = randomSkyColourDay();
+  }
+  return colour;
 }
 
 let res720 = [1280, 720];
 let res1080 = [1920, 1080];
 
 function generateSky() {
-  let colour = randomColour();
+  let colour = randomSkyColour();
   let mutationSpeed = randInt(1, 5);
 
   let sky =  {
@@ -88,6 +102,10 @@ function generateMoon(skyColour) {
   return moon;
 }
 
+function randomSunsetColour() {
+  return [randInt(100, 255), randInt(100, 240), randInt(100, 255)];
+}
+
 function randFloat(min, max) {
   const str = (Math.random() * (max - min) + min);
   return parseFloat(str);
@@ -98,9 +116,9 @@ function generateSunsetLayers() {
   let n = randInt(1, 10);
   for (let i = 0; i < n; i++) {
     let layer = {
-      colour: randomColour(),
+      colour: randomSunsetColour(),
       maxOpacity: randFloat(0.2, 1),
-      proportion: Math.random(),
+      proportion: randFloat(0.2, 1),
       colourMutationSpeed: randInt(1, 3),
       xStretch: randFloat(0.2, 1.2),  // >1 (thinner), <1 (wider) 
       yStretch: randFloat(0.7, 1.5),  // >1 (shorter), <1 (taller) 
