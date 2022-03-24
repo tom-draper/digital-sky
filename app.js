@@ -465,8 +465,8 @@ function applyColour(x, y, grid, colour) {
 }
 
 function addSunsetToSky(grid, x, y, colour) {
-  let [hasCloud, idx] = pixelHasType(grid[y][x], 'sunset');
-  if (hasCloud) {
+  let [hasSunset, idx] = pixelHasType(grid[y][x], 'sunset');
+  if (hasSunset) {
     grid[y][x][idx].colour = combineColours(colour, grid[y][x][idx].colour);
   } else {
     grid[y][x].push({type: 'sunset', colour: colour});
@@ -618,7 +618,10 @@ function collapsePixel(pixel) {
 }
 
 function buildCanvas(grid) {
-  const canvas = document.getElementById('canvas');
+  let canvas = document.getElementById('canvas');
+  let retinaRation = window.devicePixelRatio;
+  canvas.width = w * retinaRation;
+  canvas.height = h * retinaRation;
   const ctx = canvas.getContext('2d');
 
   const imageData = ctx.createImageData(w, h);
@@ -657,5 +660,6 @@ let w = config.sky.properties.width;
 let h = config.sky.properties.height;
 
 let grid = createSky(config);
+console.log(grid);
 buildCanvas(grid);
 console.log("Complete");

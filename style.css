@@ -12,12 +12,6 @@ body {
     display: grid;
 }
 
-#canvas {
-    height: 720px;
-    width: 1280px;
-    image-rendering: pixelated;
-}
-
 .pixel {
     height: 1px;
     width: 1px;
