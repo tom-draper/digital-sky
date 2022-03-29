@@ -619,16 +619,15 @@ function collapsePixel(pixel) {
 
 function buildCanvas(grid) {
   let canvas = document.getElementById('canvas');
-  let retinaRation = window.devicePixelRatio;
-  canvas.width = w * retinaRation;
-  canvas.height = h * retinaRation;
+  canvas.width = w;
+  canvas.height = h;
   const ctx = canvas.getContext('2d');
 
   const imageData = ctx.createImageData(w, h);
 
-  // Iterate through every pixel
   for (let y = 0; y < h; y++) {
     for (let x = 0; x < w; x++) {
+      // Index 1D array as 2D array with a step of 4 (for rgba elements)
       let i = (x + w * y) * 4;
       
       let colour = collapsePixel(grid[y][x]);
