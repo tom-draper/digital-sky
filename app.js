@@ -264,12 +264,12 @@ function nextPixel(toPaint) {
   return next;
 }
 
-function addCloudToSky(grid, x, y, colour) {
-  let [hasCloud, idx] = pixelHasType(grid[y][x], 'cloud');
+function addCloudToSky(grid, x, y, colour, layer) {
+  let [hasCloud, idx] = pixelHasType(grid[y][x], 'cloud' + layer);
   if (hasCloud) {
     grid[y][x][idx].colour = combineColours(colour, grid[y][x][idx].colour);
   } else {
-    grid[y][x].push({type: 'cloud', colour: colour});
+    grid[y][x].push({type: 'cloud' + layer, colour: colour});
   }
 }
 
@@ -285,7 +285,7 @@ function createCloudBase(grid, startColour, sizeRange, pH, pV) {
   let cloudSize = 1;
   while (toPaint.length > 0) {
     let [x, y, colour] = nextPixel(toPaint);
-    addCloudToSky(grid, x, y, colour);
+    addCloudToSky(grid, x, y, colour, 0);
     cloudSize = cloudsSpread(
       x,
       y,
@@ -311,7 +311,7 @@ function pixelHasType(pixel, type) {
   return [false, null];
 }
 
-function addCloudLayer(grid, start, startColour, sizeRange, pH, pV) {
+function addCloudLayer(grid, start, layer, startColour, sizeRange, pH, pV) {
   let seen = new TupleSet();
   let toPaint = [];
 
@@ -321,7 +321,7 @@ function addCloudLayer(grid, start, startColour, sizeRange, pH, pV) {
   let currentSize = 1;
   while (toPaint.length > 0) {
     let [x, y, colour] = nextPixel(toPaint);
-    addCloudToSky(grid, x, y, colour);
+    addCloudToSky(grid, x, y, colour, layer);
     currentSize = cloudsSpread(
       x,
       y,
@@ -349,6 +349,7 @@ function createCloud(grid, layers) {
     addCloudLayer(
       grid,
       start,
+      i,
       [...layers[i].colour, layers[i].opacity],
       [layers[i].minSize, layers[i].maxSize],
       layers[i].pH,
@@ -536,16 +537,23 @@ function fullMoon(grid, toPaint, moonConfig) {
   }
 }
 
+function moonColour(fade) {
+  return null;
+}
+
 function halfMoon(grid, toPaint, moonConfig, start) {
   let r = moonConfig.radius;
   let position = randInt(0.25*r, r*0.9);
-  let edge = [start[0] - position, start[1] - position];
+  let edge = [start[0] - position, start[1] - position*Math.min(Math.random(), 0.8)];
   
+  let fadeMargin = randInt(0, 10);
   let colour = [...moonConfig.colour, 1];
   while (toPaint.length > 0) {
     [x, y] = nextPixel(toPaint);
-    if (distance(x, y, edge[0], edge[1]) >= r) {
-      grid[y][x].push({type: 'moon', colour: colour});
+    let d = distance(x, y, edge[0], edge[1]);
+    if (d >= r) {
+      let opacity = Math.min((d - r) / fadeMargin, 1);
+      grid[y][x].push({type: 'moon', colour: [colour[0], colour[1], colour[2], opacity]});
       mutateColourInPlace(colour, moonConfig.noise);
     } else {
       // Remove any star pixels in the darkness of the half moon
@@ -648,7 +656,7 @@ let skyColours = {
   nighttime: [19, 19, 19],
 };
 
-let config = presetLateEvening;
+let config = presetLateEvening2;
 
 // Check for preset sky colour
 if (config.sky.properties.colour in skyColours) {

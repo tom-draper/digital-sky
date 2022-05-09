@@ -187,6 +187,56 @@ let clouds1 = {
     ],
   }
 };
+let c = [160, 170, 190];
+let clouds2 = {
+  include: true,
+  properties: {
+    quantity: 4,
+    // Cloud layers are created in order
+    layers: [
+      {
+        colour: c,
+        opacity: 0.15,
+        minSize: 100,
+        maxSize: 20000,
+        pH: 0.8,
+        pV: 0.25,
+      },
+      {
+        colour: c,
+        opacity: 0.15,
+        minSize: 100,
+        maxSize: 20000,
+        pH: 0.8,
+        pV: 0.25,
+      },
+      {
+        colour: c,
+        opacity: 0.15,
+        minSize: 100,
+        maxSize: 20000,
+        pH: 0.8,
+        pV: 0.25,
+      },
+      {
+        colour: c,
+        opacity: 0.15,
+        minSize: 100,
+        maxSize: 20000,
+        pH: 0.8,
+        pV: 0.25,
+      },
+      {
+        colour: c,
+        opacity: 0.15,
+        minSize: 100,
+        maxSize: 20000,
+        pH: 0.8,
+        pV: 0.25,
+      },
+    ],
+  }
+};
 let cloudsBig = {
   include: true,
   properties: {
@@ -420,6 +470,14 @@ let presetLateEvening = {
   clouds: cloudsBig
 };
 
+let presetLateEvening2 = {
+  sky: defaultSky([8, 43, 94]),
+  stars: starsFaint,
+  moon: moon1,
+  sunset: sunset2,
+  clouds: none
+};
+
 let presetPinkSky = {
   sky: defaultSky([255, 192, 203]),
   stars: none,
@@ -428,7 +486,62 @@ let presetPinkSky = {
   clouds: clouds1
 };
 
-let presetLightDayCloudy = {
+
+let presetPinkSky2 = {
+  sky: defaultSky([255, 182, 193]),
+  stars: none,
+  moon: none,
+  sunset: {
+    include: true,
+    properties: {
+      layers: [
+        {
+          colour: [253, 240, 240],  // White
+          maxOpacity: 0.3,
+          proportion: 0.7,
+          colourMutationSpeed: 1,
+          xStretch: 0.7,
+          yStretch: 1,
+        },
+        {
+          colour: [252, 210, 102],  // Yellow
+          maxOpacity: 0.3,
+          proportion: 0.7,
+          colourMutationSpeed: 1,
+          xStretch: 0.7,
+          yStretch: 1,
+        },
+        {
+          colour: [255, 227, 115],  // Yellow
+          maxOpacity: 0.35,
+          proportion: 0.6,
+          colourMutationSpeed: 1,
+          xStretch: 0.7,
+          yStretch: 1,
+        },
+        {
+          colour: [252, 156, 84],  // Sandy brown
+          maxOpacity: 0.4,
+          proportion: 0.5,
+          colourMutationSpeed: 1,
+          xStretch: 0.7,
+          yStretch: 1,
+        },
+        {
+          colour: [253, 94, 83],  // Sunset orange
+          maxOpacity: 0.45,
+          proportion: 0.5,
+          colourMutationSpeed: 1,
+          xStretch: 0.7,
+          yStretch: 1,
+        },
+      ]
+    }
+  },
+  clouds: none
+};
+
+let presetlightdaycloudy = {
   sky: defaultSky([135, 206, 235]),
   stars: none,
   moon: none,
@@ -436,93 +549,93 @@ let presetLightDayCloudy = {
   clouds: {
     include: true,
     quantity: 10,
-    // Cloud layers are created in order
+    // cloud layers are created in order
     layers: [
       {
         colour: [235, 235, 235],
         opacity: 0.5,
-        minSize: 100,
-        maxSize: 10000,
-        pH: 0.7, // Probability of horizontal expansion
-        pV: 0.3, // Probability of vertical expansion
+        minsize: 100,
+        maxsize: 10000,
+        ph: 0.7, // probability of horizontal expansion
+        pv: 0.3, // probability of vertical expansion
       },
       {
         colour: [235, 235, 235],
         opacity: 0.4,
-        minSize: 100,
-        maxSize: 10000,
-        pH: 0.7,
-        pV: 0.3,
+        minsize: 100,
+        maxsize: 10000,
+        ph: 0.7,
+        pv: 0.3,
       },
       {
         colour: [235, 235, 235],
         opacity: 0.4,
-        minSize: 100,
-        maxSize: 10000,
-        pH: 0.7,
-        pV: 0.3,
+        minsize: 100,
+        maxsize: 10000,
+        ph: 0.7,
+        pv: 0.3,
       },
       {
         colour: [235, 235, 235],
         opacity: 0.4,
-        minSize: 100,
-        maxSize: 10000,
-        pH: 0.7,
-        pV: 0.3,
+        minsize: 100,
+        maxsize: 10000,
+        ph: 0.7,
+        pv: 0.3,
       },
       {
         colour: [240, 211, 201],
         opacity: 0.4,
-        minSize: 100,
-        maxSize: 2000,
-        pH: 0.6,
-        pV: 0.2,
+        minsize: 100,
+        maxsize: 2000,
+        ph: 0.6,
+        pv: 0.2,
       },
       {
         colour: [240, 211, 201],
         opacity: 0.4,
-        minSize: 100,
-        maxSize: 2000,
-        pH: 0.6,
-        pV: 0.2,
+        minsize: 100,
+        maxsize: 2000,
+        ph: 0.6,
+        pv: 0.2,
       },
       {
         colour: [173, 216, 230],
         opacity: 0.4,
-        minSize: 100,
-        maxSize: 1000,
-        pH: 0.6,
-        pV: 0.2,
+        minsize: 100,
+        maxsize: 1000,
+        ph: 0.6,
+        pv: 0.2,
       },
       {
         colour: [173, 216, 230],
         opacity: 0.15,
-        minSize: 100,
-        maxSize: 1000,
-        pH: 0.6,
-        pV: 0.2,
+        minsize: 100,
+        maxsize: 1000,
+        ph: 0.6,
+        pv: 0.2,
       },
       {
         colour: [240, 240, 240],
         opacity: 0.2,
-        minSize: 100,
-        maxSize: 1000,
-        pH: 0.6,
-        pV: 0.2,
+        minsize: 100,
+        maxsize: 1000,
+        ph: 0.6,
+        pv: 0.2,
       },
     ],
   },
 };
 
-let presetLightDayStarry = {
-  sky: defaultSky([135, 206, 235]),
+let presetlightdaystarry = {
+  sky: defaultsSky([135, 206, 235]),
   stars: stars1,
   moon: none,
   sunset: none,
   clouds: clouds1
 };
 
-let presetNight = {
+let presetnight = {
   sky: defaultSky([40, 30, 45]),
   stars: stars1,
   moon: none,
@@ -530,7 +643,7 @@ let presetNight = {
   clouds: cloudsMild
 };
 
-let presetCloudy = {
+let presetcloudy = {
   sky: defaultSky([115, 160, 200]),
   stars: starsDense,
   moon: none,
