@@ -11,7 +11,7 @@ function defaultSky(colour) {
       width: defaultWidth,
       pixelSize: 1,
       colour: colour,
-      mutationSpeed: 3,
+      mutationSpeed: 1,
       opacity: 1
     }
   };
@@ -67,15 +67,15 @@ let sunset1 = {
         // Magnitude of the inc/dec of one rgb value with each colour step
         colourMutationSpeed: 1,
         xStretch: 0.5,  // >1 (thinner), <1 (wider) 
-        yStretch: 1,  // >1 (shorter), <1 (taller) 
+        yStretch: 0,  // >1 (shorter), <1 (taller) 
       },
       {
         colour: [255, 201, 34],
         maxOpacity: 0.4,
         proportion: 0.7,
         colourMutationSpeed: 1,
-        xStretch: 0.3,
-        yStretch: 1,
+        xStretch: 0.7,
+        yStretch: 0,
       }
     ]
   }
@@ -89,7 +89,7 @@ let sunset2 = {
         maxOpacity: 0.25,
         proportion: 0.6,
         colourMutationSpeed: 1,
-        xStretch: 0.3,
+        xStretch: 0.7,
         yStretch: 0.5,
       },
       {
@@ -97,8 +97,8 @@ let sunset2 = {
         maxOpacity: 0.4,
         proportion: 0.9,
         colourMutationSpeed: 3,
-        xStretch: 0.2,
-        yStretch: 0.4,
+        xStretch: 0.8,
+        yStretch: 0.6,
       },
       {
         colour: [253, 94, 83],
@@ -108,15 +108,15 @@ let sunset2 = {
         // Magnitude of the inc/dec of one rgb value with each colour step
         colourMutationSpeed: 1,
         xStretch: 0.5,  // >1 (thinner), <1 (wider) 
-        yStretch: 1,  // >1 (shorter), <1 (taller) 
+        yStretch: 0,  // >1 (shorter), <1 (taller) 
       },
       {
         colour: [255, 201, 34],
         maxOpacity: 0.4,
         proportion: 0.7,
         colourMutationSpeed: 1,
-        xStretch: 0.3,
-        yStretch: 1,
+        xStretch: 0.7,
+        yStretch: 0,
       },
     ]
   }
@@ -478,6 +478,36 @@ let presetLateEvening2 = {
   clouds: none
 };
 
+let presetLateEvening3 = {
+  sky: defaultSky([94, 122, 187]),
+  stars: none,
+  moon: none,
+  sunset: {
+    include: true,
+    properties: {
+      layers: [
+        {
+          colour: [254, 207, 199],
+          maxOpacity: 0.7,
+          proportion: 0.7,
+          colourMutationSpeed: 1,
+          xStretch: 0.8,
+          yStretch: 0.5,
+        },
+        {
+          colour: [253, 227, 228],
+          maxOpacity: 0.5,
+          proportion: 0.7,
+          colourMutationSpeed: 1,
+          xStretch: 0.6,
+          yStretch: 0.4,
+        }
+      ]
+    }
+  },
+  clouds: none
+};
+
 let presetPinkSky = {
   sky: defaultSky([255, 192, 203]),
   stars: none,
@@ -500,40 +530,40 @@ let presetPinkSky2 = {
           maxOpacity: 0.3,
           proportion: 0.7,
           colourMutationSpeed: 1,
-          xStretch: 0.7,
-          yStretch: 1,
+          xStretch: 0.3,
+          yStretch: 0,
         },
         {
           colour: [252, 210, 102],  // Yellow
           maxOpacity: 0.3,
           proportion: 0.7,
           colourMutationSpeed: 1,
-          xStretch: 0.7,
-          yStretch: 1,
+          xStretch: 0.3,
+          yStretch: 0,
         },
         {
           colour: [255, 227, 115],  // Yellow
           maxOpacity: 0.35,
           proportion: 0.6,
           colourMutationSpeed: 1,
-          xStretch: 0.7,
-          yStretch: 1,
+          xStretch: 0.3,
+          yStretch: 0,
         },
         {
           colour: [252, 156, 84],  // Sandy brown
           maxOpacity: 0.4,
           proportion: 0.5,
           colourMutationSpeed: 1,
-          xStretch: 0.7,
-          yStretch: 1,
+          xStretch: 0.3,
+          yStretch: 0,
         },
         {
           colour: [253, 94, 83],  // Sunset orange
           maxOpacity: 0.45,
           proportion: 0.5,
           colourMutationSpeed: 1,
-          xStretch: 0.7,
-          yStretch: 1,
+          xStretch: 0.3,
+          yStretch: 0,
         },
       ]
     }
@@ -628,7 +658,7 @@ let presetlightdaycloudy = {
 };
 
 let presetlightdaystarry = {
-  sky: defaultsSky([135, 206, 235]),
+  sky: defaultSky([135, 206, 235]),
   stars: stars1,
   moon: none,
   sunset: none,

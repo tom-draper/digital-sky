@@ -441,8 +441,8 @@ function sunsetSpread(x, y, colour, toPaint, seen, colourStep) {
 }
 
 function warpedDistance(x1, y1, x2, y2, xStretch, yStretch) {
-  let x = y2 - y1 * yStretch;
-  let y = (x2 - x1) * xStretch;
+  let x = (y2 - y1) * (1 - yStretch);
+  let y = (x2 - x1) * (1 - xStretch);
   return Math.sqrt(x * x + y * y);
 }
 
@@ -656,7 +656,7 @@ let skyColours = {
   nighttime: [19, 19, 19],
 };
 
-let config = presetLateEvening2;
+let config = presetLateEvening3;
 
 // Check for preset sky colour
 if (config.sky.properties.colour in skyColours) {
