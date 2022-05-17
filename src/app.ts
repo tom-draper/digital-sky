@@ -142,7 +142,7 @@ type Pixel = {
 }
 
 function colourSky(grid: Pixel[][][], skyConfig: SkyConfig) {
-  let start = [randInt(0, w - 1), randInt(0, h - 1)];
+  let start: [number, number] = [randInt(0, w - 1), randInt(0, h - 1)];
   let startColour: [number, number, number, number] = [...skyConfig.properties.colour, skyConfig.properties.opacity];
 
   let seen = new MyTupleSet();

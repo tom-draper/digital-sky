@@ -1,17 +1,17 @@
 
-function randomColour() {
+function randomColour(): number[] {
   return [randInt(0, 255), randInt(0, 255), randInt(0, 255)];
 }
 
-function randomSkyColourNight() {
+function randomSkyColourNight(): number[] {
  return [randInt(0, 100), randInt(0, 100), randInt(0, 100)];
 }
-function randomSkyColourDay() {
+function randomSkyColourDay(): number[] {
   return [randInt(150, 250), randInt(140, 240), randInt(160, 255)];
 }
 
-function randomSkyColour() {
-  let colour;
+function randomSkyColour(): number[] {
+  let colour: number[];
   let pNight = 0.3;
   if (Math.random() < pNight) {
     colour = randomSkyColourNight();
@@ -24,8 +24,8 @@ function randomSkyColour() {
 let res720 = [1280, 720];
 let res1080 = [1920, 1080];
 
-function generateSky() {
-  let colour = randomSkyColour();
+function generateSky(): SkyConfig {
+  let colour: [number, number, number] = randomSkyColour();
   let mutationSpeed = randInt(1, 5);
 
   let sky =  {
@@ -42,11 +42,11 @@ function generateSky() {
   return sky;
 }
 
-function colourSum(colour) {
+function colourSum(colour: number[]): number {
   return colour[0] + colour[1] + colour[2];
 }
 
-function generateStars(skyColour) {
+function generateStars(skyColour: number[]): StarsConfig {
   let stars;
   let p = 0.6;
   let threshold = 120;
@@ -69,12 +69,12 @@ function generateStars(skyColour) {
   return stars;
 }
 
-function randomMoonColour() {
+function randomMoonColour(): [number, number, number] {
   return [randInt(250, 255), randInt(250, 255), randInt(250, 255)];
 }
 
-function generateMoon(skyColour) {
-  let moon;
+function generateMoon(skyColour: number[]): MoonConfig {
+  let moon: MoonConfig;
   let p = 0.5;
   let threshold = 120;
   let colour = randomMoonColour();
@@ -102,17 +102,16 @@ function generateMoon(skyColour) {
   return moon;
 }
 
-function randomSunsetColour() {
+function randomSunsetColour(): [number, number, number] {
   return [randInt(100, 255), randInt(100, 240), randInt(100, 255)];
 }
 
-function randFloat(min, max) {
-  const str = (Math.random() * (max - min) + min);
-  return parseFloat(str);
+function randFloat(min: number, max: number): number {
+  return Math.random() * (max - min) + min;
 }
 
-function generateSunsetLayers() {
-  let sunsetLayers = [];
+function generateSunsetLayers(): SunsetLayer[] {
+  let sunsetLayers: SunsetLayer[] = [];
   let n = randInt(1, 10);
   for (let i = 0; i < n; i++) {
     let layer = {
@@ -128,8 +127,8 @@ function generateSunsetLayers() {
   return sunsetLayers;
 }
 
-function generateSunset() {
-  let sunset;
+function generateSunset(): SunsetConfig {
+  let sunset: SunsetConfig;
   let p = 1;
 
   if (Math.random() < p) {
@@ -151,15 +150,15 @@ function generateSunset() {
   return sunset;
 }
 
-function randomCloudColour() {
+function randomCloudColour(): [number, number, number] {
   return [randInt(200, 255), randInt(200, 255), randInt(200, 255)];
 }
 
-function generateCloudLayers() {
-  let cloudLayers = [];
+function generateCloudLayers(): CloudLayer[] {
+  let cloudLayers: CloudLayer[] = [];
   let n = randInt(1, 25);
   for (let i = 0; i < n; i++) {
-    let layer = {
+    let layer: CloudLayer = {
       colour: randomCloudColour(),
       opacity: randFloat(0.05, 0.5),
       minSize: randInt(500, 1000),
@@ -174,8 +173,8 @@ function generateCloudLayers() {
   return cloudLayers;
 }
 
-function generateClouds() {
-  let clouds;
+function generateClouds(): CloudsConfig {
+  let clouds: CloudsConfig;
   let p = 1;
 
   if (Math.random() < p) {
@@ -195,7 +194,7 @@ function generateClouds() {
   return clouds;
 }
 
-function generateConfig() {
+function generateConfig(): Config {
   let sky = generateSky();
   let stars = generateStars(sky.properties.colour);
   let moon = generateMoon(sky.properties.colour);
