@@ -757,4 +757,4 @@ let presetCloudy = {
   clouds: cloudsCloudy
 };
 
-export { Config, SkyConfig, CloudsConfig, CloudLayer, SunsetConfig, StarsConfig, MoonConfig, presetLateEvening3 };
+// export { Config, SkyConfig, CloudsConfig, CloudLayer, SunsetConfig, StarsConfig, MoonConfig, presetLateEvening3 };

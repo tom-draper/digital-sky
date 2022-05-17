@@ -1,10 +1,8 @@
 "use strict";
-exports.__esModule = true;
-exports.presetLateEvening3 = void 0;
 // let defaultHeight = 1080;
 // let defaultWidth = 1920;
-var defaultHeight = 720;
-var defaultWidth = 1280;
+let defaultHeight = 720;
+let defaultWidth = 1280;
 function defaultSky(colour) {
     return {
         properties: {
@@ -17,32 +15,32 @@ function defaultSky(colour) {
         }
     };
 }
-var none = {
+let none = {
     include: false,
     properties: null
 };
-var stars1 = {
+let stars1 = {
     include: true,
     properties: {
         opacity: 1,
-        density: 0.005
+        density: 0.005,
     }
 };
-var starsDense = {
+let starsDense = {
     include: true,
     properties: {
         opacity: 1,
-        density: 0.01
+        density: 0.01,
     }
 };
-var starsFaint = {
+let starsFaint = {
     include: true,
     properties: {
         opacity: 0.5,
-        density: 0.002
+        density: 0.002,
     }
 };
-var moon1 = {
+let moon1 = {
     include: true,
     properties: {
         colour: [248, 250, 244],
@@ -51,7 +49,7 @@ var moon1 = {
         noise: 2
     }
 };
-var sunset1 = {
+let sunset1 = {
     include: true,
     properties: {
         layers: [
@@ -63,7 +61,7 @@ var sunset1 = {
                 // Magnitude of the inc/dec of one rgb value with each colour step
                 colourMutationSpeed: 1,
                 xStretch: 0.5,
-                yStretch: 0
+                yStretch: 0, // >1 (shorter), <1 (taller) 
             },
             {
                 colour: [255, 201, 34],
@@ -71,12 +69,12 @@ var sunset1 = {
                 proportion: 0.7,
                 colourMutationSpeed: 1,
                 xStretch: 0.7,
-                yStretch: 0
+                yStretch: 0,
             }
         ]
     }
 };
-var sunset2 = {
+let sunset2 = {
     include: true,
     properties: {
         layers: [
@@ -86,7 +84,7 @@ var sunset2 = {
                 proportion: 0.6,
                 colourMutationSpeed: 1,
                 xStretch: 0.7,
-                yStretch: 0.5
+                yStretch: 0.5,
             },
             {
                 colour: [33, 89, 136],
@@ -94,7 +92,7 @@ var sunset2 = {
                 proportion: 0.9,
                 colourMutationSpeed: 3,
                 xStretch: 0.8,
-                yStretch: 0.6
+                yStretch: 0.6,
             },
             {
                 colour: [253, 94, 83],
@@ -104,7 +102,7 @@ var sunset2 = {
                 // Magnitude of the inc/dec of one rgb value with each colour step
                 colourMutationSpeed: 1,
                 xStretch: 0.5,
-                yStretch: 0
+                yStretch: 0, // >1 (shorter), <1 (taller) 
             },
             {
                 colour: [255, 201, 34],
@@ -112,12 +110,12 @@ var sunset2 = {
                 proportion: 0.7,
                 colourMutationSpeed: 1,
                 xStretch: 0.7,
-                yStretch: 0
+                yStretch: 0,
             },
         ]
     }
 };
-var clouds1 = {
+let clouds1 = {
     include: true,
     properties: {
         quantity: 10,
@@ -129,7 +127,7 @@ var clouds1 = {
                 minSize: 100,
                 maxSize: 10000,
                 pH: 0.7,
-                pV: 0.3
+                pV: 0.3, // Probability of vertical expansion
             },
             {
                 colour: [235, 235, 235],
@@ -137,7 +135,7 @@ var clouds1 = {
                 minSize: 100,
                 maxSize: 10000,
                 pH: 0.7,
-                pV: 0.3
+                pV: 0.3,
             },
             {
                 colour: [235, 235, 235],
@@ -145,7 +143,7 @@ var clouds1 = {
                 minSize: 100,
                 maxSize: 10000,
                 pH: 0.7,
-                pV: 0.3
+                pV: 0.3,
             },
             {
                 colour: [235, 235, 235],
@@ -153,7 +151,7 @@ var clouds1 = {
                 minSize: 100,
                 maxSize: 10000,
                 pH: 0.7,
-                pV: 0.3
+                pV: 0.3,
             },
             {
                 colour: [173, 216, 230],
@@ -161,7 +159,7 @@ var clouds1 = {
                 minSize: 100,
                 maxSize: 10000,
                 pH: 0.6,
-                pV: 0.2
+                pV: 0.2,
             },
             {
                 colour: [173, 216, 230],
@@ -169,7 +167,7 @@ var clouds1 = {
                 minSize: 100,
                 maxSize: 10000,
                 pH: 0.6,
-                pV: 0.2
+                pV: 0.2,
             },
             {
                 colour: [240, 240, 240],
@@ -177,13 +175,13 @@ var clouds1 = {
                 minSize: 100,
                 maxSize: 10000,
                 pH: 0.6,
-                pV: 0.2
+                pV: 0.2,
             },
-        ]
+        ],
     }
 };
-var c = [160, 170, 190];
-var clouds2 = {
+let c = [160, 170, 190];
+let clouds2 = {
     include: true,
     properties: {
         quantity: 4,
@@ -195,7 +193,7 @@ var clouds2 = {
                 minSize: 100,
                 maxSize: 20000,
                 pH: 0.8,
-                pV: 0.25
+                pV: 0.25,
             },
             {
                 colour: c,
@@ -203,7 +201,7 @@ var clouds2 = {
                 minSize: 100,
                 maxSize: 20000,
                 pH: 0.8,
-                pV: 0.25
+                pV: 0.25,
             },
             {
                 colour: c,
@@ -211,7 +209,7 @@ var clouds2 = {
                 minSize: 100,
                 maxSize: 20000,
                 pH: 0.8,
-                pV: 0.25
+                pV: 0.25,
             },
             {
                 colour: c,
@@ -219,7 +217,7 @@ var clouds2 = {
                 minSize: 100,
                 maxSize: 20000,
                 pH: 0.8,
-                pV: 0.25
+                pV: 0.25,
             },
             {
                 colour: c,
@@ -227,12 +225,12 @@ var clouds2 = {
                 minSize: 100,
                 maxSize: 20000,
                 pH: 0.8,
-                pV: 0.25
+                pV: 0.25,
             },
-        ]
+        ],
     }
 };
-var cloudsBig = {
+let cloudsBig = {
     include: true,
     properties: {
         quantity: 10,
@@ -244,7 +242,7 @@ var cloudsBig = {
                 minSize: 100,
                 maxSize: 20000,
                 pH: 0.7,
-                pV: 0.3
+                pV: 0.3, // Probability of vertical expansion
             },
             {
                 colour: [235, 235, 235],
@@ -252,7 +250,7 @@ var cloudsBig = {
                 minSize: 100,
                 maxSize: 20000,
                 pH: 0.7,
-                pV: 0.3
+                pV: 0.3,
             },
             {
                 colour: [235, 235, 235],
@@ -260,7 +258,7 @@ var cloudsBig = {
                 minSize: 100,
                 maxSize: 20000,
                 pH: 0.7,
-                pV: 0.3
+                pV: 0.3,
             },
             {
                 colour: [235, 235, 235],
@@ -268,7 +266,7 @@ var cloudsBig = {
                 minSize: 100,
                 maxSize: 20000,
                 pH: 0.7,
-                pV: 0.3
+                pV: 0.3,
             },
             {
                 colour: [173, 216, 230],
@@ -276,7 +274,7 @@ var cloudsBig = {
                 minSize: 100,
                 maxSize: 20000,
                 pH: 0.6,
-                pV: 0.2
+                pV: 0.2,
             },
             {
                 colour: [173, 216, 230],
@@ -284,7 +282,7 @@ var cloudsBig = {
                 minSize: 100,
                 maxSize: 20000,
                 pH: 0.6,
-                pV: 0.2
+                pV: 0.2,
             },
             {
                 colour: [240, 240, 240],
@@ -292,12 +290,12 @@ var cloudsBig = {
                 minSize: 100,
                 maxSize: 20000,
                 pH: 0.6,
-                pV: 0.2
+                pV: 0.2,
             },
-        ]
+        ],
     }
 };
-var cloudsCloudy = {
+let cloudsCloudy = {
     include: true,
     properties: {
         quantity: 30,
@@ -309,7 +307,7 @@ var cloudsCloudy = {
                 minSize: 100,
                 maxSize: 50000,
                 pH: 0.8,
-                pV: 0.5
+                pV: 0.5, // Probability of vertical expansion
             },
             {
                 colour: [183, 183, 178],
@@ -317,7 +315,7 @@ var cloudsCloudy = {
                 minSize: 100,
                 maxSize: 50000,
                 pH: 0.8,
-                pV: 0.5
+                pV: 0.5,
             },
             {
                 colour: [183, 183, 178],
@@ -325,7 +323,7 @@ var cloudsCloudy = {
                 minSize: 100,
                 maxSize: 10000,
                 pH: 0.7,
-                pV: 0.3
+                pV: 0.3,
             },
             {
                 colour: [183, 183, 178],
@@ -333,7 +331,7 @@ var cloudsCloudy = {
                 minSize: 100,
                 maxSize: 10000,
                 pH: 0.7,
-                pV: 0.3
+                pV: 0.3,
             },
             {
                 colour: [183, 183, 178],
@@ -341,7 +339,7 @@ var cloudsCloudy = {
                 minSize: 100,
                 maxSize: 10000,
                 pH: 0.7,
-                pV: 0.3
+                pV: 0.3,
             },
             {
                 colour: [183, 183, 178],
@@ -349,12 +347,12 @@ var cloudsCloudy = {
                 minSize: 100,
                 maxSize: 10000,
                 pH: 0.7,
-                pV: 0.3
+                pV: 0.3,
             },
-        ]
+        ],
     }
 };
-var cloudsMild = {
+let cloudsMild = {
     include: true,
     properties: {
         quantity: 6,
@@ -366,7 +364,7 @@ var cloudsMild = {
                 minSize: 100,
                 maxSize: 30000,
                 pH: 0.7,
-                pV: 0.3
+                pV: 0.3, // Probability of vertical expansion
             },
             {
                 colour: [235, 235, 235],
@@ -374,7 +372,7 @@ var cloudsMild = {
                 minSize: 100,
                 maxSize: 30000,
                 pH: 0.7,
-                pV: 0.3
+                pV: 0.3,
             },
             {
                 colour: [235, 235, 235],
@@ -382,7 +380,7 @@ var cloudsMild = {
                 minSize: 100,
                 maxSize: 30000,
                 pH: 0.7,
-                pV: 0.3
+                pV: 0.3,
             },
             {
                 colour: [235, 235, 235],
@@ -390,7 +388,7 @@ var cloudsMild = {
                 minSize: 100,
                 maxSize: 10000,
                 pH: 0.7,
-                pV: 0.3
+                pV: 0.3,
             },
             {
                 colour: [240, 211, 201],
@@ -398,7 +396,7 @@ var cloudsMild = {
                 minSize: 100,
                 maxSize: 10000,
                 pH: 0.6,
-                pV: 0.2
+                pV: 0.2,
             },
             {
                 colour: [240, 211, 201],
@@ -406,7 +404,7 @@ var cloudsMild = {
                 minSize: 100,
                 maxSize: 10000,
                 pH: 0.6,
-                pV: 0.2
+                pV: 0.2,
             },
             {
                 colour: [173, 216, 230],
@@ -414,7 +412,7 @@ var cloudsMild = {
                 minSize: 100,
                 maxSize: 10000,
                 pH: 0.6,
-                pV: 0.2
+                pV: 0.2,
             },
             {
                 colour: [173, 216, 230],
@@ -422,48 +420,48 @@ var cloudsMild = {
                 minSize: 100,
                 maxSize: 10000,
                 pH: 0.6,
-                pV: 0.2
+                pV: 0.2,
             }
-        ]
+        ],
     }
 };
 // ----------------------- PRESETS -----------------------
-var presetLightDay = {
+let presetLightDay = {
     sky: defaultSky([135, 206, 235]),
     stars: none,
     moon: none,
     sunset: none,
     clouds: clouds1
 };
-var presetSunset = {
+let presetSunset = {
     sky: defaultSky([135, 206, 235]),
     stars: starsFaint,
     moon: false,
     sunset: sunset1,
     clouds: clouds1
 };
-var presetMoonAndStars = {
+let presetMoonAndStars = {
     sky: defaultSky([8, 43, 94]),
     stars: starsFaint,
     moon: moon1,
     sunset: none,
     clouds: none
 };
-var presetLateEvening = {
+let presetLateEvening = {
     sky: defaultSky([8, 43, 94]),
     stars: starsFaint,
     moon: none,
     sunset: sunset2,
     clouds: cloudsBig
 };
-var presetLateEvening2 = {
+let presetLateEvening2 = {
     sky: defaultSky([8, 43, 94]),
     stars: starsFaint,
     moon: moon1,
     sunset: sunset2,
     clouds: none
 };
-var presetLateEvening3 = {
+let presetLateEvening3 = {
     sky: defaultSky([94, 122, 187]),
     stars: none,
     moon: none,
@@ -477,7 +475,7 @@ var presetLateEvening3 = {
                     proportion: 0.7,
                     colourMutationSpeed: 1,
                     xStretch: 0.7,
-                    yStretch: 0.5
+                    yStretch: 0.5,
                 },
                 {
                     colour: [253, 227, 228],
@@ -485,22 +483,21 @@ var presetLateEvening3 = {
                     proportion: 0.7,
                     colourMutationSpeed: 1,
                     xStretch: 0.6,
-                    yStretch: 0.3
+                    yStretch: 0.3,
                 }
             ]
         }
     },
     clouds: none
 };
-exports.presetLateEvening3 = presetLateEvening3;
-var presetPinkSky = {
+let presetPinkSky = {
     sky: defaultSky([255, 192, 203]),
     stars: none,
     moon: none,
     sunset: none,
     clouds: clouds1
 };
-var presetPinkSky2 = {
+let presetPinkSky2 = {
     sky: defaultSky([255, 182, 193]),
     stars: none,
     moon: none,
@@ -514,7 +511,7 @@ var presetPinkSky2 = {
                     proportion: 0.7,
                     colourMutationSpeed: 1,
                     xStretch: 0.3,
-                    yStretch: 0
+                    yStretch: 0,
                 },
                 {
                     colour: [252, 210, 102],
@@ -522,7 +519,7 @@ var presetPinkSky2 = {
                     proportion: 0.7,
                     colourMutationSpeed: 1,
                     xStretch: 0.3,
-                    yStretch: 0
+                    yStretch: 0,
                 },
                 {
                     colour: [255, 227, 115],
@@ -530,7 +527,7 @@ var presetPinkSky2 = {
                     proportion: 0.6,
                     colourMutationSpeed: 1,
                     xStretch: 0.3,
-                    yStretch: 0
+                    yStretch: 0,
                 },
                 {
                     colour: [252, 156, 84],
@@ -538,7 +535,7 @@ var presetPinkSky2 = {
                     proportion: 0.5,
                     colourMutationSpeed: 1,
                     xStretch: 0.3,
-                    yStretch: 0
+                    yStretch: 0,
                 },
                 {
                     colour: [253, 94, 83],
@@ -546,14 +543,14 @@ var presetPinkSky2 = {
                     proportion: 0.5,
                     colourMutationSpeed: 1,
                     xStretch: 0.3,
-                    yStretch: 0
+                    yStretch: 0,
                 },
             ]
         }
     },
     clouds: none
 };
-var presetLightDayCloudy = {
+let presetLightDayCloudy = {
     sky: defaultSky([135, 206, 235]),
     stars: none,
     moon: none,
@@ -570,7 +567,7 @@ var presetLightDayCloudy = {
                     minSize: 100,
                     maxSize: 10000,
                     pH: 0.7,
-                    pV: 0.3
+                    pV: 0.3, // probability of vertical expansion
                 },
                 {
                     colour: [235, 235, 235],
@@ -578,7 +575,7 @@ var presetLightDayCloudy = {
                     minSize: 100,
                     maxSize: 10000,
                     pH: 0.7,
-                    pV: 0.3
+                    pV: 0.3,
                 },
                 {
                     colour: [235, 235, 235],
@@ -586,7 +583,7 @@ var presetLightDayCloudy = {
                     minSize: 100,
                     maxSize: 10000,
                     pH: 0.7,
-                    pV: 0.3
+                    pV: 0.3,
                 },
                 {
                     colour: [235, 235, 235],
@@ -594,7 +591,7 @@ var presetLightDayCloudy = {
                     minSize: 100,
                     maxSize: 10000,
                     pH: 0.7,
-                    pV: 0.3
+                    pV: 0.3,
                 },
                 {
                     colour: [240, 211, 201],
@@ -602,7 +599,7 @@ var presetLightDayCloudy = {
                     minSize: 100,
                     maxSize: 2000,
                     pH: 0.6,
-                    pV: 0.2
+                    pV: 0.2,
                 },
                 {
                     colour: [240, 211, 201],
@@ -610,7 +607,7 @@ var presetLightDayCloudy = {
                     minSize: 100,
                     maxSize: 2000,
                     pH: 0.6,
-                    pV: 0.2
+                    pV: 0.2,
                 },
                 {
                     colour: [173, 216, 230],
@@ -618,7 +615,7 @@ var presetLightDayCloudy = {
                     minSize: 100,
                     maxSize: 1000,
                     pH: 0.6,
-                    pV: 0.2
+                    pV: 0.2,
                 },
                 {
                     colour: [173, 216, 230],
@@ -626,7 +623,7 @@ var presetLightDayCloudy = {
                     minSize: 100,
                     maxSize: 1000,
                     pH: 0.6,
-                    pV: 0.2
+                    pV: 0.2,
                 },
                 {
                     colour: [240, 240, 240],
@@ -634,30 +631,31 @@ var presetLightDayCloudy = {
                     minSize: 100,
                     maxSize: 1000,
                     pH: 0.6,
-                    pV: 0.2
+                    pV: 0.2,
                 },
             ]
         }
-    }
+    },
 };
-var presetLightDayStarry = {
+let presetLightDayStarry = {
     sky: defaultSky([135, 206, 235]),
     stars: stars1,
     moon: none,
     sunset: none,
     clouds: clouds1
 };
-var presetNight = {
+let presetNight = {
     sky: defaultSky([40, 30, 45]),
     stars: stars1,
     moon: none,
     sunset: none,
     clouds: cloudsMild
 };
-var presetCloudy = {
+let presetCloudy = {
     sky: defaultSky([115, 160, 200]),
     stars: starsDense,
     moon: none,
     sunset: none,
     clouds: cloudsCloudy
 };
+// export { Config, SkyConfig, CloudsConfig, CloudLayer, SunsetConfig, StarsConfig, MoonConfig, presetLateEvening3 };

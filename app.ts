@@ -1,4 +1,4 @@
-import { Config, SkyConfig, CloudsConfig, CloudLayer, SunsetConfig, StarsConfig, MoonConfig, presetLateEvening3 } from './presets'
+// import { Config, SkyConfig, CloudsConfig, CloudLayer, SunsetConfig, StarsConfig, MoonConfig, presetLateEvening3 } from './presets'
 
 function TupleSet() {
   this.data = new Map();
@@ -647,7 +647,7 @@ function collapsePixel(pixel: Pixel[]) {
 //     width: number,
 //     height: number
 // }
-interface Canvas extends HTMLDivElement {
+interface Canvas extends HTMLElement {
     width: number,
     height: number
 }
