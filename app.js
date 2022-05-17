@@ -1,3 +1,5 @@
+// function TupleSet() {
+//   this.data = new Map();
 var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
         if (ar || !(i in from)) {
@@ -7,9 +9,32 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     }
     return to.concat(ar || Array.prototype.slice.call(from));
 };
-function TupleSet() {
-    this.data = new Map();
-    this.add = function (_a) {
+//   this.add = function ([first, second]: any[]) {
+//     if (!this.data.has(first)) {
+//       this.data.set(first, new Set());
+//     }
+//     this.data.get(first).add(second);
+//     return this;
+//   };
+//   this.has = function ([first, second]: any[]) {
+//     return this.data.has(first) && this.data.get(first).has(second);
+//   };
+//   this.delete = function ([first, second]: any[]) {
+//     if (!this.data.has(first) || !this.data.get(first).has(second)) {
+//       return false;
+//     }
+//     this.data.get(first).delete(second);
+//     if (this.data.get(first).size === 0) {
+//       this.data.delete(first);
+//     }
+//     return true;
+//   };
+// }
+var MyTupleSet = /** @class */ (function () {
+    function MyTupleSet() {
+        this.data = new Map();
+    }
+    MyTupleSet.prototype.add = function (_a) {
         var first = _a[0], second = _a[1];
         if (!this.data.has(first)) {
             this.data.set(first, new Set());
@@ -17,11 +42,11 @@ function TupleSet() {
         this.data.get(first).add(second);
         return this;
     };
-    this.has = function (_a) {
+    MyTupleSet.prototype.has = function (_a) {
         var first = _a[0], second = _a[1];
         return this.data.has(first) && this.data.get(first).has(second);
     };
-    this["delete"] = function (_a) {
+    MyTupleSet.prototype["delete"] = function (_a) {
         var first = _a[0], second = _a[1];
         if (!this.data.has(first) || !this.data.get(first).has(second)) {
             return false;
@@ -32,7 +57,8 @@ function TupleSet() {
         }
         return true;
     };
-}
+    return MyTupleSet;
+}());
 function createGrid(h, w) {
     var grid = __spreadArray([], Array(h), true).map(function (e) { return Array(w); });
     return grid;
@@ -129,7 +155,7 @@ function colourSky(grid, skyConfig) {
     var _a;
     var start = [randInt(0, w - 1), randInt(0, h - 1)];
     var startColour = __spreadArray(__spreadArray([], skyConfig.properties.colour, true), [skyConfig.properties.opacity], false);
-    var seen = new TupleSet();
+    var seen = new MyTupleSet();
     var toPaint = [];
     toPaint.push([start[0], start[1], startColour]);
     seen.add(start);
@@ -217,7 +243,7 @@ function addCloudToSky(grid, x, y, colour, layer) {
 function createCloudBase(grid, startColour, sizeRange, pH, pV) {
     var _a;
     var start = [randInt(0, w - 1), randInt(0, h - 1)];
-    var seen = new TupleSet();
+    var seen = new MyTupleSet();
     var toPaint = [];
     toPaint.push([start[0], start[1], startColour]);
     seen.add(start);
@@ -242,7 +268,7 @@ function pixelHasType(pixel, type) {
 }
 function addCloudLayer(grid, start, layer, startColour, sizeRange, pH, pV) {
     var _a;
-    var seen = new TupleSet();
+    var seen = new MyTupleSet();
     var toPaint = [];
     toPaint.push([start[0], start[1], startColour]);
     seen.add(start);
@@ -361,7 +387,7 @@ function addSunsetToSky(grid, x, y, colour) {
 function createSunsetLayer(grid, layerConfig) {
     var _a;
     var maxD = h * layerConfig.proportion;
-    var seen = new TupleSet();
+    var seen = new MyTupleSet();
     var toPaint = [];
     // let colour = [253, 94, 83, layerConfig.maxOpacity];
     var start = [randInt(0, w - 1), h - 1];
@@ -509,6 +535,7 @@ function buildCanvas(grid) {
 var config = presetLateEvening3;
 var w = config.sky.properties.width;
 var h = config.sky.properties.height;
+console.log(w, h);
 var grid = createSky(config);
 buildCanvas(grid);
 console.log("Complete");

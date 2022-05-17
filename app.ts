@@ -1,21 +1,26 @@
 
-function TupleSet() {
-  this.data = new Map();
 
-  this.add = function ([first, second]: any[]) {
+class MyTupleSet {
+  private data: Map<number, Set<number>>
+  
+  public constructor() {
+    this.data = new Map();
+  }
+
+  public add([first, second]: [any, any]) {
     if (!this.data.has(first)) {
       this.data.set(first, new Set());
     }
 
     this.data.get(first).add(second);
     return this;
-  };
+  }
 
-  this.has = function ([first, second]: any[]) {
+  public has([first, second]: [any, any]): boolean {
     return this.data.has(first) && this.data.get(first).has(second);
-  };
+  }
 
-  this.delete = function ([first, second]: any[]) {
+  public delete([first, second]: [any, any]): boolean {
     if (!this.data.has(first) || !this.data.get(first).has(second)) {
       return false;
     }
@@ -26,7 +31,7 @@ function TupleSet() {
     }
 
     return true;
-  };
+  }
 }
 
 function createGrid(h: number, w: number): any[][] {
@@ -140,7 +145,7 @@ function colourSky(grid: Pixel[][][], skyConfig: SkyConfig) {
   let start = [randInt(0, w - 1), randInt(0, h - 1)];
   let startColour: [number, number, number, number] = [...skyConfig.properties.colour, skyConfig.properties.opacity];
 
-  let seen = new TupleSet();
+  let seen = new MyTupleSet();
   let toPaint: [number, number, [number, number, number, number]][] = [];
 
   toPaint.push([start[0], start[1], startColour]);
@@ -253,7 +258,7 @@ function addCloudToSky(grid: Pixel[][][], x: number, y: number, colour: [number,
 function createCloudBase(grid: Pixel[][][], startColour: [number, number, number, number], sizeRange: [number, number], pH: number, pV: number): [number, number] {
   let start: [number, number] = [randInt(0, w - 1), randInt(0, h - 1)];
 
-  let seen = new TupleSet();
+  let seen = new MyTupleSet();
   let toPaint: [number, number, [number, number, number, number]][] = [];
 
   toPaint.push([start[0], start[1], startColour]);
@@ -292,7 +297,7 @@ function pixelHasType(pixel: Pixel[], type: string): [boolean, number] {
 }
 
 function addCloudLayer(grid: Pixel[][][], start: [number, number], layer: number, startColour: [number, number, number, number], sizeRange: [number, number], pH: number, pV: number) {
-  let seen = new TupleSet();
+  let seen = new MyTupleSet();
   let toPaint: [number, number, [number, number, number, number]][] = [];
 
   toPaint.push([start[0], start[1], startColour]);
@@ -457,7 +462,7 @@ function addSunsetToSky(grid: Pixel[][][], x: number, y: number, colour: [number
 function createSunsetLayer(grid: Pixel[][][], layerConfig: SunsetLayer) {
   const maxD = h * layerConfig.proportion;
 
-  let seen = new TupleSet();
+  let seen = new MyTupleSet();
   let toPaint: [number, number, number[]][] = [];
 
   // let colour = [253, 94, 83, layerConfig.maxOpacity];
@@ -645,6 +650,8 @@ const config: Config = presetLateEvening3;
 
 let w: number = config.sky.properties.width;
 let h: number = config.sky.properties.height;
+
+console.log(w, h);
 
 let grid = createSky(config);
 buildCanvas(grid);

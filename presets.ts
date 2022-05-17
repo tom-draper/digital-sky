@@ -1,8 +1,8 @@
 
-// let defaultHeight = 1080;
-// let defaultWidth = 1920;
-let defaultHeight = 720;
-let defaultWidth = 1280;
+let defaultHeight = 1080;
+let defaultWidth = 1920;
+// let defaultHeight = 720;
+// let defaultWidth = 1280;
 
 function defaultSky(colour: [number, number, number]) {
   return {
