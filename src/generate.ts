@@ -1,17 +1,17 @@
 
-function randomColour(): number[] {
+function randomColour(): [number, number, number] {
   return [randInt(0, 255), randInt(0, 255), randInt(0, 255)];
 }
 
-function randomSkyColourNight(): number[] {
+function randomSkyColourNight(): [number, number, number]{
  return [randInt(0, 100), randInt(0, 100), randInt(0, 100)];
 }
-function randomSkyColourDay(): number[] {
+function randomSkyColourDay(): [number, number, number] {
   return [randInt(150, 250), randInt(140, 240), randInt(160, 255)];
 }
 
-function randomSkyColour(): number[] {
-  let colour: number[];
+function randomSkyColour(): [number, number, number] {
+  let colour: [number, number, number];
   let pNight = 0.3;
   if (Math.random() < pNight) {
     colour = randomSkyColourNight();
@@ -47,7 +47,7 @@ function colourSum(colour: number[]): number {
 }
 
 function generateStars(skyColour: number[]): StarsConfig {
-  let stars;
+  let stars: StarsConfig;
   let p = 0.6;
   let threshold = 120;
 
@@ -163,9 +163,7 @@ function generateCloudLayers(): CloudLayer[] {
       opacity: randFloat(0.05, 0.5),
       minSize: randInt(500, 1000),
       maxSize: randInt(5000, 50000),
-      // pH: 0.7, // Probability of horizontal expansion
       pH: randFloat(0.5, 0.9), // Probability of horizontal expansion
-      // pV: 0.3, // Probability of vertical expansion
       pV: randFloat(0.1, 0.5), // Probability of vertical expansion
     };
     cloudLayers.push(layer);
