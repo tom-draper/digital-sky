@@ -436,12 +436,7 @@ function createSunsetLayer(grid, layerConfig) {
   toPaint.push([
     start[0],
     start[1],
-    [
-      layerConfig.colour[0],
-      layerConfig.colour[1],
-      layerConfig.colour[2],
-      layerConfig.maxOpacity,
-    ],
+    __spreadArray(__spreadArray([], layerConfig.colour, true), [1], false),
   ]);
   seen.add(start);
   var x;
@@ -462,7 +457,7 @@ function createSunsetLayer(grid, layerConfig) {
       ) /
         maxD;
     if (scale > 0) {
-      colour[3] *= scale;
+      colour[3] = layerConfig.maxOpacity * scale;
       addSunsetToSky(grid, x, y, colour);
       sunsetSpread(
         x,
