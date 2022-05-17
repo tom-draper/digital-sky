@@ -225,20 +225,6 @@ function createCloudPixel(colour: [number, number, number, number]) {
   return cloudPixel;
 }
 
-// function nextPixelColourless(toPaint: [number, number][]): [number, number] {
-//   const idx = Math.floor(Math.random() * toPaint.length);
-//   let next = toPaint[idx];
-//   toPaint.splice(idx, 1);
-//   return next;
-// }
-
-// function nextPixelRGB(toPaint: [number, number, [number, number, number]][]): [number, number, [number, number, number]] {
-//   const idx = Math.floor(Math.random() * toPaint.length);
-//   let next = toPaint[idx];
-//   toPaint.splice(idx, 1);
-//   return next;
-// }
-
 function nextPixel(toPaint: [x:number, y:number, colour?:number[]][]): [x:number, y:number, colour?:number[]] {
   const idx = Math.floor(Math.random() * toPaint.length);
   let next = toPaint[idx];
@@ -403,7 +389,7 @@ function createSunsetPixel(colour: [number, number, number, number]): HTMLDivEle
 }
 
 function getRGBValues(str: string): [number, number, number] {
-  var vals = str.substring(str.indexOf("(") + 1, str.length - 1).split(", ");
+  let vals = str.substring(str.indexOf("(") + 1, str.length - 1).split(", ");
   return [parseInt(vals[0]), parseInt(vals[1]), parseInt(vals[2])];
 }
 
@@ -467,7 +453,7 @@ function createSunsetLayer(grid: Pixel[][][], layerConfig: SunsetLayer) {
 
   // let colour = [253, 94, 83, layerConfig.maxOpacity];
 
-  const start = [randInt(0, w - 1), h - 1];
+  const start: [number, number] = [randInt(0, w - 1), h - 1];
   toPaint.push([start[0], start[1], layerConfig.colour]);
   seen.add(start);
 
@@ -650,8 +636,6 @@ const config: Config = presetLateEvening3;
 
 let w: number = config.sky.properties.width;
 let h: number = config.sky.properties.height;
-
-console.log(w, h);
 
 let grid = createSky(config);
 buildCanvas(grid);
