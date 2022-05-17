@@ -1,6 +1,4 @@
 
-// let defaultHeight = 1080;
-// let defaultWidth = 1920;
 let defaultHeight = 720;
 let defaultWidth = 1280;
 

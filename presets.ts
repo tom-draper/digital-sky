@@ -17,7 +17,7 @@ function defaultSky(colour: [number, number, number]) {
   };
 }
 
-let none = {
+let none: None = {
   include: false,
   properties: null
 };
@@ -756,5 +756,3 @@ let presetCloudy = {
   sunset: none,
   clouds: cloudsCloudy
 };
-
-// export { Config, SkyConfig, CloudsConfig, CloudLayer, SunsetConfig, StarsConfig, MoonConfig, presetLateEvening3 };

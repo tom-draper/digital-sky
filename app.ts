@@ -1,4 +1,3 @@
-// import { Config, SkyConfig, CloudsConfig, CloudLayer, SunsetConfig, StarsConfig, MoonConfig, presetLateEvening3 } from './presets'
 
 function TupleSet() {
   this.data = new Map();
@@ -39,32 +38,9 @@ function formatColour(r: number, g: number, b: number, a: number): string {
   return `rgba(${r},${g},${b},${a})`;
 }
 
-// function formatColour2(colour: number[]): string {
-//   return `rgba(${colour[0]},${colour[1]},${colour[2]},${colour[3]})`;
-// }
-
 function randInt(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
-// function initSky(pixelSize: number): HTMLDivElement[][] {
-//   let grid = createGrid(h, w);
-
-//   let sky = document.getElementById("sky");
-//   sky.style.height = h * pixelSize + "px";
-//   sky.style.width = w * pixelSize + "px";
-//   sky.style.gridTemplateColumns = "repeat(" + w + ", 1fr)";
-
-//   for (let y = 0; y < h; y++) {
-//     for (let x = 0; x < w; x++) {
-//       let pixel = document.createElement("div");
-//       pixel.className = "pixel";
-//       sky.appendChild(pixel);
-//       grid[y][x] = pixel;
-//     }
-//   }
-//   return grid;
-// }
 
 function mutateColour(colour: [number, number, number, number], step: number): [number, number, number, number] {
   let mutatedColour = Object.values(colour);
@@ -170,7 +146,9 @@ function colourSky(grid: Pixel[][][], skyConfig: SkyConfig) {
   toPaint.push([start[0], start[1], startColour]);
   seen.add(start);
 
-  let x, y, colour;
+  let x: number;
+  let y: number;
+  let colour: [number, number, number, number];
   while (toPaint.length > 0) {
     [x, y, colour] = nextPixel(toPaint);
     grid[y][x] = [{
@@ -180,29 +158,6 @@ function colourSky(grid: Pixel[][][], skyConfig: SkyConfig) {
     colourSpread(x, y, colour, seen, toPaint, skyConfig.properties.mutationSpeed);
   }
 }
-
-// function moveCloud(grid: Pixel[][][], cloud: any): Pixel[][] {
-//   let movedCloud = {};
-//   for (let y in cloud.pixels) {
-//     movedCloud[y] = {};
-//     for (let x in cloud.pixels[y]) {
-//       grid[y][x].removeChild(cloud.pixels[y][x].div);
-//       if (x-10 >= 0) {
-//         grid[y][x-10].appendChild(cloud.pixels[y][x].div);
-//         movedCloud[y][x-10] = cloud.pixels[y][x];
-//       }
-//     }
-//   }
-//   return movedCloud;
-// }
-
-// function moveClouds(grid: Pixel[][], clouds: Object[]) {
-//   console.log("Moving clouds...");
-//   for (let i = 0; i < clouds.length; i++) {
-//     console.log("Cloud", i);
-//     clouds[i].pixels = moveCloud(grid, clouds[i]);
-//   }
-// }
 
 function inRange(cloudSize: number, sizeRange: [number, number]): boolean {
   return cloudSize <= sizeRange[0] && cloudSize <= sizeRange[1];
@@ -265,14 +220,21 @@ function createCloudPixel(colour: [number, number, number, number]) {
   return cloudPixel;
 }
 
-function nextPixelColourless(toPaint: [number, number][]): [number, number] {
-  const idx = Math.floor(Math.random() * toPaint.length);
-  let next = toPaint[idx];
-  toPaint.splice(idx, 1);
-  return next;
-}
+// function nextPixelColourless(toPaint: [number, number][]): [number, number] {
+//   const idx = Math.floor(Math.random() * toPaint.length);
+//   let next = toPaint[idx];
+//   toPaint.splice(idx, 1);
+//   return next;
+// }
 
-function nextPixel(toPaint: [number, number, [number, number, number, number]][]): [number, number, [number, number, number, number]] {
+// function nextPixelRGB(toPaint: [number, number, [number, number, number]][]): [number, number, [number, number, number]] {
+//   const idx = Math.floor(Math.random() * toPaint.length);
+//   let next = toPaint[idx];
+//   toPaint.splice(idx, 1);
+//   return next;
+// }
+
+function nextPixel(toPaint: [x:number, y:number, colour?:number[]][]): [x:number, y:number, colour?:number[]] {
   const idx = Math.floor(Math.random() * toPaint.length);
   let next = toPaint[idx];
   toPaint.splice(idx, 1);
@@ -298,8 +260,11 @@ function createCloudBase(grid: Pixel[][][], startColour: [number, number, number
   seen.add(start);
 
   let cloudSize = 1;
+  let x: number;
+  let y: number;
+  let colour: [number, number, number, number];
   while (toPaint.length > 0) {
-    let [x, y, colour] = nextPixel(toPaint);
+    [x, y, colour] = nextPixel(toPaint);
     addCloudToSky(grid, x, y, colour, 0);
     cloudSize = cloudsSpread(
       x,
@@ -333,9 +298,12 @@ function addCloudLayer(grid: Pixel[][][], start: [number, number], layer: number
   toPaint.push([start[0], start[1], startColour]);
   seen.add(start);
 
+  let x: number;
+  let y: number;
+  let colour: [number, number, number, number];
   let currentSize = 1;
   while (toPaint.length > 0) {
-    let [x, y, colour] = nextPixel(toPaint);
+    [x, y, colour] = nextPixel(toPaint);
     addCloudToSky(grid, x, y, colour, layer);
     currentSize = cloudsSpread(
       x,
@@ -435,7 +403,7 @@ function getRGBValues(str: string): [number, number, number] {
 }
 
 function sunsetSpread(x: number, y: number, colour: [number, number, number, number], 
-                      toPaint: [number, number, [number, number, number, number]][], 
+                      toPaint: [number, number, number[]][], 
                       seen: any, colourStep: number) {
   let nextColour = mutateColour(colour, colourStep);
 
@@ -477,12 +445,6 @@ function combineColours(colour1: [number, number, number, number],
   return colour;
 }
 
-// function applyColour(x: number, y: number, grid: Pixel[][], colour: [number, number, number, number]) {
-//   let originalColour: [number, number, number, number] = [...getRGBValues(grid[y][x].style.background), 1];
-//   let combinedColour = combineColours(colour, originalColour);
-//   grid[y][x].style.background = formatColour2(combinedColour);
-// }
-
 function addSunsetToSky(grid: Pixel[][][], x: number, y: number, colour: [number, number, number, number]) {
   let [hasSunset, idx] = pixelHasType(grid[y][x], 'sunset');
   if (hasSunset) {
@@ -492,21 +454,24 @@ function addSunsetToSky(grid: Pixel[][][], x: number, y: number, colour: [number
   }
 }
 
-function createSunsetLayer(grid: Pixel[][][], layerConfig: any) {
-  let maxD = h * layerConfig.proportion;
+function createSunsetLayer(grid: Pixel[][][], layerConfig: SunsetLayer) {
+  const maxD = h * layerConfig.proportion;
 
   let seen = new TupleSet();
-  let toPaint: [number, number, [number, number, number, number]][] = [];
+  let toPaint: [number, number, number[]][] = [];
 
-  let colour = [253, 94, 83, layerConfig.maxOpacity];
+  // let colour = [253, 94, 83, layerConfig.maxOpacity];
 
-  let start = [randInt(0, w - 1), h - 1];
+  const start = [randInt(0, w - 1), h - 1];
   toPaint.push([start[0], start[1], layerConfig.colour]);
   seen.add(start);
 
-  let scale;
+  let x: number;
+  let y: number;
+  let colour: [number, number, number, number];
+  let scale: number;
   while (toPaint.length > 0) {
-    const [x, y, colour] = nextPixel(toPaint);
+    [x, y, colour] = nextPixel(toPaint);
     scale =
       1 -
       warpedDistance(
@@ -548,13 +513,13 @@ function createMoonPixel(colour: [number, number, number, number]): HTMLDivEleme
 function fullMoon(grid: Pixel[][][], toPaint: [number, number][], moonConfig: MoonConfig) {
   let colour: [number, number, number, number] = [...moonConfig.properties.colour, 1];
   while (toPaint.length > 0) {
-    const [x, y] = nextPixelColourless(toPaint);
+    const [x, y] = nextPixel(toPaint);
     grid[y][x].push({type: 'moon', colour: colour});
     mutateColourInPlace(colour, moonConfig.properties.noise);
   }
 }
 
-function moonColour(fade: number) {
+function moonColour(fade: number): null {
   return null;
 }
 
@@ -567,7 +532,7 @@ function halfMoon(grid: Pixel[][][], toPaint: [number, number][],
   const fadeMargin = randInt(0, 10);
   let colour: [number, number, number, number] = [...moonConfig.properties.colour, 1];
   while (toPaint.length > 0) {
-    const [x, y] = nextPixelColourless(toPaint);
+    const [x, y] = nextPixel(toPaint);
     const d = distance(x, y, edge[0], edge[1]);
     if (d >= r) {
       const opacity = Math.min((d - r) / fadeMargin, 1);
@@ -643,28 +608,26 @@ function collapsePixel(pixel: Pixel[]) {
   return colour;
 }
 
-// type Canvas = HTMLDivElement & {
-//     width: number,
-//     height: number
-// }
-interface Canvas extends HTMLElement {
-    width: number,
-    height: number
+type Canvas = HTMLCanvasElement & {
+  width: number,
+  height: number
+}
+
+function getCanvasContext(): CanvasRenderingContext2D {
+  let canvas: Canvas = document.getElementById('canvas') as Canvas;
+  canvas.width = w;
+  canvas.height = h;
+  let context = canvas.getContext('2d');
+  return context;
 }
 
 function buildCanvas(grid: Pixel[][][]) {
-  let canvas: Canvas = document.getElementById('canvas');
-  canvas.width = w;
-  canvas.height = h;
-  const ctx = canvas.getContext('2d');
-
-  const imageData = ctx.createImageData(w, h);
-
+  let context = getCanvasContext()
+  let imageData = context.createImageData(w, h);
   for (let y = 0; y < h; y++) {
     for (let x = 0; x < w; x++) {
       // Index 1D array as 2D array with a step of 4 (for rgba elements)
       const i = (x + w * y) * 4;
-      
       const colour = collapsePixel(grid[y][x]);
       
       imageData.data[i] = colour[0];
@@ -674,16 +637,15 @@ function buildCanvas(grid: Pixel[][][]) {
     }
   }
 
-  ctx.putImageData(imageData, 0, 0);
+  context.putImageData(imageData, 0, 0);
 }
 
 
-let config: Config = presetLateEvening3;
+const config: Config = presetLateEvening3;
 
 let w: number = config.sky.properties.width;
 let h: number = config.sky.properties.height;
 
 let grid = createSky(config);
-console.log(grid);
 buildCanvas(grid);
 console.log("Complete");
