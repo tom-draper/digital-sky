@@ -29,3 +29,34 @@ body {
 .sunset {
     position: absolute;
 }
+
+#config {
+    display: grid;
+    place-items: center;
+}
+
+.config-container {
+   width: 100%;
+   height: auto;
+   display: grid;
+   place-items: center;
+}
+.title {
+    margin: 40px 0;
+}
+.card {
+    margin: 5px 0;
+}
+.btn {
+    margin-top: 30px;
+}
+
+.dimensions {
+    display: flex;
+}
+.component {
+    margin: 8px 0;
+}
+.sky-width {
+    margin-left: 15px;
+}

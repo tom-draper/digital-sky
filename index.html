@@ -6,12 +6,84 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Digital Sky</title>
   <link href="styles/style.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
 <body>
   <div id="main">
+    <div id="config">
+      <div class="config-container">
+        <h1 class="title fw-bold">Digital Sky</h1>
+        <div class="card" style="width: 50rem;">
+          <div class="card-body">
+            <h4 class="card-title">Sky</h4>
+            <div class="component dimensions">
+              <div class="sky-height">
+                Height: <input id="skyHeight" type="number" min="1" max="5000">
+              </div>
+              <div class="sky-width">
+                Width: <input id="skyWidth" type="number" min="1" max="5000" >
+              </div>
+            </div>
+            <div class="component sky-pixel-size">
+              Pixel size: <input id="skyPixelSize" type="number" min="1" max="5">
+            </div>
+            <div class="component sky-colours">
+              Colour: <input id="skyRed" type="number" min="1" max="255"> <input id="skyGreen" type="number" min="1" max="255"> <input id="skyBlue" type="number" min="1" max="255"> 
+            </div>
+            <div class="component sky-opacity">
+              Opacity: <input id="skyOpacity" type="number" min="1" max="5">
+            </div>
+            <div class="component sky-mutation-speed">
+              Mutation speed: <input id="skyMutationSpeed" type="number" min="1" max="5">
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="width: 50rem;">
+          <div class="card-body">
+            <h4 class="card-title">Stars</h4>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+        </div>
+
+        <div class="card" style="width: 50rem;">
+          <div class="card-body">
+            <h5 class="card-title">Moon</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+
+        <div class="card" style="width: 50rem;">
+          <div class="card-body">
+            <h5 class="card-title">Sunset</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+
+        <div class="card" style="width: 50rem;">
+          <div class="card-body">
+            <h5 class="card-title">Clouds</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+
+        <button onclick="run()" class="btn btn-primary">Generate</button>
+      </div>
+    </div>
     <canvas id="canvas"></canvas>
   </div>
   <!-- <script>var exports = {};</script> -->
+  
+  <script type='text/javascript' src="src/config.js"></script>
   <script type='text/javascript' src="src/presets.js"></script>
   <script type='text/javascript' src="src/app.js"></script>
   <!-- <script type='text/javascript' src="src/generate.js"></script> -->

@@ -632,12 +632,16 @@ function buildCanvas(grid: Pixel[][][]) {
   context.putImageData(imageData, 0, 0);
 }
 
+let w: number;
+let h: number;
 
-const config: Config = presetLateEvening3;
-
-let w: number = config.sky.properties.width;
-let h: number = config.sky.properties.height;
-
-let grid = createSky(config);
-buildCanvas(grid);
-console.log("Complete");
+function runSkyGeneration() {
+  const config: Config = presetLateEvening3;
+  
+  w = config.sky.properties.width;
+  h = config.sky.properties.height;
+  
+  let grid = createSky(config);
+  buildCanvas(grid);
+  console.log("Complete");
+}
