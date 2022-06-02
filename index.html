@@ -31,38 +31,89 @@
               Colour: <input id="skyRed" type="number" min="1" max="255"> <input id="skyGreen" type="number" min="1" max="255"> <input id="skyBlue" type="number" min="1" max="255"> 
             </div>
             <div class="component sky-opacity">
-              Opacity: <input id="skyOpacity" type="number" min="1" max="5">
+              Opacity: <input id="skyOpacity" type="number" min="1" max="1">
             </div>
             <div class="component sky-mutation-speed">
               Mutation speed: <input id="skyMutationSpeed" type="number" min="1" max="5">
             </div>
           </div>
         </div>
-
+        
         <div class="card" style="width: 50rem;">
           <div class="card-body">
             <h4 class="card-title">Stars</h4>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <div class="component stars-include">
+              Include: <input id="starsInclude" type="checkbox">
+            </div>
+            <div class="component stars-opacity">
+              Opacity: <input id="starsOpacity" type="number" min="1" max="1">
+            </div>
+            <div class="component stars-density">
+              Density: <input id="starsDensity" type="number" min="1" max="5">
+            </div>
           </div>
         </div>
-
+        
         <div class="card" style="width: 50rem;">
           <div class="card-body">
-            <h5 class="card-title">Moon</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
+            <h4 class="card-title">Moon</h4>
+            <div class="component moon-include">
+              Include: <input id="moonInclude" type="checkbox">
+            </div>
+            <div class="component moon-colour">
+              Colour: <input id="moonRed" type="number" min="1" max="255"> <input id="moonGreen" type="number" min="1" max="255"> <input id="moonBlue" type="number" min="1" max="255"> 
+            </div>
+            <div class="component moon-density">
+              Radius: <input id="moonRadius" type="number" min="1" max="5">
+            </div>
+            <div class="component moon-half-moon">
+              Half moon: <input id="moonHalfMoon" type="checkbox">
+            </div>
+            <div class="component moon-noise">
+              Noise: <input id="moonNoise" type="number" min="1" max="5">
+            </div>
           </div>
         </div>
-
+        
         <div class="card" style="width: 50rem;">
           <div class="card-body">
-            <h5 class="card-title">Sunset</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
+            <h4 class="card-title">Sunset</h4>
+            <div class="component sunset-include">
+              Include: <input id="sunsetInclude" type="checkbox">
+            </div>
+            <div class="component sunset-layers">
+              Layers: <input id="sunsetLayers" type="number" min="1" max="5">
+            </div>
+            
+            <div id="sunsetLayers">
+              <div class="card sunset-layer">
+                <h6 class="sunset-layer-title">Layer 1</h6>
+                <button class="btn btn-outline-danger delete-sunset-layer">Delete</button>
+                <div class="component sunset-colour">
+                  Colour: <input id="sunset1Red" type="number" min="1" max="255"> <input id="sunset1Green" type="number" min="1" max="255"> <input id="sunset1Blue" type="number" min="1" max="255"> 
+                </div>
+                <div class="component sunset-max-opacity">
+                  Max opacity: <input id="sunsetMaxOpacity" type="number" min="1" max="5">
+                </div>
+                <div class="component sunset-proportion">
+                  Proportion: <input id="sunsetProportion" type="number" min="1" max="5">
+                </div>
+                <div class="component sunset-mutation-speed">
+                  Mutation speed: <input id="sunsetMutationSpeed" type="number" min="1" max="5">
+                </div>
+                <div class="component sunset-x-stretch">
+                  X-stretch: <input id="sunsetXStretch" type="number" min="1" max="5">
+                </div>
+                <div class="component sunset-y-stretch">
+                  Y-stretch: <input id="sunsetYStretch" type="number" min="1" max="5">
+                </div>
+              </div>
+            </div>
+
+            <div class="add-sunset-layer-container">
+              <button class="btn btn-outline-primary add-sunset-layer">Add layer</button>
+            </div>
+            
           </div>
         </div>
 

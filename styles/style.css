@@ -60,3 +60,22 @@ body {
 .sky-width {
     margin-left: 15px;
 }
+.sunset-layer {
+    padding: 15px;
+    position: relative;
+}
+.delete-sunset-layer { 
+    position: absolute;
+    top: 5px; 
+    right: 5px;
+    margin: 0;
+ }
+.add-sunset-layer-container {
+    display: grid;
+    place-items: center;
+}
+.add-sunset-layer {
+    width: auto;
+    padding: 5px;
+    margin-top: 10px;
+}
