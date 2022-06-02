@@ -116,14 +116,46 @@
             
           </div>
         </div>
-
+        
         <div class="card" style="width: 50rem;">
           <div class="card-body">
-            <h5 class="card-title">Clouds</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
+            <h4 class="card-title">Clouds</h4>
+            <div class="component clouds-include">
+              Include: <input id="cloudsInclude" type="checkbox">
+            </div>
+            <div class="component clouds-quantity">
+              Quantity: <input id="cloudsQuantity" type="number" min="1" max="5">
+            </div>
+            
+            <div id="cloudsLayers">
+              <div class="card clouds-layer">
+                <h6 class="clouds-layer-title">Layer 1</h6>
+                <button class="btn btn-outline-danger delete-clouds-layer">Delete</button>
+                <div class="component clouds-colour">
+                  Colour: <input id="clouds1Red" type="number" min="1" max="255"> <input id="clouds1Green" type="number" min="1" max="255"> <input id="clouds1Blue" type="number" min="1" max="255"> 
+                </div>
+                <div class="component clouds-max-opacity">
+                  Max opacity: <input id="cloudsMaxOpacity" type="number" min="1" max="5">
+                </div>
+                <div class="component clouds-proportion">
+                  Proportion: <input id="cloudsProportion" type="number" min="1" max="5">
+                </div>
+                <div class="component clouds-mutation-speed">
+                  Mutation speed: <input id="cloudsMutationSpeed" type="number" min="1" max="5">
+                </div>
+                <div class="component clouds-x-stretch">
+                  X-stretch: <input id="cloudsXStretch" type="number" min="1" max="5">
+                </div>
+                <div class="component clouds-y-stretch">
+                  Y-stretch: <input id="cloudsYStretch" type="number" min="1" max="5">
+                </div>
+              </div>
+            </div>
+  
+            <div class="add-clouds-layer-container">
+              <button class="btn btn-outline-primary add-clouds-layer">Add layer</button>
+            </div>
+            
           </div>
         </div>
 

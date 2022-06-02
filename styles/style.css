@@ -60,20 +60,24 @@ body {
 .sky-width {
     margin-left: 15px;
 }
+.clouds-layer,
 .sunset-layer {
     padding: 15px;
     position: relative;
 }
+.delete-clouds-layer,
 .delete-sunset-layer { 
     position: absolute;
     top: 5px; 
     right: 5px;
     margin: 0;
  }
+.add-clouds-layer-container,
 .add-sunset-layer-container {
     display: grid;
     place-items: center;
 }
+.add-clouds-layer,
 .add-sunset-layer {
     width: auto;
     padding: 5px;
