@@ -5,20 +5,20 @@ let config: Config = {
       height: 720,
       width: 1280,
       pixelSize: 1,
-      colour: [200, 200, 250],
+      colour: [94, 122, 187],
       opacity: 1,
-      mutationSpeed: 2
+      mutationSpeed: 1
     }
   },
   stars: {
-    include: true,
+    include: false,
     properties: {
       opacity: 1,
       density: 0.005,
     }
   },
   moon: {
-    include: true,
+    include: false,
     properties: {
       colour: [200, 200, 200],
       radius: 10,
@@ -31,70 +31,86 @@ let config: Config = {
     properties: {
       layers: [
         {
-          colour: [255, 160, 160],
+          colour: [254, 207, 199],
           maxOpacity: 0.7,
           proportion: 0.7,
-          mutationSpeed: 2,
-          xStretch: 1,
-          yStretch: 1,
+          mutationSpeed: 1,
+          xStretch: 0.7,
+          yStretch: 0.5,
         },
         {
-          colour: [255, 200, 200],
-          maxOpacity: 0.7,
+          colour: [253, 227, 228],
+          maxOpacity: 0.5,
           proportion: 0.7,
-          mutationSpeed: 2,
-          xStretch: 1,
-          yStretch: 1,
+          mutationSpeed: 1,
+          xStretch: 0.6,
+          yStretch: 0.3,
         }
       ]
     }
   },
   clouds: {
-    include: true,
+    include: false,
     properties: {
-      quantity: 5,
+      quantity: 10,
       layers: [
         {
-          colour: [200, 200, 200],
+          colour: [235, 235, 235],
           opacity: 0.2,
-          minSize: 1000,
+          minSize: 100,
           maxSize: 10000,
-          pH: 0.8, // Probability of horizontal expansion
+          pH: 0.7, // Probability of horizontal expansion
           pV: 0.3, // Probability of vertical expansion
         },
         {
-          colour: [200, 200, 200],
-          opacity: 0.2,
-          minSize: 1000,
+          colour: [235, 235, 235],
+          opacity: 0.15,
+          minSize: 100,
           maxSize: 10000,
-          pH: 0.8, // Probability of horizontal expansion
-          pV: 0.3, // Probability of vertical expansion
+          pH: 0.7,
+          pV: 0.3,
         },
         {
-          colour: [200, 200, 200],
-          opacity: 0.2,
-          minSize: 1000,
+          colour: [235, 235, 235],
+          opacity: 0.15,
+          minSize: 100,
           maxSize: 10000,
-          pH: 0.8, // Probability of horizontal expansion
-          pV: 0.3, // Probability of vertical expansion
+          pH: 0.7,
+          pV: 0.3,
         },
         {
-          colour: [200, 200, 200],
-          opacity: 0.2,
-          minSize: 1000,
+          colour: [235, 235, 235],
+          opacity: 0.15,
+          minSize: 100,
           maxSize: 10000,
-          pH: 0.8, // Probability of horizontal expansion
-          pV: 0.3, // Probability of vertical expansion
+          pH: 0.7,
+          pV: 0.3,
         },
         {
-          colour: [200, 200, 200],
-          opacity: 0.2,
-          minSize: 1000,
+          colour: [173, 216, 230],
+          opacity: 0.15,
+          minSize: 100,
           maxSize: 10000,
-          pH: 0.8, // Probability of horizontal expansion
-          pV: 0.3, // Probability of vertical expansion
+          pH: 0.6,
+          pV: 0.2,
         },
-      ]
+        {
+          colour: [173, 216, 230],
+          opacity: 0.15,
+          minSize: 100,
+          maxSize: 10000,
+          pH: 0.6,
+          pV: 0.2,
+        },
+        {
+          colour: [240, 240, 240],
+          opacity: 0.2,
+          minSize: 100,
+          maxSize: 10000,
+          pH: 0.6,
+          pV: 0.2,
+        },
+      ],
     }
   }
 }
@@ -132,7 +148,7 @@ function createSunsetLayers() {
   for (let i = 0; i < config.sunset.properties.layers.length; i++) {
     let layer: any = original.cloneNode(true);
     layer.removeAttribute("id");
-    layer.children[0].textContent = 'Layer ' + (i+1);
+    layer.children[0].textContent = 'Layer ' + (i + 1);
     layer.children[2].children[0].value = config.sunset.properties.layers[i].colour[0];
     layer.children[2].children[1].value = config.sunset.properties.layers[i].colour[1];
     layer.children[2].children[2].value = config.sunset.properties.layers[i].colour[2];
@@ -156,7 +172,7 @@ function createCloudsLayers() {
   for (let i = 0; i < config.clouds.properties.layers.length; i++) {
     let layer: any = original.cloneNode(true);
     layer.removeAttribute("id");
-    layer.children[0].textContent = 'Layer ' + (i+1);
+    layer.children[0].textContent = 'Layer ' + (i + 1);
     layer.children[2].children[0].value = config.clouds.properties.layers[i].colour[0];
     layer.children[2].children[1].value = config.clouds.properties.layers[i].colour[1];
     layer.children[2].children[2].value = config.clouds.properties.layers[i].colour[2];
@@ -196,18 +212,18 @@ function collectSky() {
 }
 
 function collectStars() {
-  config.stars.include = new Boolean(document.getElementById('starsInclude').value);
+  config.stars.include = document.getElementById('starsInclude').value == 'true';
   config.stars.properties.opacity = parseFloat(document.getElementById('starsOpacity').value);
   config.stars.properties.density = parseFloat(document.getElementById('starsDensity').value);
 }
 
 function collectMoon() {
-  config.moon.include = new Boolean(document.getElementById('moonInclude').value);
+  config.moon.include = document.getElementById('moonInclude').value == 'true';
   config.moon.properties.colour[0] = parseInt(document.getElementById('moonRed').value);
   config.moon.properties.colour[1] = parseInt(document.getElementById('moonGreen').value);
   config.moon.properties.colour[2] = parseInt(document.getElementById('moonBlue').value);
   config.moon.properties.radius = parseInt(document.getElementById('moonRadius').value);
-  config.moon.properties.halfMoon = new Boolean(document.getElementById('moonHalfMoon').value);
+  config.moon.properties.halfMoon = document.getElementById('moonHalfMoon').value == 'true';
   config.moon.properties.noise = parseInt(document.getElementById('moonNoise').value);
 }
 
@@ -219,7 +235,7 @@ function collectSunsetLayers() {
     let configLayer: SunsetLayer = {
       colour: [parseInt(layer.children[2].children[0].value), parseInt(layer.children[2].children[1].value), parseInt(layer.children[2].children[2].value)],
       maxOpacity: parseFloat(layer.children[3].children[0].value),
-      proportion: parseInt(layer.children[4].children[0].value),
+      proportion: parseFloat(layer.children[4].children[0].value),
       mutationSpeed: parseInt(layer.children[5].children[0].value),
       xStretch: parseFloat(layer.children[6].children[0].value),
       yStretch: parseFloat(layer.children[7].children[0].value),
@@ -230,7 +246,7 @@ function collectSunsetLayers() {
 }
 
 function collectSunset() {
-  config.sunset.include = new Boolean(document.getElementById('sunsetInclude').value);
+  config.sunset.include = document.getElementById('sunsetInclude').value == 'true';
   collectSunsetLayers();
 }
 
@@ -253,7 +269,7 @@ function collectCloudsLayers() {
 }
 
 function collectClouds() {
-  config.clouds.include = new Boolean(document.getElementById('cloudsInclude').value);
+  config.clouds.include = document.getElementById('cloudsInclude').value == 'true';
   config.clouds.properties.quantity = parseInt(document.getElementById('cloudsQuantity').value);
   collectCloudsLayers();
 }
