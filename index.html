@@ -1,156 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Digital Sky</title>
-  <link href="styles/style.css" rel="stylesheet"/>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <link href="styles/style.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
 </head>
+
 <body>
   <div id="main">
     <div id="config">
       <div class="config-container">
         <h1 class="title fw-bold">Digital Sky</h1>
-        <div class="card" style="width: 50rem;">
+        <div class="card" style="width: 50rem">
           <div class="card-body">
             <h4 class="card-title">Sky</h4>
             <div class="component dimensions">
               <div class="sky-height">
-                Height: <input id="skyHeight" type="number" min="1" max="5000">
+                Height:
+                <input id="skyHeight" type="number" min="1" max="5000" />
               </div>
               <div class="sky-width">
-                Width: <input id="skyWidth" type="number" min="1" max="5000" >
+                Width:
+                <input id="skyWidth" type="number" min="1" max="5000" />
               </div>
             </div>
             <div class="component sky-pixel-size">
-              Pixel size: <input id="skyPixelSize" type="number" min="1" max="5">
+              Pixel size:
+              <input type="range" class="form-range" id="skyPixelSize" min="0" , max="5" step="1" />
             </div>
             <div class="component sky-colours">
-              Colour: <input id="skyRed" type="number" min="1" max="255"> <input id="skyGreen" type="number" min="1" max="255"> <input id="skyBlue" type="number" min="1" max="255"> 
+              Colour: <input id="skyRed" type="number" min="1" max="255" />
+              <input id="skyGreen" type="number" min="1" max="255" />
+              <input id="skyBlue" type="number" min="1" max="255" />
             </div>
             <div class="component sky-opacity">
-              Opacity: <input id="skyOpacity" type="number" min="1" max="1">
+              Opacity:
+              <input type="range" class="form-range" id="skyOpacity" min="0" , max="1" step="0.01" />
             </div>
             <div class="component sky-mutation-speed">
-              Mutation speed: <input id="skyMutationSpeed" type="number" min="1" max="5">
+              Mutation speed:
+              <input type="range" class="form-range" id="skyMutationSpeed" min="0" , max="5" step="1" />
             </div>
           </div>
         </div>
-        
-        <div class="card" style="width: 50rem;">
+
+        <div class="card" style="width: 50rem">
           <div class="card-body">
             <h4 class="card-title">Stars</h4>
             <div class="component stars-include">
-              Include: <input id="starsInclude" type="checkbox">
+              Include: <input id="starsInclude" type="checkbox" />
             </div>
             <div class="component stars-opacity">
-              Opacity: <input id="starsOpacity" type="number" min="1" max="1">
+              Opacity:
+              <input type="range" class="form-range" id="starsOpacity" min="0" , max="1" step="0.01" />
             </div>
             <div class="component stars-density">
-              Density: <input id="starsDensity" type="number" min="0" max="1", step="0.001">
+              Density:
+              <input type="range" class="form-range" id="starsDensity" min="0" , max="1" step="0.001" />
             </div>
           </div>
         </div>
-        
-        <div class="card" style="width: 50rem;">
+
+        <div class="card" style="width: 50rem">
           <div class="card-body">
             <h4 class="card-title">Moon</h4>
             <div class="component moon-include">
-              Include: <input id="moonInclude" type="checkbox">
+              Include: <input id="moonInclude" type="checkbox" />
             </div>
             <div class="component moon-colour">
-              Colour: <input id="moonRed" type="number" min="1" max="255"> <input id="moonGreen" type="number" min="1" max="255"> <input id="moonBlue" type="number" min="1" max="255"> 
+              Colour: <input id="moonRed" type="number" min="1" max="255" />
+              <input id="moonGreen" type="number" min="1" max="255" />
+              <input id="moonBlue" type="number" min="1" max="255" />
             </div>
             <div class="component moon-density">
-              Radius: <input id="moonRadius" type="number" min="1" max="5">
+              Radius: <input type="range" class="form-range" id="moonRadius" min="0", max="25" step="1" />
             </div>
             <div class="component moon-half-moon">
-              Half moon: <input id="moonHalfMoon" type="checkbox">
+              Half moon: <input id="moonHalfMoon" type="checkbox" />
             </div>
             <div class="component moon-noise">
-              Noise: <input id="moonNoise" type="number" min="1" max="5">
+              Noise:  <input type="range" class="form-range" id="moonNoise" min="0", max="5" step="1" />
             </div>
           </div>
         </div>
-        
-        <div class="card" style="width: 50rem;">
+
+        <div class="card" style="width: 50rem">
           <div class="card-body">
             <h4 class="card-title">Sunset</h4>
             <div class="component sunset-include">
-              Include: <input id="sunsetInclude" type="checkbox">
+              Include: <input id="sunsetInclude" type="checkbox" />
             </div>
-            
+
             <div id="sunsetLayers">
               <div id="sunsetLayer" class="card sunset-layer">
                 <h6 class="sunset-layer-title">Layer 1</h6>
-                <button class="btn btn-outline-danger delete-sunset-layer">Delete</button>
+                <button class="btn btn-outline-danger delete-sunset-layer">
+                  Delete
+                </button>
                 <div class="component sunset-colour">
-                  Colour: <input id="sunset1Red" type="number" min="1" max="255"> <input id="sunset1Green" type="number" min="1" max="255"> <input id="sunset1Blue" type="number" min="1" max="255"> 
+                  Colour:
+                  <input id="sunset1Red" type="number" min="1" max="255" />
+                  <input id="sunset1Green" type="number" min="1" max="255" />
+                  <input id="sunset1Blue" type="number" min="1" max="255" />
                 </div>
                 <div class="component sunset-max-opacity">
-                  Max opacity: <input id="sunsetMaxOpacity" type="number" min="0" max="1" step="0.01">
+                  Max opacity:
+                  <input type="range" class="form-range" id="sunsetMaxOpacity" min="0", max="1" step="0.01" />
                 </div>
                 <div class="component sunset-proportion">
-                  Proportion: <input id="sunsetProportion" type="number" min="0" max="1" step="0.01">
+                  Proportion:
+                  <input type="range" class="form-range" id="sunsetProportion" min="0", max="1" step="0.01" />
                 </div>
                 <div class="component sunset-mutation-speed">
-                  Mutation speed: <input id="sunsetMutationSpeed" type="number" min="1" max="5">
+                  Mutation speed:
+                  <input type="range" class="form-range" id="sunsetMutationSpeed" min="0", max="5" step="1" />
                 </div>
                 <div class="component sunset-x-stretch">
-                  X-stretch: <input id="sunsetXStretch" type="number" min="1" max="5">
+                  X-stretch:
+                  <input type="range" class="form-range" id="sunsetXStretch" min="0", max="1" step="0.01" />
                 </div>
                 <div class="component sunset-y-stretch">
-                  Y-stretch: <input id="sunsetYStretch" type="number" min="1" max="5">
+                  Y-stretch:
+                  <input type="range" class="form-range" id="sunsetYStretch" min="0", max="1" step="0.01" />
                 </div>
               </div>
             </div>
 
             <div class="add-sunset-layer-container">
-              <button class="btn btn-outline-primary add-sunset-layer" onclick="addSunsetLayer()">Add layer</button>
+              <button class="btn btn-outline-primary add-sunset-layer" onclick="addSunsetLayer()">
+                Add layer
+              </button>
             </div>
-            
           </div>
         </div>
-        
-        <div class="card" style="width: 50rem;">
+
+        <div class="card" style="width: 50rem">
           <div class="card-body">
             <h4 class="card-title">Clouds</h4>
             <div class="component clouds-include">
-              Include: <input id="cloudsInclude" type="checkbox">
+              Include: <input id="cloudsInclude" type="checkbox" />
             </div>
             <div class="component clouds-quantity">
-              Quantity: <input id="cloudsQuantity" type="number" min="1" max="5">
+              Quantity:
+              <input id="cloudsQuantity" type="number" min="1" max="5" />
             </div>
-            
+
             <div id="cloudsLayers">
               <div id="cloudsLayer" class="card clouds-layer">
                 <h6 class="clouds-layer-title">Layer 1</h6>
-                <button class="btn btn-outline-danger delete-clouds-layer">Delete</button>
+                <button class="btn btn-outline-danger delete-clouds-layer">
+                  Delete
+                </button>
                 <div class="component clouds-colour">
-                  Colour: <input id="clouds1Red" type="number" min="1" max="255"> <input id="clouds1Green" type="number" min="1" max="255"> <input id="clouds1Blue" type="number" min="1" max="255"> 
+                  Colour:
+                  <input id="clouds1Red" type="number" min="1" max="255" />
+                  <input id="clouds1Green" type="number" min="1" max="255" />
+                  <input id="clouds1Blue" type="number" min="1" max="255" />
                 </div>
                 <div class="component clouds-max-opacity">
-                  Opacity: <input id="cloudsMaxOpacity" type="number" min="1" max="5">
+                  Opacity:
+                  <input type="range" class="form-range" id="cloudsOpacity" min="0", max="1" step="0.01" />
                 </div>
                 <div class="component clouds-min-size">
-                  Min size: <input id="cloudsMinSize" type="number" min="1" max="5">
+                  Min size:
+                  <input type="range" class="form-range" id="cloudsMinSize" min="0", max="10000" step="1" />
                 </div>
                 <div class="component clouds-max-size">
-                  Max size: <input id="cloudsMaxSize" type="number" min="1" max="5">
+                  Max size:
+                  <input type="range" class="form-range" id="cloudsMaxSize" min="10000" max="500000" step="1"/>
                 </div>
                 <div class="component clouds-pH">
-                  pH: <input id="cloudsPH" type="number" min="0" max="1" step="0.01">
+                  pH:
+                  <input type="range" class="form-range" id="cloudsPH" min="0" max="1" step="0.01"/>
                 </div>
                 <div class="component clouds-pV">
-                  pV: <input id="cloudsPV" type="number" min="0" max="1" step="0.01">
+                  pV:
+                  <input type="range" class="form-range" id="cloudsPV" min="0" max="1" step="0.01"/>
                 </div>
               </div>
             </div>
-  
+
             <div class="add-clouds-layer-container">
-              <button class="btn btn-outline-primary add-clouds-layer" onclick="addCloudsLayer()">Add layer</button>
+              <button class="btn btn-outline-primary add-clouds-layer" onclick="addCloudsLayer()">
+                Add layer
+              </button>
             </div>
           </div>
         </div>
@@ -160,10 +198,11 @@
     <canvas id="canvas"></canvas>
   </div>
   <!-- <script>var exports = {};</script> -->
-  
-  <script type='text/javascript' src="src/config.js"></script>
-  <script type='text/javascript' src="src/presets.js"></script>
-  <script type='text/javascript' src="src/app.js"></script>
+
+  <script type="text/javascript" src="src/config.js"></script>
+  <script type="text/javascript" src="src/presets.js"></script>
+  <script type="text/javascript" src="src/app.js"></script>
   <!-- <script type='text/javascript' src="src/generate.js"></script> -->
 </body>
+
 </html>

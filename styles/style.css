@@ -47,6 +47,9 @@ body {
 .card {
     margin: 5px 0;
 }
+.card-body {
+    padding: 2em !important;
+}
 .btn {
     margin-top: 30px;
 }
@@ -83,14 +86,4 @@ body {
     width: auto;
     padding: 5px;
     margin-top: 10px;
-}
-
-#progress {
-    display: none;
-}
-.progress {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    border-radius: 0 !important;
 }
