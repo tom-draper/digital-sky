@@ -199,6 +199,7 @@ function createCloudsLayers() {
         layer.children[5].children[0].value = config.clouds.properties.layers[i].maxSize;
         layer.children[6].children[0].value = config.clouds.properties.layers[i].pH;
         layer.children[7].children[0].value = config.clouds.properties.layers[i].pV;
+        console.log(layer);
         document.getElementById('cloudsLayers').appendChild(layer);
         cloudLayerCount += 1;
     };
@@ -246,7 +247,7 @@ function collectMoon() {
     config.moon.properties.colour[1] = parseInt(document.getElementById('moonGreen').value);
     config.moon.properties.colour[2] = parseInt(document.getElementById('moonBlue').value);
     config.moon.properties.radius = parseInt(document.getElementById('moonRadius').value);
-    config.moon.properties.halfMoon = document.getElementById('moonHalfMoon').value == 'true';
+    config.moon.properties.halfMoon = document.getElementById('moonHalfMoon').checked;
     config.moon.properties.noise = parseInt(document.getElementById('moonNoise').value);
 }
 function collectSunsetLayers() {

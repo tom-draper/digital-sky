@@ -65,15 +65,15 @@ body {
 }
 .clouds-layer,
 .sunset-layer {
-    padding: 15px;
+    padding: 1.5em;
     position: relative;
-    margin: 5px 0;
+    margin: 15px 0;
 }
 .delete-clouds-layer,
 .delete-sunset-layer { 
     position: absolute;
-    top: 5px; 
-    right: 5px;
+    top: 1.5em; 
+    right: 1.5em;
     margin: 0;
  }
 .add-clouds-layer-container,

@@ -205,6 +205,7 @@ function createCloudsLayers() {
     layer.children[5].children[0].value = config.clouds.properties.layers[i].maxSize;
     layer.children[6].children[0].value = config.clouds.properties.layers[i].pH;
     layer.children[7].children[0].value = config.clouds.properties.layers[i].pV;
+    console.log(layer);
     document.getElementById('cloudsLayers').appendChild(layer);
     cloudLayerCount += 1;
   }
