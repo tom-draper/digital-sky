@@ -155,7 +155,6 @@ function createCloudsLayers() {
   document.getElementById('cloudsLayers').removeChild(original);
   for (let i = 0; i < config.clouds.properties.layers.length; i++) {
     let layer: any = original.cloneNode(true);
-    console.log(layer.children)
     layer.removeAttribute("id");
     layer.children[0].textContent = 'Layer ' + (i+1);
     layer.children[2].children[0].value = config.clouds.properties.layers[i].colour[0];
@@ -184,8 +183,87 @@ function init() {
   fillCloudsDefault();
 }
 
-function collectInputs() {
 
+function collectSky() {
+  config.sky.properties.width = document.getElementById('skyWidth').value;
+  config.sky.properties.height = document.getElementById('skyHeight').value;
+  config.sky.properties.pixelSize = document.getElementById('skyPixelSize').value;
+  config.sky.properties.colour[0] = document.getElementById('skyRed').value;
+  config.sky.properties.colour[1] = document.getElementById('skyGreen').value;
+  config.sky.properties.colour[2] = document.getElementById('skyBlue').value;
+  config.sky.properties.opacity = document.getElementById('skyOpacity').value;
+  config.sky.properties.mutationSpeed = document.getElementById('skyMutationSpeed').value;
+}
+
+function collectStars() {
+  config.stars.include = document.getElementById('starsInclude').value;
+  config.stars.properties.opacity = document.getElementById('starsOpacity').value;
+  config.stars.properties.density = document.getElementById('starsDensity').value;
+}
+
+function collectMoon() {
+  config.moon.include = document.getElementById('moonInclude').value;
+  config.moon.properties.colour[0] = document.getElementById('moonRed').value;
+  config.moon.properties.colour[1] = document.getElementById('moonGreen').value;
+  config.moon.properties.colour[2] = document.getElementById('moonBlue').value;
+  config.moon.properties.radius = document.getElementById('moonRadius').value;
+  config.moon.properties.halfMoon = document.getElementById('moonHalfMoon').value;
+  config.moon.properties.noise = document.getElementById('moonNoise').value;
+}
+
+function collectSunsetLayers() {
+  let layers = document.getElementById('sunsetLayers');
+  let configLayers: SunsetLayer[] = [];
+  for (let i = 0; i < layers.children.length; i++) {
+    let layer = layers.children[i];
+    let configLayer: SunsetLayer = {
+      colour: [layer.children[2].children[0].value, layer.children[2].children[1].value, layer.children[2].children[2].value],
+      maxOpacity: layer.children[3].children[0].value,
+      proportion: layer.children[4].children[0].value,
+      mutationSpeed: layer.children[5].children[0].value,
+      xStretch: layer.children[6].children[0].value,
+      yStretch: layer.children[7].children[0].value,
+    }
+    configLayers.push(configLayer);
+  }
+  config.sunset.properties.layers = configLayers;
+}
+
+function collectSunset() {
+  config.sunset.include = document.getElementById('sunsetInclude').value;
+  collectSunsetLayers();
+}
+
+function collectCloudsLayers() {
+  let layers = document.getElementById('cloudsLayers');
+  let configLayers: CloudLayer[] = [];
+  for (let i = 0; i < layers.children.length; i++) {
+    let layer = layers.children[i];
+    let configLayer: CloudLayer = {
+      colour: [layer.children[2].children[0].value, layer.children[2].children[1].value, layer.children[2].children[2].value],
+      opacity: layer.children[3].children[0].value,
+      maxSize: layer.children[4].children[0].value,
+      minSize: layer.children[5].children[0].value,
+      pH: layer.children[6].children[0].value,
+      pV: layer.children[7].children[0].value,
+    }
+    configLayers.push(configLayer);
+  }
+  config.clouds.properties.layers = configLayers;
+}
+
+function collectClouds() {
+  config.clouds.include = document.getElementById('cloudsInclude').value;
+  config.clouds.properties.quantity = document.getElementById('cloudsQuantity').value;
+  collectCloudsLayers();
+}
+
+function collectInputs() {
+  collectSky();
+  collectStars();
+  collectMoon();
+  collectSunset();
+  collectClouds();
 }
 
 function run() {
