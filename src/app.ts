@@ -568,27 +568,25 @@ function createSky(config: Config): Pixel[][][] {
 
   console.log("Colouring sky...");
   colourSky(grid, config.sky);
-
+  
   if (config.sunset.include) {
     console.log("Creating sunset...");
-    createSunset(grid, config.sunset);
+    createSunset(grid, config.sunset)
   }
-
   if (config.stars.include) {
     console.log("Creating stars...");
-    createStars(grid, config.stars);
+    createStars(grid, config.stars)
   }
-
   if (config.moon.include) {
     console.log("Creating moon...");
     createMoon(grid, config.moon);
   }
-
+  
   if (config.clouds.include) {
     console.log("Creating clouds...");
     createClouds(grid, config.clouds);
   }
-
+  
   return grid;
 }
 
@@ -638,7 +636,7 @@ let h: number;
 function runSkyGeneration() {
   // const config: Config = presetLateEvening3;
   console.log(config);
-   
+  
   w = config.sky.properties.width;
   h = config.sky.properties.height;
   

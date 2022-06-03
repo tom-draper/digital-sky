@@ -449,6 +449,7 @@ function createSky(config) {
     var grid = createGrid(h, w);
     console.log("Colouring sky...");
     colourSky(grid, config.sky);
+    console.log(document.getElementById('progress-bar'));
     if (config.sunset.include) {
         console.log("Creating sunset...");
         createSunset(grid, config.sunset);

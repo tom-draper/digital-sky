@@ -84,3 +84,13 @@ body {
     padding: 5px;
     margin-top: 10px;
 }
+
+#progress {
+    display: none;
+}
+.progress {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    border-radius: 0 !important;
+}
