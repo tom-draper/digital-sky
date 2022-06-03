@@ -581,7 +581,6 @@ function createSky(config: Config): Pixel[][][] {
     console.log("Creating moon...");
     createMoon(grid, config.moon);
   }
-  
   if (config.clouds.include) {
     console.log("Creating clouds...");
     createClouds(grid, config.clouds);
