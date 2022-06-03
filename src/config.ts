@@ -34,7 +34,7 @@ let config: Config = {
           colour: [255, 160, 160],
           maxOpacity: 0.7,
           proportion: 0.7,
-          colourMutationSpeed: 2,
+          mutationSpeed: 2,
           xStretch: 1,
           yStretch: 1,
         },
@@ -42,7 +42,7 @@ let config: Config = {
           colour: [255, 200, 200],
           maxOpacity: 0.7,
           proportion: 0.7,
-          colourMutationSpeed: 2,
+          mutationSpeed: 2,
           xStretch: 1,
           yStretch: 1,
         }
@@ -124,16 +124,72 @@ function fillMoonDefault() {
   document.getElementById('moonRadius').value = config.moon.properties.radius;
   document.getElementById('moonHalfMoon').value = config.moon.properties.halfMoon;
   document.getElementById('moonNoise').value = config.moon.properties.noise;
+}
 
+function createSunsetLayers() {
+  let original = document.getElementById("sunsetLayer");
+  document.getElementById('sunsetLayers').removeChild(original);
+  for (let i = 0; i < config.sunset.properties.layers.length; i++) {
+    let layer: any = original.cloneNode(true);
+    layer.removeAttribute("id");
+    layer.children[0].textContent = 'Layer ' + (i+1);
+    layer.children[2].children[0].value = config.sunset.properties.layers[i].colour[0];
+    layer.children[2].children[1].value = config.sunset.properties.layers[i].colour[1];
+    layer.children[2].children[2].value = config.sunset.properties.layers[i].colour[2];
+    layer.children[3].children[0].value = config.sunset.properties.layers[i].maxOpacity;
+    layer.children[4].children[0].value = config.sunset.properties.layers[i].proportion;
+    layer.children[5].children[0].value = config.sunset.properties.layers[i].mutationSpeed;
+    layer.children[6].children[0].value = config.sunset.properties.layers[i].xStretch;
+    layer.children[7].children[0].value = config.sunset.properties.layers[i].yStretch;
+    document.getElementById('sunsetLayers').appendChild(layer);
+  }
+}
+
+function fillSunsetDefault() {
+  document.getElementById('sunsetInclude').value = config.sunset.include;
+  createSunsetLayers()
+}
+
+function createCloudsLayers() {
+  let original = document.getElementById("cloudsLayer");
+  document.getElementById('cloudsLayers').removeChild(original);
+  for (let i = 0; i < config.clouds.properties.layers.length; i++) {
+    let layer: any = original.cloneNode(true);
+    console.log(layer.children)
+    layer.removeAttribute("id");
+    layer.children[0].textContent = 'Layer ' + (i+1);
+    layer.children[2].children[0].value = config.clouds.properties.layers[i].colour[0];
+    layer.children[2].children[1].value = config.clouds.properties.layers[i].colour[1];
+    layer.children[2].children[2].value = config.clouds.properties.layers[i].colour[2];
+    layer.children[3].children[0].value = config.clouds.properties.layers[i].opacity;
+    layer.children[4].children[0].value = config.clouds.properties.layers[i].minSize;
+    layer.children[5].children[0].value = config.clouds.properties.layers[i].maxSize;
+    layer.children[6].children[0].value = config.clouds.properties.layers[i].pH;
+    layer.children[7].children[0].value = config.clouds.properties.layers[i].pV;
+    document.getElementById('cloudsLayers').appendChild(layer);
+  }
+}
+
+function fillCloudsDefault() {
+  document.getElementById('cloudsInclude').value = config.clouds.include;
+  document.getElementById('cloudsQuantity').value = config.clouds.properties.quantity;
+  createCloudsLayers()
 }
 
 function init() {
-  fillSkyDefaults()
-  fillStarsDefault()
-  fillMoonDefault()
+  fillSkyDefaults();
+  fillStarsDefault();
+  fillMoonDefault();
+  fillSunsetDefault();
+  fillCloudsDefault();
+}
+
+function collectInputs() {
+
 }
 
 function run() {
+  collectInputs();
   runSkyGeneration();
   document.getElementById('config').style.display = 'none';
 }

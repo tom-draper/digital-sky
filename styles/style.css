@@ -64,6 +64,7 @@ body {
 .sunset-layer {
     padding: 15px;
     position: relative;
+    margin: 5px 0;
 }
 .delete-clouds-layer,
 .delete-sunset-layer { 

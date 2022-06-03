@@ -490,7 +490,7 @@ let presetLateEvening3: Config = {
           colour: [254, 207, 199],
           maxOpacity: 0.7,
           proportion: 0.7,
-          colourMutationSpeed: 1,
+          mutationSpeed: 1,
           xStretch: 0.7,
           yStretch: 0.5,
         },
@@ -498,7 +498,7 @@ let presetLateEvening3: Config = {
           colour: [253, 227, 228],
           maxOpacity: 0.5,
           proportion: 0.7,
-          colourMutationSpeed: 1,
+          mutationSpeed: 1,
           xStretch: 0.6,
           yStretch: 0.3,
         }
@@ -603,7 +603,7 @@ type SunsetLayer = {
     colour: [number, number, number],
     maxOpacity: number,
     proportion: number,
-    colourMutationSpeed: number,
+    mutationSpeed: number,
     xStretch: number,
     yStretch: number,
 }

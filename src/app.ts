@@ -478,7 +478,7 @@ function createSunsetLayer(grid: Pixel[][][], layerConfig: SunsetLayer) {
     if (scale > 0) {
       colour[3] = layerConfig.maxOpacity * scale;
       addSunsetToSky(grid, x, y, colour);
-      sunsetSpread(x, y, colour, toPaint, seen, layerConfig.colourMutationSpeed);
+      sunsetSpread(x, y, colour, toPaint, seen, layerConfig.mutationSpeed);
     }
   }
 }

@@ -49,7 +49,7 @@
               Opacity: <input id="starsOpacity" type="number" min="1" max="1">
             </div>
             <div class="component stars-density">
-              Density: <input id="starsDensity" type="number" min="1" max="5">
+              Density: <input id="starsDensity" type="number" min="0" max="1", step="0.001">
             </div>
           </div>
         </div>
@@ -81,22 +81,19 @@
             <div class="component sunset-include">
               Include: <input id="sunsetInclude" type="checkbox">
             </div>
-            <div class="component sunset-layers">
-              Layers: <input id="sunsetLayers" type="number" min="1" max="5">
-            </div>
             
             <div id="sunsetLayers">
-              <div class="card sunset-layer">
+              <div id="sunsetLayer" class="card sunset-layer">
                 <h6 class="sunset-layer-title">Layer 1</h6>
                 <button class="btn btn-outline-danger delete-sunset-layer">Delete</button>
                 <div class="component sunset-colour">
                   Colour: <input id="sunset1Red" type="number" min="1" max="255"> <input id="sunset1Green" type="number" min="1" max="255"> <input id="sunset1Blue" type="number" min="1" max="255"> 
                 </div>
                 <div class="component sunset-max-opacity">
-                  Max opacity: <input id="sunsetMaxOpacity" type="number" min="1" max="5">
+                  Max opacity: <input id="sunsetMaxOpacity" type="number" min="0" max="1" step="0.01">
                 </div>
                 <div class="component sunset-proportion">
-                  Proportion: <input id="sunsetProportion" type="number" min="1" max="5">
+                  Proportion: <input id="sunsetProportion" type="number" min="0" max="1" step="0.01">
                 </div>
                 <div class="component sunset-mutation-speed">
                   Mutation speed: <input id="sunsetMutationSpeed" type="number" min="1" max="5">
@@ -128,26 +125,26 @@
             </div>
             
             <div id="cloudsLayers">
-              <div class="card clouds-layer">
+              <div id="cloudsLayer" class="card clouds-layer">
                 <h6 class="clouds-layer-title">Layer 1</h6>
                 <button class="btn btn-outline-danger delete-clouds-layer">Delete</button>
                 <div class="component clouds-colour">
                   Colour: <input id="clouds1Red" type="number" min="1" max="255"> <input id="clouds1Green" type="number" min="1" max="255"> <input id="clouds1Blue" type="number" min="1" max="255"> 
                 </div>
                 <div class="component clouds-max-opacity">
-                  Max opacity: <input id="cloudsMaxOpacity" type="number" min="1" max="5">
+                  Opacity: <input id="cloudsMaxOpacity" type="number" min="1" max="5">
                 </div>
-                <div class="component clouds-proportion">
-                  Proportion: <input id="cloudsProportion" type="number" min="1" max="5">
+                <div class="component clouds-min-size">
+                  Min size: <input id="cloudsMinSize" type="number" min="1" max="5">
                 </div>
-                <div class="component clouds-mutation-speed">
-                  Mutation speed: <input id="cloudsMutationSpeed" type="number" min="1" max="5">
+                <div class="component clouds-max-size">
+                  Max size: <input id="cloudsMaxSize" type="number" min="1" max="5">
                 </div>
-                <div class="component clouds-x-stretch">
-                  X-stretch: <input id="cloudsXStretch" type="number" min="1" max="5">
+                <div class="component clouds-pH">
+                  pH: <input id="cloudsPH" type="number" min="0" max="1" step="0.01">
                 </div>
-                <div class="component clouds-y-stretch">
-                  Y-stretch: <input id="cloudsYStretch" type="number" min="1" max="5">
+                <div class="component clouds-pV">
+                  pV: <input id="cloudsPV" type="number" min="0" max="1" step="0.01">
                 </div>
               </div>
             </div>
