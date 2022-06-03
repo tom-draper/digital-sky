@@ -636,8 +636,9 @@ let w: number;
 let h: number;
 
 function runSkyGeneration() {
-  const config: Config = presetLateEvening3;
-  
+  // const config: Config = presetLateEvening3;
+  console.log(config);
+   
   w = config.sky.properties.width;
   h = config.sky.properties.height;
   

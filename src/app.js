@@ -371,7 +371,7 @@ function createSunsetLayer(grid, layerConfig) {
         if (scale > 0) {
             colour[3] = layerConfig.maxOpacity * scale;
             addSunsetToSky(grid, x, y, colour);
-            sunsetSpread(x, y, colour, toPaint, seen, layerConfig.colourMutationSpeed);
+            sunsetSpread(x, y, colour, toPaint, seen, layerConfig.mutationSpeed);
         }
     }
 }
@@ -500,7 +500,8 @@ function buildCanvas(grid) {
 var w;
 var h;
 function runSkyGeneration() {
-    var config = presetLateEvening3;
+    // const config: Config = presetLateEvening3;
+    console.log(config);
     w = config.sky.properties.width;
     h = config.sky.properties.height;
     var grid = createSky(config);
