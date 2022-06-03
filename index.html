@@ -33,10 +33,8 @@
               Pixel size:
               <input type="range" class="form-range" id="skyPixelSize" min="0" , max="5" step="1" />
             </div>
-            <div class="component sky-colours">
-              Colour: <input id="skyRed" type="number" min="1" max="255" />
-              <input id="skyGreen" type="number" min="1" max="255" />
-              <input id="skyBlue" type="number" min="1" max="255" />
+            <div class="component sky-colours same-line">
+              <div class="colour-text">Colour:</div> <input type="color" id="skyColour" class="colour-picker">
             </div>
             <div class="component sky-opacity">
               Opacity:
@@ -72,10 +70,8 @@
             <div class="component moon-include">
               Include: <input id="moonInclude" type="checkbox" />
             </div>
-            <div class="component moon-colour">
-              Colour: <input id="moonRed" type="number" min="1" max="255" />
-              <input id="moonGreen" type="number" min="1" max="255" />
-              <input id="moonBlue" type="number" min="1" max="255" />
+            <div class="component moon-colour same-line">
+              <div class="colour-text">Colour:</div> <input type="color" id="moonColour" class="colour-picker">
             </div>
             <div class="component moon-density">
               Radius:
@@ -104,11 +100,8 @@
                 <button class="btn btn-outline-danger delete-sunset-layer">
                   Delete
                 </button>
-                <div class="component sunset-colour">
-                  Colour:
-                  <input id="sunset1Red" type="number" min="1" max="255" />
-                  <input id="sunset1Green" type="number" min="1" max="255" />
-                  <input id="sunset1Blue" type="number" min="1" max="255" />
+                <div class="component sunset-colour same-line">
+                  <div class="colour-text">Colour:</div> <input type="color" class="colour-picker">
                 </div>
                 <div class="component sunset-max-opacity">
                   Max opacity:
@@ -158,11 +151,8 @@
                 <button class="btn btn-outline-danger delete-clouds-layer">
                   Delete
                 </button>
-                <div class="component clouds-colour">
-                  Colour:
-                  <input id="clouds1Red" type="number" min="1" max="255" />
-                  <input id="clouds1Green" type="number" min="1" max="255" />
-                  <input id="clouds1Blue" type="number" min="1" max="255" />
+                <div class="component clouds-colour same-line">
+                  <div class="colour-text">Colour:</div> <input type="color" class="colour-picker">
                 </div>
                 <div class="component clouds-max-opacity">
                   Opacity:

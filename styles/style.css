@@ -92,3 +92,17 @@ body {
     margin-top: 36px;
     display: none;
 }
+h4 {
+    margin-bottom: 20px !important;
+}
+
+.colour-picker {
+    border: none;
+    padding: 0;
+}
+.colour-text {
+    margin: auto 15px auto 0;
+}
+.same-line {
+    display: inline-flex;
+}
