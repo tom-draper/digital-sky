@@ -399,9 +399,6 @@ function fullMoon(grid, toPaint, moonConfig) {
         mutateColourInPlace(colour, moonConfig.properties.noise);
     }
 }
-function moonColour(fade) {
-    return null;
-}
 function halfMoon(grid, toPaint, moonConfig, start) {
     var r = moonConfig.properties.radius;
     var position = randInt(0.25 * r, r * 0.9);

@@ -511,10 +511,6 @@ function fullMoon(grid: Pixel[][][], toPaint: [number, number][], moonConfig: Mo
   }
 }
 
-function moonColour(fade: number): null {
-  return null;
-}
-
 function halfMoon(grid: Pixel[][][], toPaint: [number, number][],
   moonConfig: MoonConfig, start: [number, number]) {
   const r = moonConfig.properties.radius;
