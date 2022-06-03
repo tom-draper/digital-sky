@@ -302,9 +302,13 @@ function collectInputs() {
     collectClouds();
 }
 function run() {
-    collectInputs();
-    runSkyGeneration();
-    document.getElementById('config').style.display = 'none';
+    document.getElementById('generate-btn').style.display = 'none';
+    document.getElementById('loading-spinner').style.display = 'grid';
+    setTimeout(function () {
+        collectInputs();
+        runSkyGeneration();
+        document.getElementById('config').style.display = 'none';
+    }, 500);
 }
 var originalSunsetLayer = document.getElementById('sunsetLayer');
 var sunsetLayerCount = 0;

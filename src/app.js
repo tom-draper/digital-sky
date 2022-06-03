@@ -497,7 +497,6 @@ function buildCanvas(grid) {
 var w;
 var h;
 function runSkyGeneration() {
-    // const config: Config = presetLateEvening3;
     console.log(config);
     w = config.sky.properties.width;
     h = config.sky.properties.height;

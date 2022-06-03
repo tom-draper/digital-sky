@@ -87,3 +87,8 @@ body {
     padding: 5px;
     margin-top: 10px;
 }
+
+#loading-spinner {
+    margin-top: 36px;
+    display: none;
+}

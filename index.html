@@ -78,13 +78,15 @@
               <input id="moonBlue" type="number" min="1" max="255" />
             </div>
             <div class="component moon-density">
-              Radius: <input type="range" class="form-range" id="moonRadius" min="0", max="25" step="1" />
+              Radius:
+              <input type="range" class="form-range" id="moonRadius" min="0" , max="25" step="1" />
             </div>
             <div class="component moon-half-moon">
               Half moon: <input id="moonHalfMoon" type="checkbox" />
             </div>
             <div class="component moon-noise">
-              Noise:  <input type="range" class="form-range" id="moonNoise" min="0", max="5" step="1" />
+              Noise:
+              <input type="range" class="form-range" id="moonNoise" min="0" , max="5" step="1" />
             </div>
           </div>
         </div>
@@ -110,23 +112,23 @@
                 </div>
                 <div class="component sunset-max-opacity">
                   Max opacity:
-                  <input type="range" class="form-range" id="sunsetMaxOpacity" min="0", max="1" step="0.01" />
+                  <input type="range" class="form-range" id="sunsetMaxOpacity" min="0" , max="1" step="0.01" />
                 </div>
                 <div class="component sunset-proportion">
                   Proportion:
-                  <input type="range" class="form-range" id="sunsetProportion" min="0", max="1" step="0.01" />
+                  <input type="range" class="form-range" id="sunsetProportion" min="0" , max="1" step="0.01" />
                 </div>
                 <div class="component sunset-mutation-speed">
                   Mutation speed:
-                  <input type="range" class="form-range" id="sunsetMutationSpeed" min="0", max="5" step="1" />
+                  <input type="range" class="form-range" id="sunsetMutationSpeed" min="0" , max="5" step="1" />
                 </div>
                 <div class="component sunset-x-stretch">
                   X-stretch:
-                  <input type="range" class="form-range" id="sunsetXStretch" min="0", max="1" step="0.01" />
+                  <input type="range" class="form-range" id="sunsetXStretch" min="0" , max="1" step="0.01" />
                 </div>
                 <div class="component sunset-y-stretch">
                   Y-stretch:
-                  <input type="range" class="form-range" id="sunsetYStretch" min="0", max="1" step="0.01" />
+                  <input type="range" class="form-range" id="sunsetYStretch" min="0" , max="1" step="0.01" />
                 </div>
               </div>
             </div>
@@ -164,23 +166,23 @@
                 </div>
                 <div class="component clouds-max-opacity">
                   Opacity:
-                  <input type="range" class="form-range" id="cloudsOpacity" min="0", max="1" step="0.01" />
+                  <input type="range" class="form-range" id="cloudsOpacity" min="0" , max="1" step="0.01" />
                 </div>
                 <div class="component clouds-min-size">
                   Min size:
-                  <input type="range" class="form-range" id="cloudsMinSize" min="0", max="10000" step="1" />
+                  <input type="range" class="form-range" id="cloudsMinSize" min="0" , max="10000" step="1" />
                 </div>
                 <div class="component clouds-max-size">
                   Max size:
-                  <input type="range" class="form-range" id="cloudsMaxSize" min="0" max="100000" step="1"/>
+                  <input type="range" class="form-range" id="cloudsMaxSize" min="0" max="100000" step="1" />
                 </div>
                 <div class="component clouds-pH">
                   pH:
-                  <input type="range" class="form-range" id="cloudsPH" min="0" max="1" step="0.01"/>
+                  <input type="range" class="form-range" id="cloudsPH" min="0" max="1" step="0.01" />
                 </div>
                 <div class="component clouds-pV">
                   pV:
-                  <input type="range" class="form-range" id="cloudsPV" min="0" max="1" step="0.01"/>
+                  <input type="range" class="form-range" id="cloudsPV" min="0" max="1" step="0.01" />
                 </div>
               </div>
             </div>
@@ -192,7 +194,10 @@
             </div>
           </div>
         </div>
-        <button onclick="run()" class="btn btn-primary">Generate</button>
+        <button onclick="run()" id="generate-btn" class="btn btn-primary">Generate</button>
+        <div id="loading-spinner" class="spinner-border text-primary" role="status">
+          <span class="sr-only"></span>
+        </div>
       </div>
     </div>
     <canvas id="canvas"></canvas>
