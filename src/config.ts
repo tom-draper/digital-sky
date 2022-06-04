@@ -149,8 +149,10 @@ function fillStarsDefault() {
 function toggleProperties(checkboxId: string, propertiesId: string) {
   if ((<HTMLInputElement>document.getElementById(checkboxId)).checked) {
     document.getElementById(propertiesId).style.opacity = '1';
+    document.getElementById(propertiesId).style.pointerEvents = 'auto';
   } else {
     document.getElementById(propertiesId).style.opacity = '0.5';
+    document.getElementById(propertiesId).style.pointerEvents = 'none';
   }
 }
 
@@ -249,15 +251,19 @@ function fadeExcluded() {
   let excludeOpacity = '0.5';
   if (!config.stars.include) {
     document.getElementById('starsProperties').style.opacity = excludeOpacity;
+    document.getElementById('starsProperties').style.pointerEvents = 'none';
   }
   if (!config.moon.include) {
     document.getElementById('moonProperties').style.opacity = excludeOpacity;
+    document.getElementById('moonProperties').style.pointerEvents = 'none';
   }
   if (!config.sunset.include) {
     document.getElementById('sunsetProperties').style.opacity = excludeOpacity;
+    document.getElementById('sunsetProperties').style.pointerEvents = 'none';
   }
   if (!config.clouds.include) {
     document.getElementById('cloudsProperties').style.opacity = excludeOpacity;
+    document.getElementById('cloudsProperties').style.pointerEvents = 'none';
   }
 }
 
