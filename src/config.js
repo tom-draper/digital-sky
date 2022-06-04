@@ -122,7 +122,7 @@ function rgbToHex(r, g, b) {
     return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
 function hexToRGB(hex) {
-    var r = parseInt(hex.slice(1, 3), 16), g = parseInt(hex.slice(3, 5), 16), b = parseInt(hex.slice(5, 7), 16);
+    let r = parseInt(hex.slice(1, 3), 16), g = parseInt(hex.slice(3, 5), 16), b = parseInt(hex.slice(5, 7), 16);
     return [r, g, b];
 }
 function fillSkyDefaults() {
@@ -140,12 +140,10 @@ function fillStarsDefault() {
 }
 function toggleProperties(checkboxId, propertiesId) {
     if (document.getElementById(checkboxId).checked) {
-        document.getElementById(propertiesId).style.opacity = '1';
-        document.getElementById(propertiesId).style.pointerEvents = 'auto';
+        document.getElementById(propertiesId).style.display = 'grid';
     }
     else {
-        document.getElementById(propertiesId).style.opacity = '0.5';
-        document.getElementById(propertiesId).style.pointerEvents = 'none';
+        document.getElementById(propertiesId).style.display = 'none';
     }
 }
 function fillMoonDefault() {
@@ -187,6 +185,11 @@ function addSunsetLayer() {
     layer.removeAttribute("id");
     sunsetLayerCount += 1;
     layer.children[0].textContent = 'Layer ' + sunsetLayerCount;
+    layer.children[1].onclick = function () {
+        document.getElementById('sunsetLayers').removeChild(layer);
+        sunsetLayerCount -= 1;
+        renameLayers('sunsetLayers');
+    };
     document.getElementById('sunsetLayers').appendChild(layer);
 }
 function fillSunsetDefault() {
@@ -219,6 +222,11 @@ function addCloudsLayer() {
     layer.removeAttribute("id");
     cloudLayerCount += 1;
     layer.children[0].textContent = 'Layer ' + cloudLayerCount;
+    layer.children[1].onclick = function () {
+        document.getElementById('cloudsLayers').removeChild(layer);
+        cloudLayerCount -= 1;
+        renameLayers('cloudsLayers');
+    };
     document.getElementById('cloudsLayers').appendChild(layer);
 }
 function fillCloudsDefault() {
@@ -227,22 +235,17 @@ function fillCloudsDefault() {
     createCloudsLayers();
 }
 function fadeExcluded() {
-    let excludeOpacity = '0.5';
     if (!config.stars.include) {
-        document.getElementById('starsProperties').style.opacity = excludeOpacity;
-        document.getElementById('starsProperties').style.pointerEvents = 'none';
+        document.getElementById('starsProperties').style.display = 'none';
     }
     if (!config.moon.include) {
-        document.getElementById('moonProperties').style.opacity = excludeOpacity;
-        document.getElementById('moonProperties').style.pointerEvents = 'none';
+        document.getElementById('moonProperties').style.display = 'none';
     }
     if (!config.sunset.include) {
-        document.getElementById('sunsetProperties').style.opacity = excludeOpacity;
-        document.getElementById('sunsetProperties').style.pointerEvents = 'none';
+        document.getElementById('sunsetProperties').style.display = 'nonw';
     }
     if (!config.clouds.include) {
-        document.getElementById('cloudsProperties').style.opacity = excludeOpacity;
-        document.getElementById('cloudsProperties').style.pointerEvents = 'none';
+        document.getElementById('cloudsProperties').style.display = 'none';
     }
 }
 function init() {
@@ -279,7 +282,7 @@ function collectSunsetLayers() {
     for (let i = 0; i < layers.children.length; i++) {
         let layer = layers.children[i];
         let configLayer = {
-            colour: hexToRGB(layer.children[2].children[0].value),
+            colour: hexToRGB(layer.children[2].children[1].value),
             maxOpacity: parseFloat(layer.children[3].children[0].value),
             proportion: parseFloat(layer.children[4].children[0].value),
             mutationSpeed: parseInt(layer.children[5].children[0].value),
@@ -300,7 +303,7 @@ function collectCloudsLayers() {
     for (let i = 0; i < layers.children.length; i++) {
         let layer = layers.children[i];
         let configLayer = {
-            colour: hexToRGB(layer.children[2].children[0].value),
+            colour: hexToRGB(layer.children[2].children[1].value),
             opacity: parseFloat(layer.children[3].children[0].value),
             maxSize: parseInt(layer.children[4].children[0].value),
             minSize: parseInt(layer.children[5].children[0].value),
