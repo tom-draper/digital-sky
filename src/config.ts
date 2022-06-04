@@ -146,6 +146,14 @@ function fillStarsDefault() {
   (<HTMLInputElement>document.getElementById('starsDensity')).value = config.stars.properties.density.toString();
 }
 
+function toggleProperties(checkboxId: string, propertiesId: string) {
+  if ((<HTMLInputElement>document.getElementById(checkboxId)).checked) {
+    document.getElementById(propertiesId).style.opacity = '1';
+  } else {
+    document.getElementById(propertiesId).style.opacity = '0.5';
+  }
+}
+
 function fillMoonDefault() {
   (<HTMLInputElement>document.getElementById('moonInclude')).checked = config.moon.include;
   (<HTMLInputElement>document.getElementById('moonColour')).value = rgbToHex(config.moon.properties.colour[0], config.moon.properties.colour[1], config.moon.properties.colour[2]);
@@ -172,7 +180,6 @@ function createSunsetLayers() {
       sunsetLayerCount -= 1;
       renameLayers('sunsetLayers');
     }
-    console.log(layer.children[2].children[0]);
     layer.children[2].children[1].value = rgbToHex(config.sunset.properties.layers[i].colour[0], 
                                                    config.sunset.properties.layers[i].colour[1], 
                                                    config.sunset.properties.layers[i].colour[2]);
@@ -238,12 +245,29 @@ function fillCloudsDefault() {
   createCloudsLayers()
 }
 
+function fadeExcluded() {
+  let excludeOpacity = '0.5';
+  if (!config.stars.include) {
+    document.getElementById('starsProperties').style.opacity = excludeOpacity;
+  }
+  if (!config.moon.include) {
+    document.getElementById('moonProperties').style.opacity = excludeOpacity;
+  }
+  if (!config.sunset.include) {
+    document.getElementById('sunsetProperties').style.opacity = excludeOpacity;
+  }
+  if (!config.clouds.include) {
+    document.getElementById('cloudsProperties').style.opacity = excludeOpacity;
+  }
+}
+
 function init() {
   fillSkyDefaults();
   fillStarsDefault();
   fillMoonDefault();
   fillSunsetDefault();
   fillCloudsDefault();
+  fadeExcluded();
 }
 
 

@@ -138,6 +138,14 @@ function fillStarsDefault() {
     document.getElementById('starsOpacity').value = config.stars.properties.opacity.toString();
     document.getElementById('starsDensity').value = config.stars.properties.density.toString();
 }
+function toggleProperties(checkboxId, propertiesId) {
+    if (document.getElementById(checkboxId).checked) {
+        document.getElementById(propertiesId).style.opacity = '1';
+    }
+    else {
+        document.getElementById(propertiesId).style.opacity = '0.5';
+    }
+}
 function fillMoonDefault() {
     document.getElementById('moonInclude').checked = config.moon.include;
     document.getElementById('moonColour').value = rgbToHex(config.moon.properties.colour[0], config.moon.properties.colour[1], config.moon.properties.colour[2]);
@@ -162,7 +170,6 @@ function createSunsetLayers() {
             sunsetLayerCount -= 1;
             renameLayers('sunsetLayers');
         };
-        console.log(layer.children[2].children[0]);
         layer.children[2].children[1].value = rgbToHex(config.sunset.properties.layers[i].colour[0], config.sunset.properties.layers[i].colour[1], config.sunset.properties.layers[i].colour[2]);
         layer.children[3].children[0].value = config.sunset.properties.layers[i].maxOpacity;
         layer.children[4].children[0].value = config.sunset.properties.layers[i].proportion;
@@ -217,12 +224,28 @@ function fillCloudsDefault() {
     document.getElementById('cloudsQuantity').value = config.clouds.properties.quantity.toString();
     createCloudsLayers();
 }
+function fadeExcluded() {
+    let excludeOpacity = '0.5';
+    if (!config.stars.include) {
+        document.getElementById('starsProperties').style.opacity = excludeOpacity;
+    }
+    if (!config.moon.include) {
+        document.getElementById('moonProperties').style.opacity = excludeOpacity;
+    }
+    if (!config.sunset.include) {
+        document.getElementById('sunsetProperties').style.opacity = excludeOpacity;
+    }
+    if (!config.clouds.include) {
+        document.getElementById('cloudsProperties').style.opacity = excludeOpacity;
+    }
+}
 function init() {
     fillSkyDefaults();
     fillStarsDefault();
     fillMoonDefault();
     fillSunsetDefault();
     fillCloudsDefault();
+    fadeExcluded();
 }
 function collectSky() {
     config.sky.properties.width = parseInt(document.getElementById('skyWidth').value);

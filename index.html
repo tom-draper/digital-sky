@@ -34,7 +34,8 @@
               <input type="range" class="form-range" id="skyPixelSize" min="0" , max="5" step="1" />
             </div>
             <div class="component sky-colours same-line">
-              <div class="colour-text">Colour:</div> <input type="color" id="skyColour" class="colour-picker">
+              <div class="colour-text">Colour:</div>
+              <input type="color" id="skyColour" class="colour-picker" />
             </div>
             <div class="component sky-opacity">
               Opacity:
@@ -51,15 +52,17 @@
           <div class="card-body">
             <h4 class="card-title">Stars</h4>
             <div class="component stars-include">
-              Include: <input id="starsInclude" type="checkbox" />
+              Include: <input id="starsInclude" type="checkbox" onclick="toggleProperties('starsInclude', 'starsProperties')"/>
             </div>
-            <div class="component stars-opacity">
-              Opacity:
-              <input type="range" class="form-range" id="starsOpacity" min="0" , max="1" step="0.01" />
-            </div>
-            <div class="component stars-density">
-              Density:
-              <input type="range" class="form-range" id="starsDensity" min="0" , max="1" step="0.001" />
+            <div id="starsProperties">
+              <div class="component stars-opacity">
+                Opacity:
+                <input type="range" class="form-range" id="starsOpacity" min="0" , max="1" step="0.01" />
+              </div>
+              <div class="component stars-density">
+                Density:
+                <input type="range" class="form-range" id="starsDensity" min="0" , max="1" step="0.001" />
+              </div>
             </div>
           </div>
         </div>
@@ -68,21 +71,24 @@
           <div class="card-body">
             <h4 class="card-title">Moon</h4>
             <div class="component moon-include">
-              Include: <input id="moonInclude" type="checkbox" />
+              Include: <input id="moonInclude" type="checkbox" onclick="toggleProperties('moonInclude', 'moonProperties')"/>
             </div>
-            <div class="component moon-colour same-line">
-              <div class="colour-text">Colour:</div> <input type="color" id="moonColour" class="colour-picker">
-            </div>
-            <div class="component moon-density">
-              Radius:
-              <input type="range" class="form-range" id="moonRadius" min="0" , max="25" step="1" />
-            </div>
-            <div class="component moon-half-moon">
-              Half moon: <input id="moonHalfMoon" type="checkbox" />
-            </div>
-            <div class="component moon-noise">
-              Noise:
-              <input type="range" class="form-range" id="moonNoise" min="0" , max="5" step="1" />
+            <div id="moonProperties">
+              <div class="component moon-colour same-line">
+                <div class="colour-text">Colour:</div>
+                <input type="color" id="moonColour" class="colour-picker" />
+              </div>
+              <div class="component moon-density">
+                Radius:
+                <input type="range" class="form-range" id="moonRadius" min="0" , max="25" step="1" />
+              </div>
+              <div class="component moon-half-moon">
+                Half moon: <input id="moonHalfMoon" type="checkbox" />
+              </div>
+              <div class="component moon-noise">
+                Noise:
+                <input type="range" class="form-range" id="moonNoise" min="0" , max="5" step="1" />
+              </div>
             </div>
           </div>
         </div>
@@ -91,45 +97,49 @@
           <div class="card-body">
             <h4 class="card-title">Sunset</h4>
             <div class="component sunset-include">
-              Include: <input id="sunsetInclude" type="checkbox" />
+              Include: <input id="sunsetInclude" type="checkbox" onclick="toggleProperties('sunsetInclude', 'sunsetProperties')"/>
             </div>
 
-            <div id="sunsetLayers">
-              <div id="sunsetLayer" class="card sunset-layer">
-                <h6 class="sunset-layer-title">Layer 1</h6>
-                <button class="btn btn-outline-danger delete-sunset-layer">
-                  Delete
-                </button>
-                <div class="component sunset-colour same-line">
-                  <div class="colour-text">Colour:</div> <input type="color" class="colour-picker">
-                </div>
-                <div class="component sunset-max-opacity">
-                  Max opacity:
-                  <input type="range" class="form-range" id="sunsetMaxOpacity" min="0" , max="1" step="0.01" />
-                </div>
-                <div class="component sunset-proportion">
-                  Proportion:
-                  <input type="range" class="form-range" id="sunsetProportion" min="0" , max="1" step="0.01" />
-                </div>
-                <div class="component sunset-mutation-speed">
-                  Mutation speed:
-                  <input type="range" class="form-range" id="sunsetMutationSpeed" min="0" , max="5" step="1" />
-                </div>
-                <div class="component sunset-x-stretch">
-                  X-stretch:
-                  <input type="range" class="form-range" id="sunsetXStretch" min="0" , max="1" step="0.01" />
-                </div>
-                <div class="component sunset-y-stretch">
-                  Y-stretch:
-                  <input type="range" class="form-range" id="sunsetYStretch" min="0" , max="1" step="0.01" />
+            <div id="sunsetProperties">
+
+              <div id="sunsetLayers">
+                <div id="sunsetLayer" class="card sunset-layer">
+                  <h6 class="sunset-layer-title">Layer 1</h6>
+                  <button class="btn btn-outline-danger delete-sunset-layer">
+                    Delete
+                  </button>
+                  <div class="component sunset-colour same-line">
+                    <div class="colour-text">Colour:</div>
+                    <input type="color" class="colour-picker" />
+                  </div>
+                  <div class="component sunset-max-opacity">
+                    Max opacity:
+                    <input type="range" class="form-range" id="sunsetMaxOpacity" min="0" , max="1" step="0.01" />
+                  </div>
+                  <div class="component sunset-proportion">
+                    Proportion:
+                    <input type="range" class="form-range" id="sunsetProportion" min="0" , max="1" step="0.01" />
+                  </div>
+                  <div class="component sunset-mutation-speed">
+                    Mutation speed:
+                    <input type="range" class="form-range" id="sunsetMutationSpeed" min="0" , max="5" step="1" />
+                  </div>
+                  <div class="component sunset-x-stretch">
+                    X-stretch:
+                    <input type="range" class="form-range" id="sunsetXStretch" min="0" , max="1" step="0.01" />
+                  </div>
+                  <div class="component sunset-y-stretch">
+                    Y-stretch:
+                    <input type="range" class="form-range" id="sunsetYStretch" min="0" , max="1" step="0.01" />
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="add-sunset-layer-container">
-              <button class="btn btn-outline-primary add-sunset-layer" onclick="addSunsetLayer()">
-                Add layer
-              </button>
+              <div class="add-sunset-layer-container">
+                <button class="btn btn-outline-primary add-sunset-layer" onclick="addSunsetLayer()">
+                  Add layer
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -138,53 +148,59 @@
           <div class="card-body">
             <h4 class="card-title">Clouds</h4>
             <div class="component clouds-include">
-              Include: <input id="cloudsInclude" type="checkbox" />
+              Include: <input id="cloudsInclude" type="checkbox" onclick="toggleProperties('cloudsInclude', 'cloudsProperties')"/>
             </div>
-            <div class="component clouds-quantity">
-              Quantity:
-              <input id="cloudsQuantity" type="number" min="1" max="5" />
-            </div>
+            <div id="cloudsProperties">
 
-            <div id="cloudsLayers">
-              <div id="cloudsLayer" class="card clouds-layer">
-                <h6 class="clouds-layer-title">Layer 1</h6>
-                <button class="btn btn-outline-danger delete-clouds-layer">
-                  Delete
-                </button>
-                <div class="component clouds-colour same-line">
-                  <div class="colour-text">Colour:</div> <input type="color" class="colour-picker">
-                </div>
-                <div class="component clouds-max-opacity">
-                  Opacity:
-                  <input type="range" class="form-range" id="cloudsOpacity" min="0" , max="1" step="0.01" />
-                </div>
-                <div class="component clouds-min-size">
-                  Min size:
-                  <input type="range" class="form-range" id="cloudsMinSize" min="0" , max="10000" step="1" />
-                </div>
-                <div class="component clouds-max-size">
-                  Max size:
-                  <input type="range" class="form-range" id="cloudsMaxSize" min="0" max="100000" step="1" />
-                </div>
-                <div class="component clouds-pH">
-                  pH:
-                  <input type="range" class="form-range" id="cloudsPH" min="0" max="1" step="0.01" />
-                </div>
-                <div class="component clouds-pV">
-                  pV:
-                  <input type="range" class="form-range" id="cloudsPV" min="0" max="1" step="0.01" />
+              <div class="component clouds-quantity">
+                Quantity:
+                <input id="cloudsQuantity" type="number" min="1" max="5" />
+              </div>
+
+              <div id="cloudsLayers">
+                <div id="cloudsLayer" class="card clouds-layer">
+                  <h6 class="clouds-layer-title">Layer 1</h6>
+                  <button class="btn btn-outline-danger delete-clouds-layer">
+                    Delete
+                  </button>
+                  <div class="component clouds-colour same-line">
+                    <div class="colour-text">Colour:</div>
+                    <input type="color" class="colour-picker" />
+                  </div>
+                  <div class="component clouds-max-opacity">
+                    Opacity:
+                    <input type="range" class="form-range" id="cloudsOpacity" min="0" , max="1" step="0.01" />
+                  </div>
+                  <div class="component clouds-min-size">
+                    Min size:
+                    <input type="range" class="form-range" id="cloudsMinSize" min="0" , max="10000" step="1" />
+                  </div>
+                  <div class="component clouds-max-size">
+                    Max size:
+                    <input type="range" class="form-range" id="cloudsMaxSize" min="0" max="100000" step="1" />
+                  </div>
+                  <div class="component clouds-pH">
+                    pH:
+                    <input type="range" class="form-range" id="cloudsPH" min="0" max="1" step="0.01" />
+                  </div>
+                  <div class="component clouds-pV">
+                    pV:
+                    <input type="range" class="form-range" id="cloudsPV" min="0" max="1" step="0.01" />
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="add-clouds-layer-container">
-              <button class="btn btn-outline-primary add-clouds-layer" onclick="addCloudsLayer()">
-                Add layer
-              </button>
+              <div class="add-clouds-layer-container">
+                <button class="btn btn-outline-primary add-clouds-layer" onclick="addCloudsLayer()">
+                  Add layer
+                </button>
+              </div>
             </div>
           </div>
         </div>
-        <button onclick="run()" id="generate-btn" class="btn btn-primary">Generate</button>
+        <button onclick="run()" id="generate-btn" class="btn btn-primary">
+          Generate
+        </button>
         <div id="loading-spinner" class="spinner-border text-primary" role="status">
           <span class="sr-only"></span>
         </div>
