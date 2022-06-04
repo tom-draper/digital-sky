@@ -115,7 +115,7 @@ let config: Config = {
   }
 }
 
-function componentToHex(c) {
+function componentToHex(c: number) {
   var hex = c.toString(16);
   return hex.length == 1 ? "0" + hex : hex;
 }
@@ -132,32 +132,26 @@ function hexToRGB(hex: string): [number, number, number] {
 }
 
 function fillSkyDefaults() {
-  document.getElementById('skyWidth').value = config.sky.properties.width;
-  document.getElementById('skyHeight').value = config.sky.properties.height;
-  document.getElementById('skyPixelSize').value = config.sky.properties.pixelSize;
-  document.getElementById('skyColour').value = rgbToHex(config.sky.properties.colour[0], config.sky.properties.colour[1], config.sky.properties.colour[2])
-  // document.getElementById('skyRed').value = r;
-  // document.getElementById('skyGreen').value = g;
-  // document.getElementById('skyBlue').value = b;
-  document.getElementById('skyOpacity').value = config.sky.properties.opacity;
-  document.getElementById('skyMutationSpeed').value = config.sky.properties.mutationSpeed;
+  (<HTMLInputElement>document.getElementById('skyWidth')).value = config.sky.properties.width.toString();
+  (<HTMLInputElement>document.getElementById('skyHeight')).value = config.sky.properties.height.toString();
+  (<HTMLInputElement>document.getElementById('skyPixelSize')).value = config.sky.properties.pixelSize.toString();
+  (<HTMLInputElement>document.getElementById('skyColour')).value = rgbToHex(config.sky.properties.colour[0], config.sky.properties.colour[1], config.sky.properties.colour[2]);
+  (<HTMLInputElement>document.getElementById('skyOpacity')).value = config.sky.properties.opacity.toString();
+  (<HTMLInputElement>document.getElementById('skyMutationSpeed')).value = config.sky.properties.mutationSpeed.toString();
 }
 
 function fillStarsDefault() {
-  document.getElementById('starsInclude').checked = config.stars.include;
-  document.getElementById('starsOpacity').value = config.stars.properties.opacity;
-  document.getElementById('starsDensity').value = config.stars.properties.density;
+  (<HTMLInputElement>document.getElementById('starsInclude')).checked = config.stars.include;
+  (<HTMLInputElement>document.getElementById('starsOpacity')).value = config.stars.properties.opacity.toString();
+  (<HTMLInputElement>document.getElementById('starsDensity')).value = config.stars.properties.density.toString();
 }
 
 function fillMoonDefault() {
-  document.getElementById('moonInclude').checked = config.moon.include;
-  document.getElementById('moonColour').value = rgbToHex(config.moon.properties.colour[0], config.moon.properties.colour[1], config.moon.properties.colour[2]);
-  // document.getElementById('moonRed').value = config.moon.properties.colour[0];
-  // document.getElementById('moonGreen').value = config.moon.properties.colour[1];
-  // document.getElementById('moonBlue').value = config.moon.properties.colour[2];
-  document.getElementById('moonRadius').value = config.moon.properties.radius;
-  document.getElementById('moonHalfMoon').checked = config.moon.properties.halfMoon;
-  document.getElementById('moonNoise').value = config.moon.properties.noise;
+  (<HTMLInputElement>document.getElementById('moonInclude')).checked = config.moon.include;
+  (<HTMLInputElement>document.getElementById('moonColour')).value = rgbToHex(config.moon.properties.colour[0], config.moon.properties.colour[1], config.moon.properties.colour[2]);
+  (<HTMLInputElement>document.getElementById('moonRadius')).value = config.moon.properties.radius.toString();
+  (<HTMLInputElement>document.getElementById('moonHalfMoon')).checked = config.moon.properties.halfMoon;
+  (<HTMLInputElement>document.getElementById('moonNoise')).value = config.moon.properties.noise.toString();
 }
 
 function renameLayers(layersID: string) {
@@ -178,7 +172,10 @@ function createSunsetLayers() {
       sunsetLayerCount -= 1;
       renameLayers('sunsetLayers');
     }
-    layer.children[2].children[0].value = rgbToHex(config.sunset.properties.layers[i].colour[0], config.sunset.properties.layers[i].colour[1], config.sunset.properties.layers[i].colour[2])
+    console.log(layer.children[2].children[0]);
+    layer.children[2].children[1].value = rgbToHex(config.sunset.properties.layers[i].colour[0], 
+                                                   config.sunset.properties.layers[i].colour[1], 
+                                                   config.sunset.properties.layers[i].colour[2]);
     layer.children[3].children[0].value = config.sunset.properties.layers[i].maxOpacity;
     layer.children[4].children[0].value = config.sunset.properties.layers[i].proportion;
     layer.children[5].children[0].value = config.sunset.properties.layers[i].mutationSpeed;
@@ -198,7 +195,7 @@ function addSunsetLayer() {
 }
 
 function fillSunsetDefault() {
-  document.getElementById('sunsetInclude').checked = config.sunset.include;
+  (<HTMLInputElement>document.getElementById('sunsetInclude')).checked = config.sunset.include;
   createSunsetLayers()
 }
 
@@ -213,7 +210,9 @@ function createCloudsLayers() {
       cloudLayerCount -= 1;
       renameLayers('cloudsLayers');
     }
-    layer.children[2].children[0].value = rgbToHex(config.clouds.properties.layers[i].colour[0], config.clouds.properties.layers[i].colour[1], config.clouds.properties.layers[i].colour[2])
+    layer.children[2].children[1].value = rgbToHex(config.clouds.properties.layers[i].colour[0], 
+                                                   config.clouds.properties.layers[i].colour[1], 
+                                                   config.clouds.properties.layers[i].colour[2])
     layer.children[3].children[0].value = config.clouds.properties.layers[i].opacity;
     layer.children[4].children[0].value = config.clouds.properties.layers[i].minSize;
     layer.children[5].children[0].value = config.clouds.properties.layers[i].maxSize;
@@ -234,8 +233,8 @@ function addCloudsLayer() {
 }
 
 function fillCloudsDefault() {
-  document.getElementById('cloudsInclude').checked = config.clouds.include;
-  document.getElementById('cloudsQuantity').value = config.clouds.properties.quantity;
+  (<HTMLInputElement>document.getElementById('cloudsInclude')).checked = config.clouds.include;
+  (<HTMLInputElement>document.getElementById('cloudsQuantity')).value = config.clouds.properties.quantity.toString();
   createCloudsLayers()
 }
 
@@ -249,26 +248,26 @@ function init() {
 
 
 function collectSky() {
-  config.sky.properties.width = parseInt(document.getElementById('skyWidth').value);
-  config.sky.properties.height = parseInt(document.getElementById('skyHeight').value);
-  config.sky.properties.pixelSize = parseInt(document.getElementById('skyPixelSize').value);
-  config.sky.properties.colour = hexToRGB(document.getElementById('skyColour').value);
-  config.sky.properties.opacity = parseFloat(document.getElementById('skyOpacity').value);
-  config.sky.properties.mutationSpeed = parseInt(document.getElementById('skyMutationSpeed').value);
+  config.sky.properties.width = parseInt((<HTMLInputElement>document.getElementById('skyWidth')).value);
+  config.sky.properties.height = parseInt((<HTMLInputElement>document.getElementById('skyHeight')).value);
+  config.sky.properties.pixelSize = parseInt((<HTMLInputElement>document.getElementById('skyPixelSize')).value);
+  config.sky.properties.colour = hexToRGB((<HTMLInputElement>document.getElementById('skyColour')).value);
+  config.sky.properties.opacity = parseFloat((<HTMLInputElement>document.getElementById('skyOpacity')).value);
+  config.sky.properties.mutationSpeed = parseInt((<HTMLInputElement>document.getElementById('skyMutationSpeed')).value);
 }
 
 function collectStars() {
-  config.stars.include = document.getElementById('starsInclude').checked;
-  config.stars.properties.opacity = parseFloat(document.getElementById('starsOpacity').value);
-  config.stars.properties.density = parseFloat(document.getElementById('starsDensity').value);
+  config.stars.include = (<HTMLInputElement>document.getElementById('starsInclude')).checked;
+  config.stars.properties.opacity = parseFloat((<HTMLInputElement>document.getElementById('starsOpacity')).value);
+  config.stars.properties.density = parseFloat((<HTMLInputElement>document.getElementById('starsDensity')).value);
 }
 
 function collectMoon() {
-  config.moon.include = document.getElementById('moonInclude').checked;
-  config.moon.properties.colour = hexToRGB(document.getElementById('moonColour').value);
-  config.moon.properties.radius = parseInt(document.getElementById('moonRadius').value);
-  config.moon.properties.halfMoon = document.getElementById('moonHalfMoon').checked;
-  config.moon.properties.noise = parseInt(document.getElementById('moonNoise').value);
+  config.moon.include = (<HTMLInputElement>document.getElementById('moonInclude')).checked;
+  config.moon.properties.colour = hexToRGB((<HTMLInputElement>document.getElementById('moonColour')).value);
+  config.moon.properties.radius = parseInt((<HTMLInputElement>document.getElementById('moonRadius')).value);
+  config.moon.properties.halfMoon = (<HTMLInputElement>document.getElementById('moonHalfMoon')).checked;
+  config.moon.properties.noise = parseInt((<HTMLInputElement>document.getElementById('moonNoise')).value);
 }
 
 function collectSunsetLayers() {
@@ -277,12 +276,12 @@ function collectSunsetLayers() {
   for (let i = 0; i < layers.children.length; i++) {
     let layer = layers.children[i];
     let configLayer: SunsetLayer = {
-      colour: hexToRGB(layer.children[2].children[0].value),
-      maxOpacity: parseFloat(layer.children[3].children[0].value),
-      proportion: parseFloat(layer.children[4].children[0].value),
-      mutationSpeed: parseInt(layer.children[5].children[0].value),
-      xStretch: parseFloat(layer.children[6].children[0].value),
-      yStretch: parseFloat(layer.children[7].children[0].value),
+      colour: hexToRGB((<HTMLInputElement>layer.children[2].children[0]).value),
+      maxOpacity: parseFloat((<HTMLInputElement>layer.children[3].children[0]).value),
+      proportion: parseFloat((<HTMLInputElement>layer.children[4].children[0]).value),
+      mutationSpeed: parseInt((<HTMLInputElement>layer.children[5].children[0]).value),
+      xStretch: parseFloat((<HTMLInputElement>layer.children[6].children[0]).value),
+      yStretch: parseFloat((<HTMLInputElement>layer.children[7].children[0]).value),
     }
     configLayers.push(configLayer);
   }
@@ -290,7 +289,7 @@ function collectSunsetLayers() {
 }
 
 function collectSunset() {
-  config.sunset.include = document.getElementById('sunsetInclude').checked;
+  config.sunset.include = (<HTMLInputElement>document.getElementById('sunsetInclude')).checked;
   collectSunsetLayers();
 }
 
@@ -300,12 +299,12 @@ function collectCloudsLayers() {
   for (let i = 0; i < layers.children.length; i++) {
     let layer = layers.children[i];
     let configLayer: CloudLayer = {
-      colour: hexToRGB(layer.children[2].children[0].value),
-      opacity: parseFloat(layer.children[3].children[0].value),
-      maxSize: parseInt(layer.children[4].children[0].value),
-      minSize: parseInt(layer.children[5].children[0].value),
-      pH: parseFloat(layer.children[6].children[0].value),
-      pV: parseFloat(layer.children[7].children[0].value),
+      colour: hexToRGB((<HTMLInputElement>layer.children[2].children[0]).value),
+      opacity: parseFloat((<HTMLInputElement>layer.children[3].children[0]).value),
+      maxSize: parseInt((<HTMLInputElement>layer.children[4].children[0]).value),
+      minSize: parseInt((<HTMLInputElement>layer.children[5].children[0]).value),
+      pH: parseFloat((<HTMLInputElement>layer.children[6].children[0]).value),
+      pV: parseFloat((<HTMLInputElement>layer.children[7].children[0]).value),
     }
     configLayers.push(configLayer);
   }
@@ -313,9 +312,8 @@ function collectCloudsLayers() {
 }
 
 function collectClouds() {
-  console.log(document.getElementById('cloudsInclude').checked);
-  config.clouds.include = document.getElementById('cloudsInclude').checked;
-  config.clouds.properties.quantity = parseInt(document.getElementById('cloudsQuantity').value);
+  config.clouds.include = (<HTMLInputElement>document.getElementById('cloudsInclude')).checked;
+  config.clouds.properties.quantity = parseInt((<HTMLInputElement>document.getElementById('cloudsQuantity')).value);
   collectCloudsLayers();
 }
 

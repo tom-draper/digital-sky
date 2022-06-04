@@ -1,4 +1,5 @@
-var config = {
+"use strict";
+let config = {
     sky: {
         properties: {
             height: 720,
@@ -13,7 +14,7 @@ var config = {
         include: false,
         properties: {
             opacity: 1,
-            density: 0.005
+            density: 0.005,
         }
     },
     moon: {
@@ -35,7 +36,7 @@ var config = {
                     proportion: 0.7,
                     mutationSpeed: 1,
                     xStretch: 0.7,
-                    yStretch: 0.5
+                    yStretch: 0.5,
                 },
                 {
                     colour: [253, 227, 228],
@@ -43,7 +44,7 @@ var config = {
                     proportion: 0.7,
                     mutationSpeed: 1,
                     xStretch: 0.6,
-                    yStretch: 0.3
+                    yStretch: 0.3,
                 }
             ]
         }
@@ -59,7 +60,7 @@ var config = {
                     minSize: 100,
                     maxSize: 10000,
                     pH: 0.7,
-                    pV: 0.3
+                    pV: 0.3, // Probability of vertical expansion
                 },
                 {
                     colour: [235, 235, 235],
@@ -67,7 +68,7 @@ var config = {
                     minSize: 100,
                     maxSize: 10000,
                     pH: 0.7,
-                    pV: 0.3
+                    pV: 0.3,
                 },
                 {
                     colour: [235, 235, 235],
@@ -75,7 +76,7 @@ var config = {
                     minSize: 100,
                     maxSize: 10000,
                     pH: 0.7,
-                    pV: 0.3
+                    pV: 0.3,
                 },
                 {
                     colour: [235, 235, 235],
@@ -83,7 +84,7 @@ var config = {
                     minSize: 100,
                     maxSize: 10000,
                     pH: 0.7,
-                    pV: 0.3
+                    pV: 0.3,
                 },
                 {
                     colour: [173, 216, 230],
@@ -91,7 +92,7 @@ var config = {
                     minSize: 100,
                     maxSize: 10000,
                     pH: 0.6,
-                    pV: 0.2
+                    pV: 0.2,
                 },
                 {
                     colour: [173, 216, 230],
@@ -99,7 +100,7 @@ var config = {
                     minSize: 100,
                     maxSize: 10000,
                     pH: 0.6,
-                    pV: 0.2
+                    pV: 0.2,
                 },
                 {
                     colour: [240, 240, 240],
@@ -107,9 +108,9 @@ var config = {
                     minSize: 100,
                     maxSize: 10000,
                     pH: 0.6,
-                    pV: 0.2
+                    pV: 0.2,
                 },
-            ]
+            ],
         }
     }
 };
@@ -125,41 +126,35 @@ function hexToRGB(hex) {
     return [r, g, b];
 }
 function fillSkyDefaults() {
-    document.getElementById('skyWidth').value = config.sky.properties.width;
-    document.getElementById('skyHeight').value = config.sky.properties.height;
-    document.getElementById('skyPixelSize').value = config.sky.properties.pixelSize;
+    document.getElementById('skyWidth').value = config.sky.properties.width.toString();
+    document.getElementById('skyHeight').value = config.sky.properties.height.toString();
+    document.getElementById('skyPixelSize').value = config.sky.properties.pixelSize.toString();
     document.getElementById('skyColour').value = rgbToHex(config.sky.properties.colour[0], config.sky.properties.colour[1], config.sky.properties.colour[2]);
-    // document.getElementById('skyRed').value = r;
-    // document.getElementById('skyGreen').value = g;
-    // document.getElementById('skyBlue').value = b;
-    document.getElementById('skyOpacity').value = config.sky.properties.opacity;
-    document.getElementById('skyMutationSpeed').value = config.sky.properties.mutationSpeed;
+    document.getElementById('skyOpacity').value = config.sky.properties.opacity.toString();
+    document.getElementById('skyMutationSpeed').value = config.sky.properties.mutationSpeed.toString();
 }
 function fillStarsDefault() {
     document.getElementById('starsInclude').checked = config.stars.include;
-    document.getElementById('starsOpacity').value = config.stars.properties.opacity;
-    document.getElementById('starsDensity').value = config.stars.properties.density;
+    document.getElementById('starsOpacity').value = config.stars.properties.opacity.toString();
+    document.getElementById('starsDensity').value = config.stars.properties.density.toString();
 }
 function fillMoonDefault() {
     document.getElementById('moonInclude').checked = config.moon.include;
     document.getElementById('moonColour').value = rgbToHex(config.moon.properties.colour[0], config.moon.properties.colour[1], config.moon.properties.colour[2]);
-    // document.getElementById('moonRed').value = config.moon.properties.colour[0];
-    // document.getElementById('moonGreen').value = config.moon.properties.colour[1];
-    // document.getElementById('moonBlue').value = config.moon.properties.colour[2];
-    document.getElementById('moonRadius').value = config.moon.properties.radius;
+    document.getElementById('moonRadius').value = config.moon.properties.radius.toString();
     document.getElementById('moonHalfMoon').checked = config.moon.properties.halfMoon;
-    document.getElementById('moonNoise').value = config.moon.properties.noise;
+    document.getElementById('moonNoise').value = config.moon.properties.noise.toString();
 }
 function renameLayers(layersID) {
-    var layers = document.getElementById(layersID);
-    for (var i = 0; i < layers.children.length; i++) {
+    let layers = document.getElementById(layersID);
+    for (let i = 0; i < layers.children.length; i++) {
         layers.children[i].children[0].textContent = 'Layer' + (i + 1);
     }
 }
 function createSunsetLayers() {
     document.getElementById('sunsetLayers').removeChild(originalSunsetLayer);
-    var _loop_1 = function (i) {
-        var layer = originalSunsetLayer.cloneNode(true);
+    for (let i = 0; i < config.sunset.properties.layers.length; i++) {
+        let layer = originalSunsetLayer.cloneNode(true);
         layer.removeAttribute("id");
         layer.children[0].textContent = 'Layer ' + (i + 1);
         layer.children[1].onclick = function () {
@@ -167,7 +162,8 @@ function createSunsetLayers() {
             sunsetLayerCount -= 1;
             renameLayers('sunsetLayers');
         };
-        layer.children[2].children[0].value = rgbToHex(config.sunset.properties.layers[i].colour[0], config.sunset.properties.layers[i].colour[1], config.sunset.properties.layers[i].colour[2]);
+        console.log(layer.children[2].children[0]);
+        layer.children[2].children[1].value = rgbToHex(config.sunset.properties.layers[i].colour[0], config.sunset.properties.layers[i].colour[1], config.sunset.properties.layers[i].colour[2]);
         layer.children[3].children[0].value = config.sunset.properties.layers[i].maxOpacity;
         layer.children[4].children[0].value = config.sunset.properties.layers[i].proportion;
         layer.children[5].children[0].value = config.sunset.properties.layers[i].mutationSpeed;
@@ -175,13 +171,10 @@ function createSunsetLayers() {
         layer.children[7].children[0].value = config.sunset.properties.layers[i].yStretch;
         document.getElementById('sunsetLayers').appendChild(layer);
         sunsetLayerCount += 1;
-    };
-    for (var i = 0; i < config.sunset.properties.layers.length; i++) {
-        _loop_1(i);
     }
 }
 function addSunsetLayer() {
-    var layer = originalSunsetLayer.cloneNode(true);
+    let layer = originalSunsetLayer.cloneNode(true);
     layer.removeAttribute("id");
     sunsetLayerCount += 1;
     layer.children[0].textContent = 'Layer ' + sunsetLayerCount;
@@ -193,8 +186,8 @@ function fillSunsetDefault() {
 }
 function createCloudsLayers() {
     document.getElementById('cloudsLayers').removeChild(originalCloudLayer);
-    var _loop_2 = function (i) {
-        var layer = originalCloudLayer.cloneNode(true);
+    for (let i = 0; i < config.clouds.properties.layers.length; i++) {
+        let layer = originalCloudLayer.cloneNode(true);
         layer.removeAttribute("id");
         layer.children[0].textContent = 'Layer ' + (i + 1);
         layer.children[1].onclick = function () {
@@ -202,7 +195,7 @@ function createCloudsLayers() {
             cloudLayerCount -= 1;
             renameLayers('cloudsLayers');
         };
-        layer.children[2].children[0].value = rgbToHex(config.clouds.properties.layers[i].colour[0], config.clouds.properties.layers[i].colour[1], config.clouds.properties.layers[i].colour[2]);
+        layer.children[2].children[1].value = rgbToHex(config.clouds.properties.layers[i].colour[0], config.clouds.properties.layers[i].colour[1], config.clouds.properties.layers[i].colour[2]);
         layer.children[3].children[0].value = config.clouds.properties.layers[i].opacity;
         layer.children[4].children[0].value = config.clouds.properties.layers[i].minSize;
         layer.children[5].children[0].value = config.clouds.properties.layers[i].maxSize;
@@ -210,13 +203,10 @@ function createCloudsLayers() {
         layer.children[7].children[0].value = config.clouds.properties.layers[i].pV;
         document.getElementById('cloudsLayers').appendChild(layer);
         cloudLayerCount += 1;
-    };
-    for (var i = 0; i < config.clouds.properties.layers.length; i++) {
-        _loop_2(i);
     }
 }
 function addCloudsLayer() {
-    var layer = originalCloudLayer.cloneNode(true);
+    let layer = originalCloudLayer.cloneNode(true);
     layer.removeAttribute("id");
     cloudLayerCount += 1;
     layer.children[0].textContent = 'Layer ' + cloudLayerCount;
@@ -224,7 +214,7 @@ function addCloudsLayer() {
 }
 function fillCloudsDefault() {
     document.getElementById('cloudsInclude').checked = config.clouds.include;
-    document.getElementById('cloudsQuantity').value = config.clouds.properties.quantity;
+    document.getElementById('cloudsQuantity').value = config.clouds.properties.quantity.toString();
     createCloudsLayers();
 }
 function init() {
@@ -255,17 +245,17 @@ function collectMoon() {
     config.moon.properties.noise = parseInt(document.getElementById('moonNoise').value);
 }
 function collectSunsetLayers() {
-    var layers = document.getElementById('sunsetLayers');
-    var configLayers = [];
-    for (var i = 0; i < layers.children.length; i++) {
-        var layer = layers.children[i];
-        var configLayer = {
+    let layers = document.getElementById('sunsetLayers');
+    let configLayers = [];
+    for (let i = 0; i < layers.children.length; i++) {
+        let layer = layers.children[i];
+        let configLayer = {
             colour: hexToRGB(layer.children[2].children[0].value),
             maxOpacity: parseFloat(layer.children[3].children[0].value),
             proportion: parseFloat(layer.children[4].children[0].value),
             mutationSpeed: parseInt(layer.children[5].children[0].value),
             xStretch: parseFloat(layer.children[6].children[0].value),
-            yStretch: parseFloat(layer.children[7].children[0].value)
+            yStretch: parseFloat(layer.children[7].children[0].value),
         };
         configLayers.push(configLayer);
     }
@@ -276,24 +266,23 @@ function collectSunset() {
     collectSunsetLayers();
 }
 function collectCloudsLayers() {
-    var layers = document.getElementById('cloudsLayers');
-    var configLayers = [];
-    for (var i = 0; i < layers.children.length; i++) {
-        var layer = layers.children[i];
-        var configLayer = {
+    let layers = document.getElementById('cloudsLayers');
+    let configLayers = [];
+    for (let i = 0; i < layers.children.length; i++) {
+        let layer = layers.children[i];
+        let configLayer = {
             colour: hexToRGB(layer.children[2].children[0].value),
             opacity: parseFloat(layer.children[3].children[0].value),
             maxSize: parseInt(layer.children[4].children[0].value),
             minSize: parseInt(layer.children[5].children[0].value),
             pH: parseFloat(layer.children[6].children[0].value),
-            pV: parseFloat(layer.children[7].children[0].value)
+            pV: parseFloat(layer.children[7].children[0].value),
         };
         configLayers.push(configLayer);
     }
     config.clouds.properties.layers = configLayers;
 }
 function collectClouds() {
-    console.log(document.getElementById('cloudsInclude').checked);
     config.clouds.include = document.getElementById('cloudsInclude').checked;
     config.clouds.properties.quantity = parseInt(document.getElementById('cloudsQuantity').value);
     collectCloudsLayers();
@@ -314,8 +303,8 @@ function run() {
         document.getElementById('config').style.display = 'none';
     }, 500);
 }
-var originalSunsetLayer = document.getElementById('sunsetLayer');
-var sunsetLayerCount = 0;
-var originalCloudLayer = document.getElementById('cloudsLayer');
-var cloudLayerCount = 0;
+let originalSunsetLayer = document.getElementById('sunsetLayer');
+let sunsetLayerCount = 0;
+let originalCloudLayer = document.getElementById('cloudsLayer');
+let cloudLayerCount = 0;
 init();

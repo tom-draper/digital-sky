@@ -114,11 +114,11 @@ function generateSunsetLayers(): SunsetLayer[] {
   let sunsetLayers: SunsetLayer[] = [];
   let n = randInt(1, 10);
   for (let i = 0; i < n; i++) {
-    let layer = {
+    let layer: SunsetLayer = {
       colour: randomSunsetColour(),
       maxOpacity: randFloat(0.2, 1),
       proportion: randFloat(0.2, 1),
-      colourMutationSpeed: randInt(1, 3),
+      mutationSpeed: randInt(1, 3),
       xStretch: randFloat(0.2, 1.2),  // >1 (thinner), <1 (wider) 
       yStretch: randFloat(0.7, 1.5),  // >1 (shorter), <1 (taller) 
     };

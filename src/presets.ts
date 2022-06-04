@@ -65,7 +65,7 @@ let sunset1 = {
         // The proportion of the height used as the max distance that the sunset travels
         proportion: 0.7,
         // Magnitude of the inc/dec of one rgb value with each colour step
-        colourMutationSpeed: 1,
+        mutationSpeed: 1,
         xStretch: 0.5,  // >1 (thinner), <1 (wider) 
         yStretch: 0,  // >1 (shorter), <1 (taller) 
       },
@@ -73,7 +73,7 @@ let sunset1 = {
         colour: [255, 201, 34],
         maxOpacity: 0.4,
         proportion: 0.7,
-        colourMutationSpeed: 1,
+        mutationSpeed: 1,
         xStretch: 0.7,
         yStretch: 0,
       }
@@ -88,7 +88,7 @@ let sunset2 = {
         colour: [99, 197, 218],
         maxOpacity: 0.25,
         proportion: 0.6,
-        colourMutationSpeed: 1,
+        mutationSpeed: 1,
         xStretch: 0.7,
         yStretch: 0.5,
       },
@@ -96,7 +96,7 @@ let sunset2 = {
         colour: [33, 89, 136],
         maxOpacity: 0.4,
         proportion: 0.9,
-        colourMutationSpeed: 3,
+        mutationSpeed: 3,
         xStretch: 0.8,
         yStretch: 0.6,
       },
@@ -106,7 +106,7 @@ let sunset2 = {
         // The proportion of the height used as the max distance that the sunset travels
         proportion: 0.7,
         // Magnitude of the inc/dec of one rgb value with each colour step
-        colourMutationSpeed: 1,
+        mutationSpeed: 1,
         xStretch: 0.5,  // >1 (thinner), <1 (wider) 
         yStretch: 0,  // >1 (shorter), <1 (taller) 
       },
@@ -114,7 +114,7 @@ let sunset2 = {
         colour: [255, 201, 34],
         maxOpacity: 0.4,
         proportion: 0.7,
-        colourMutationSpeed: 1,
+        mutationSpeed: 1,
         xStretch: 0.7,
         yStretch: 0,
       },
@@ -529,7 +529,7 @@ let presetPinkSky2 = {
           colour: [253, 240, 240],  // White
           maxOpacity: 0.3,
           proportion: 0.7,
-          colourMutationSpeed: 1,
+          mutationSpeed: 1,
           xStretch: 0.3,
           yStretch: 0,
         },
@@ -537,7 +537,7 @@ let presetPinkSky2 = {
           colour: [252, 210, 102],  // Yellow
           maxOpacity: 0.3,
           proportion: 0.7,
-          colourMutationSpeed: 1,
+          mutationSpeed: 1,
           xStretch: 0.3,
           yStretch: 0,
         },
@@ -545,7 +545,7 @@ let presetPinkSky2 = {
           colour: [255, 227, 115],  // Yellow
           maxOpacity: 0.35,
           proportion: 0.6,
-          colourMutationSpeed: 1,
+          mutationSpeed: 1,
           xStretch: 0.3,
           yStretch: 0,
         },
@@ -553,7 +553,7 @@ let presetPinkSky2 = {
           colour: [252, 156, 84],  // Sandy brown
           maxOpacity: 0.4,
           proportion: 0.5,
-          colourMutationSpeed: 1,
+          mutationSpeed: 1,
           xStretch: 0.3,
           yStretch: 0,
         },
@@ -561,7 +561,7 @@ let presetPinkSky2 = {
           colour: [253, 94, 83],  // Sunset orange
           maxOpacity: 0.45,
           proportion: 0.5,
-          colourMutationSpeed: 1,
+          mutationSpeed: 1,
           xStretch: 0.3,
           yStretch: 0,
         },
