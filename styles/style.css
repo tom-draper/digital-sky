@@ -41,9 +41,6 @@ body {
    display: grid;
    place-items: center;
 }
-.title {
-    margin: 40px 0;
-}
 .card {
     margin: 5px 0;
 }
@@ -105,4 +102,17 @@ h4 {
 }
 .same-line {
     display: inline-flex;
+}
+
+.title-container {
+    display: flex;
+    flex-direction: row-reverse;
+}
+.title {
+    margin: 40px 0;
+}
+.cloud-img {
+    height: 55px;
+    width: 55px;
+    margin: 40px 15px;
 }
