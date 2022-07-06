@@ -1,4 +1,4 @@
-# Digital-Sky
+# Digital Sky
 A configurable random sky image generator.
 
 Available at: https://tom-draper.github.io/Digital-Sky/
