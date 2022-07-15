@@ -1,10 +1,9 @@
-
 function randomColour(): [number, number, number] {
   return [randInt(0, 255), randInt(0, 255), randInt(0, 255)];
 }
 
-function randomSkyColourNight(): [number, number, number]{
- return [randInt(0, 100), randInt(0, 100), randInt(0, 100)];
+function randomSkyColourNight(): [number, number, number] {
+  return [randInt(0, 100), randInt(0, 100), randInt(0, 100)];
 }
 function randomSkyColourDay(): [number, number, number] {
   return [randInt(150, 250), randInt(140, 240), randInt(160, 255)];
@@ -28,15 +27,15 @@ function generateSky(): SkyConfig {
   let colour: [number, number, number] = randomSkyColour();
   let mutationSpeed = randInt(1, 5);
 
-  let sky =  {
+  let sky = {
     properties: {
       height: res720[1],
       width: res720[0],
       pixelSize: 1,
       colour: colour,
       opacity: 1,
-      mutationSpeed: mutationSpeed
-    }
+      mutationSpeed: mutationSpeed,
+    },
   };
 
   return sky;
@@ -57,12 +56,12 @@ function generateStars(skyColour: number[]): StarsConfig {
       properties: {
         opacity: 1,
         density: 0.005,
-      }
+      },
     };
   } else {
     stars = {
       include: false,
-      properties: null
+      properties: null,
     };
   }
 
@@ -89,13 +88,13 @@ function generateMoon(skyColour: number[]): MoonConfig {
         colour: colour,
         radius: radius,
         halfMoon: halfMoon,
-        noise: noise
-      }
+        noise: noise,
+      },
     };
   } else {
     moon = {
       include: false,
-      properties: null
+      properties: null,
     };
   }
 
@@ -119,8 +118,8 @@ function generateSunsetLayers(): SunsetLayer[] {
       maxOpacity: randFloat(0.2, 1),
       proportion: randFloat(0.2, 1),
       mutationSpeed: randInt(1, 3),
-      xStretch: randFloat(0.2, 1.2),  // >1 (thinner), <1 (wider) 
-      yStretch: randFloat(0.7, 1.5),  // >1 (shorter), <1 (taller) 
+      xStretch: randFloat(0.2, 1.2), // >1 (thinner), <1 (wider)
+      yStretch: randFloat(0.7, 1.5), // >1 (shorter), <1 (taller)
     };
     sunsetLayers.push(layer);
   }
@@ -137,8 +136,8 @@ function generateSunset(): SunsetConfig {
     sunset = {
       include: true,
       properties: {
-        layers: sunsetLayers
-      }
+        layers: sunsetLayers,
+      },
     };
   } else {
     sunset = {
@@ -180,8 +179,8 @@ function generateClouds(): CloudsConfig {
       include: true,
       properties: {
         quantity: randInt(1, 25),
-        layers: generateCloudLayers()
-      }
+        layers: generateCloudLayers(),
+      },
     };
   } else {
     clouds = {
@@ -204,7 +203,7 @@ function generateConfig(): Config {
     stars: stars,
     moon: moon,
     sunset: sunset,
-    clouds: clouds
+    clouds: clouds,
   };
 
   return config;

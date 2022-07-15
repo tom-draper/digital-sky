@@ -1,4 +1,3 @@
-"use strict";
 function randomColour() {
     return [randInt(0, 255), randInt(0, 255), randInt(0, 255)];
 }
@@ -9,8 +8,8 @@ function randomSkyColourDay() {
     return [randInt(150, 250), randInt(140, 240), randInt(160, 255)];
 }
 function randomSkyColour() {
-    let colour;
-    let pNight = 0.3;
+    var colour;
+    var pNight = 0.3;
     if (Math.random() < pNight) {
         colour = randomSkyColourNight();
     }
@@ -19,12 +18,12 @@ function randomSkyColour() {
     }
     return colour;
 }
-let res720 = [1280, 720];
-let res1080 = [1920, 1080];
+var res720 = [1280, 720];
+var res1080 = [1920, 1080];
 function generateSky() {
-    let colour = randomSkyColour();
-    let mutationSpeed = randInt(1, 5);
-    let sky = {
+    var colour = randomSkyColour();
+    var mutationSpeed = randInt(1, 5);
+    var sky = {
         properties: {
             height: res720[1],
             width: res720[0],
@@ -40,15 +39,15 @@ function colourSum(colour) {
     return colour[0] + colour[1] + colour[2];
 }
 function generateStars(skyColour) {
-    let stars;
-    let p = 0.6;
-    let threshold = 120;
+    var stars;
+    var p = 0.6;
+    var threshold = 120;
     if (Math.random() < p && colourSum(skyColour) < threshold) {
         stars = {
             include: true,
             properties: {
                 opacity: 1,
-                density: 0.005,
+                density: 0.005
             }
         };
     }
@@ -64,13 +63,13 @@ function randomMoonColour() {
     return [randInt(250, 255), randInt(250, 255), randInt(250, 255)];
 }
 function generateMoon(skyColour) {
-    let moon;
-    let p = 0.5;
-    let threshold = 120;
-    let colour = randomMoonColour();
-    let radius = randInt(20, 60);
-    let halfMoon = Math.random() >= 0.5;
-    let noise = randInt(1, 5);
+    var moon;
+    var p = 0.5;
+    var threshold = 120;
+    var colour = randomMoonColour();
+    var radius = randInt(20, 60);
+    var halfMoon = Math.random() >= 0.5;
+    var noise = randInt(1, 5);
     if (Math.random() < p && colourSum(skyColour) < threshold) {
         moon = {
             include: true,
@@ -97,26 +96,26 @@ function randFloat(min, max) {
     return Math.random() * (max - min) + min;
 }
 function generateSunsetLayers() {
-    let sunsetLayers = [];
-    let n = randInt(1, 10);
-    for (let i = 0; i < n; i++) {
-        let layer = {
+    var sunsetLayers = [];
+    var n = randInt(1, 10);
+    for (var i = 0; i < n; i++) {
+        var layer = {
             colour: randomSunsetColour(),
             maxOpacity: randFloat(0.2, 1),
             proportion: randFloat(0.2, 1),
             mutationSpeed: randInt(1, 3),
             xStretch: randFloat(0.2, 1.2),
-            yStretch: randFloat(0.7, 1.5), // >1 (shorter), <1 (taller) 
+            yStretch: randFloat(0.7, 1.5)
         };
         sunsetLayers.push(layer);
     }
     return sunsetLayers;
 }
 function generateSunset() {
-    let sunset;
-    let p = 1;
+    var sunset;
+    var p = 1;
     if (Math.random() < p) {
-        let sunsetLayers = generateSunsetLayers();
+        var sunsetLayers = generateSunsetLayers();
         sunset = {
             include: true,
             properties: {
@@ -127,7 +126,7 @@ function generateSunset() {
     else {
         sunset = {
             include: false,
-            properties: null,
+            properties: null
         };
     }
     return sunset;
@@ -136,24 +135,24 @@ function randomCloudColour() {
     return [randInt(200, 255), randInt(200, 255), randInt(200, 255)];
 }
 function generateCloudLayers() {
-    let cloudLayers = [];
-    let n = randInt(1, 25);
-    for (let i = 0; i < n; i++) {
-        let layer = {
+    var cloudLayers = [];
+    var n = randInt(1, 25);
+    for (var i = 0; i < n; i++) {
+        var layer = {
             colour: randomCloudColour(),
             opacity: randFloat(0.05, 0.5),
             minSize: randInt(500, 1000),
             maxSize: randInt(5000, 50000),
             pH: randFloat(0.5, 0.9),
-            pV: randFloat(0.1, 0.5), // Probability of vertical expansion
+            pV: randFloat(0.1, 0.5)
         };
         cloudLayers.push(layer);
     }
     return cloudLayers;
 }
 function generateClouds() {
-    let clouds;
-    let p = 1;
+    var clouds;
+    var p = 1;
     if (Math.random() < p) {
         clouds = {
             include: true,
@@ -166,18 +165,18 @@ function generateClouds() {
     else {
         clouds = {
             include: false,
-            properties: null,
+            properties: null
         };
     }
     return clouds;
 }
 function generateConfig() {
-    let sky = generateSky();
-    let stars = generateStars(sky.properties.colour);
-    let moon = generateMoon(sky.properties.colour);
-    let sunset = generateSunset();
-    let clouds = generateClouds();
-    let config = {
+    var sky = generateSky();
+    var stars = generateStars(sky.properties.colour);
+    var moon = generateMoon(sky.properties.colour);
+    var sunset = generateSunset();
+    var clouds = generateClouds();
+    var config = {
         sky: sky,
         stars: stars,
         moon: moon,

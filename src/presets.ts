@@ -1,4 +1,3 @@
-
 // let defaultHeight = 1080;
 // let defaultWidth = 1920;
 let defaultHeight = 720;
@@ -12,14 +11,14 @@ function defaultSky(colour: [number, number, number]) {
       pixelSize: 1,
       colour: colour,
       mutationSpeed: 1,
-      opacity: 1
-    }
+      opacity: 1,
+    },
   };
 }
 
 let none: None = {
   include: false,
-  properties: null
+  properties: null,
 };
 
 let stars1 = {
@@ -27,21 +26,21 @@ let stars1 = {
   properties: {
     opacity: 1,
     density: 0.005,
-  }
+  },
 };
 let starsDense = {
   include: true,
   properties: {
     opacity: 1,
     density: 0.01,
-  }
+  },
 };
 let starsFaint = {
   include: true,
   properties: {
     opacity: 0.5,
     density: 0.002,
-  }
+  },
 };
 
 let moon1 = {
@@ -50,10 +49,9 @@ let moon1 = {
     colour: [248, 250, 244],
     radius: 40,
     halfMoon: true,
-    noise: 2
-  }
+    noise: 2,
+  },
 };
-
 
 let sunset1 = {
   include: true,
@@ -66,8 +64,8 @@ let sunset1 = {
         proportion: 0.7,
         // Magnitude of the inc/dec of one rgb value with each colour step
         mutationSpeed: 1,
-        xStretch: 0.5,  // >1 (thinner), <1 (wider) 
-        yStretch: 0,  // >1 (shorter), <1 (taller) 
+        xStretch: 0.5, // >1 (thinner), <1 (wider)
+        yStretch: 0, // >1 (shorter), <1 (taller)
       },
       {
         colour: [255, 201, 34],
@@ -76,9 +74,9 @@ let sunset1 = {
         mutationSpeed: 1,
         xStretch: 0.7,
         yStretch: 0,
-      }
-    ]
-  }
+      },
+    ],
+  },
 };
 let sunset2 = {
   include: true,
@@ -107,8 +105,8 @@ let sunset2 = {
         proportion: 0.7,
         // Magnitude of the inc/dec of one rgb value with each colour step
         mutationSpeed: 1,
-        xStretch: 0.5,  // >1 (thinner), <1 (wider) 
-        yStretch: 0,  // >1 (shorter), <1 (taller) 
+        xStretch: 0.5, // >1 (thinner), <1 (wider)
+        yStretch: 0, // >1 (shorter), <1 (taller)
       },
       {
         colour: [255, 201, 34],
@@ -118,8 +116,8 @@ let sunset2 = {
         xStretch: 0.7,
         yStretch: 0,
       },
-    ]
-  }
+    ],
+  },
 };
 
 let clouds1 = {
@@ -185,7 +183,7 @@ let clouds1 = {
         pV: 0.2,
       },
     ],
-  }
+  },
 };
 let c = [160, 170, 190];
 let clouds2 = {
@@ -235,7 +233,7 @@ let clouds2 = {
         pV: 0.25,
       },
     ],
-  }
+  },
 };
 let cloudsBig = {
   include: true,
@@ -300,7 +298,7 @@ let cloudsBig = {
         pV: 0.2,
       },
     ],
-  }
+  },
 };
 let cloudsCloudy = {
   include: true,
@@ -357,7 +355,7 @@ let cloudsCloudy = {
         pV: 0.3,
       },
     ],
-  }
+  },
 };
 let cloudsMild = {
   include: true,
@@ -428,13 +426,10 @@ let cloudsMild = {
         maxSize: 10000,
         pH: 0.6,
         pV: 0.2,
-      }
+      },
     ],
-  }
+  },
 };
-
-
-
 
 // ----------------------- PRESETS -----------------------
 
@@ -443,7 +438,7 @@ let presetLightDay = {
   stars: none,
   moon: none,
   sunset: none,
-  clouds: clouds1
+  clouds: clouds1,
 };
 
 let presetSunset = {
@@ -451,7 +446,7 @@ let presetSunset = {
   stars: starsFaint,
   moon: false,
   sunset: sunset1,
-  clouds: clouds1
+  clouds: clouds1,
 };
 
 let presetMoonAndStars = {
@@ -459,7 +454,7 @@ let presetMoonAndStars = {
   stars: starsFaint,
   moon: moon1,
   sunset: none,
-  clouds: none
+  clouds: none,
 };
 
 let presetLateEvening = {
@@ -467,7 +462,7 @@ let presetLateEvening = {
   stars: starsFaint,
   moon: none,
   sunset: sunset2,
-  clouds: cloudsBig
+  clouds: cloudsBig,
 };
 
 let presetLateEvening2 = {
@@ -475,7 +470,7 @@ let presetLateEvening2 = {
   stars: starsFaint,
   moon: moon1,
   sunset: sunset2,
-  clouds: none
+  clouds: none,
 };
 
 let presetLateEvening3: Config = {
@@ -501,11 +496,11 @@ let presetLateEvening3: Config = {
           mutationSpeed: 1,
           xStretch: 0.6,
           yStretch: 0.3,
-        }
-      ]
-    }
+        },
+      ],
+    },
   },
-  clouds: none
+  clouds: none,
 };
 
 let presetPinkSky = {
@@ -513,9 +508,8 @@ let presetPinkSky = {
   stars: none,
   moon: none,
   sunset: none,
-  clouds: clouds1
+  clouds: clouds1,
 };
-
 
 let presetPinkSky2 = {
   sky: defaultSky([255, 182, 193]),
@@ -526,7 +520,7 @@ let presetPinkSky2 = {
     properties: {
       layers: [
         {
-          colour: [253, 240, 240],  // White
+          colour: [253, 240, 240], // White
           maxOpacity: 0.3,
           proportion: 0.7,
           mutationSpeed: 1,
@@ -534,7 +528,7 @@ let presetPinkSky2 = {
           yStretch: 0,
         },
         {
-          colour: [252, 210, 102],  // Yellow
+          colour: [252, 210, 102], // Yellow
           maxOpacity: 0.3,
           proportion: 0.7,
           mutationSpeed: 1,
@@ -542,7 +536,7 @@ let presetPinkSky2 = {
           yStretch: 0,
         },
         {
-          colour: [255, 227, 115],  // Yellow
+          colour: [255, 227, 115], // Yellow
           maxOpacity: 0.35,
           proportion: 0.6,
           mutationSpeed: 1,
@@ -550,7 +544,7 @@ let presetPinkSky2 = {
           yStretch: 0,
         },
         {
-          colour: [252, 156, 84],  // Sandy brown
+          colour: [252, 156, 84], // Sandy brown
           maxOpacity: 0.4,
           proportion: 0.5,
           mutationSpeed: 1,
@@ -558,92 +552,92 @@ let presetPinkSky2 = {
           yStretch: 0,
         },
         {
-          colour: [253, 94, 83],  // Sunset orange
+          colour: [253, 94, 83], // Sunset orange
           maxOpacity: 0.45,
           proportion: 0.5,
           mutationSpeed: 1,
           xStretch: 0.3,
           yStretch: 0,
         },
-      ]
-    }
+      ],
+    },
   },
-  clouds: none
+  clouds: none,
 };
 
 type SkyConfig = {
-    properties: {
-        height: number,
-        width: number,
-        pixelSize: number,
-        colour: [number, number, number],
-        mutationSpeed: number,
-        opacity: number,
-    }
-}
+  properties: {
+    height: number;
+    width: number;
+    pixelSize: number;
+    colour: [number, number, number];
+    mutationSpeed: number;
+    opacity: number;
+  };
+};
 
 type StarsConfig = {
-    include: boolean,
-    properties: {
-        opacity: number,
-        density: number,
-    }
-}
+  include: boolean;
+  properties: {
+    opacity: number;
+    density: number;
+  };
+};
 
 type MoonConfig = {
-  include: boolean,
+  include: boolean;
   properties: {
-    colour: [number, number, number],
-    radius: number,
-    halfMoon: boolean,
-    noise: number
-  }
-}
+    colour: [number, number, number];
+    radius: number;
+    halfMoon: boolean;
+    noise: number;
+  };
+};
 type SunsetLayer = {
-    colour: [number, number, number],
-    maxOpacity: number,
-    proportion: number,
-    mutationSpeed: number,
-    xStretch: number,
-    yStretch: number,
-}
+  colour: [number, number, number];
+  maxOpacity: number;
+  proportion: number;
+  mutationSpeed: number;
+  xStretch: number;
+  yStretch: number;
+};
 
 type SunsetConfig = {
-  include: boolean,
+  include: boolean;
   properties: {
-    layers: SunsetLayer[]
-  }
-}
+    layers: SunsetLayer[];
+  };
+};
 
 type CloudLayer = {
-    colour: [number, number, number],
-    opacity: number,
-    minSize: number,
-    maxSize: number,
-    pH: number,
-    pV: number
-}
+  colour: [number, number, number];
+  opacity: number;
+  minSize: number;
+  maxSize: number;
+  pH: number;
+  pV: number;
+};
 
 type CloudsConfig = {
-    include: boolean,
-    properties: {
-        quantity: number,
-        layers: CloudLayer[],
-    }
-}
+  include: boolean;
+  properties: {
+    quantity: number;
+    layers: CloudLayer[];
+  };
+};
 
 type None = {
-    include: boolean,
-    properties: null
-}
+  include: boolean;
+  properties: null;
+};
 
 type Config = {
-    sky: SkyConfig,
-    stars: StarsConfig|None,
-    moon: MoonConfig|None,
-    sunset: SunsetConfig|None,
-    clouds: CloudsConfig|None
-}
+  sky: SkyConfig;
+  stars: StarsConfig | None;
+  moon: MoonConfig | None;
+  sunset: SunsetConfig | None;
+  clouds: CloudsConfig | None;
+};
 
 let presetLightDayCloudy: Config = {
   sky: defaultSky([135, 206, 235]),
@@ -653,83 +647,83 @@ let presetLightDayCloudy: Config = {
   clouds: {
     include: true,
     properties: {
-        quantity: 10,
-        // cloud layers are created in order
-        layers: [
-          {
-            colour: [235, 235, 235],
-            opacity: 0.5,
-            minSize: 100,
-            maxSize: 10000,
-            pH: 0.7, // probability of horizontal expansion
-            pV: 0.3, // probability of vertical expansion
-          },
-          {
-            colour: [235, 235, 235],
-            opacity: 0.4,
-            minSize: 100,
-            maxSize: 10000,
-            pH: 0.7,
-            pV: 0.3,
-          },
-          {
-            colour: [235, 235, 235],
-            opacity: 0.4,
-            minSize: 100,
-            maxSize: 10000,
-            pH: 0.7,
-            pV: 0.3,
-          },
-          {
-            colour: [235, 235, 235],
-            opacity: 0.4,
-            minSize: 100,
-            maxSize: 10000,
-            pH: 0.7,
-            pV: 0.3,
-          },
-          {
-            colour: [240, 211, 201],
-            opacity: 0.4,
-            minSize: 100,
-            maxSize: 2000,
-            pH: 0.6,
-            pV: 0.2,
-          },
-          {
-            colour: [240, 211, 201],
-            opacity: 0.4,
-            minSize: 100,
-            maxSize: 2000,
-            pH: 0.6,
-            pV: 0.2,
-          },
-          {
-            colour: [173, 216, 230],
-            opacity: 0.4,
-            minSize: 100,
-            maxSize: 1000,
-            pH: 0.6,
-            pV: 0.2,
-          },
-          {
-            colour: [173, 216, 230],
-            opacity: 0.15,
-            minSize: 100,
-            maxSize: 1000,
-            pH: 0.6,
-            pV: 0.2,
-          },
-          {
-            colour: [240, 240, 240],
-            opacity: 0.2,
-            minSize: 100,
-            maxSize: 1000,
-            pH: 0.6,
-            pV: 0.2,
-          },
-        ]
-    }
+      quantity: 10,
+      // cloud layers are created in order
+      layers: [
+        {
+          colour: [235, 235, 235],
+          opacity: 0.5,
+          minSize: 100,
+          maxSize: 10000,
+          pH: 0.7, // probability of horizontal expansion
+          pV: 0.3, // probability of vertical expansion
+        },
+        {
+          colour: [235, 235, 235],
+          opacity: 0.4,
+          minSize: 100,
+          maxSize: 10000,
+          pH: 0.7,
+          pV: 0.3,
+        },
+        {
+          colour: [235, 235, 235],
+          opacity: 0.4,
+          minSize: 100,
+          maxSize: 10000,
+          pH: 0.7,
+          pV: 0.3,
+        },
+        {
+          colour: [235, 235, 235],
+          opacity: 0.4,
+          minSize: 100,
+          maxSize: 10000,
+          pH: 0.7,
+          pV: 0.3,
+        },
+        {
+          colour: [240, 211, 201],
+          opacity: 0.4,
+          minSize: 100,
+          maxSize: 2000,
+          pH: 0.6,
+          pV: 0.2,
+        },
+        {
+          colour: [240, 211, 201],
+          opacity: 0.4,
+          minSize: 100,
+          maxSize: 2000,
+          pH: 0.6,
+          pV: 0.2,
+        },
+        {
+          colour: [173, 216, 230],
+          opacity: 0.4,
+          minSize: 100,
+          maxSize: 1000,
+          pH: 0.6,
+          pV: 0.2,
+        },
+        {
+          colour: [173, 216, 230],
+          opacity: 0.15,
+          minSize: 100,
+          maxSize: 1000,
+          pH: 0.6,
+          pV: 0.2,
+        },
+        {
+          colour: [240, 240, 240],
+          opacity: 0.2,
+          minSize: 100,
+          maxSize: 1000,
+          pH: 0.6,
+          pV: 0.2,
+        },
+      ],
+    },
   },
 };
 
@@ -738,7 +732,7 @@ let presetLightDayStarry = {
   stars: stars1,
   moon: none,
   sunset: none,
-  clouds: clouds1
+  clouds: clouds1,
 };
 
 let presetNight = {
@@ -746,7 +740,7 @@ let presetNight = {
   stars: stars1,
   moon: none,
   sunset: none,
-  clouds: cloudsMild
+  clouds: cloudsMild,
 };
 
 let presetCloudy = {
@@ -754,9 +748,5 @@ let presetCloudy = {
   stars: starsDense,
   moon: none,
   sunset: none,
-  clouds: cloudsCloudy
+  clouds: cloudsCloudy,
 };
-
-
-
-
