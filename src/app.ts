@@ -97,7 +97,137 @@ function mutateColourInPlace(colour: Colour, step: number) {
   }
 }
 
-function colourSpread(
+function colourSpreadBottom(
+  x: number,
+  y: number,
+  colour: Colour,
+  seen: MyTupleSet,
+  toPaint: [number, number, Colour][],
+  ) {
+  if (y < h - 1 && !seen.has([x, y + 1])) {
+    toPaint.push([x, y + 1, colour]);
+    seen.add([x, y + 1]);
+  }
+}
+
+function colourSpreadRight(
+  x: number,
+  y: number,
+  colour: Colour,
+  seen: MyTupleSet,
+  toPaint: [number, number, Colour][],
+  ) {
+  if (x < w - 1 && !seen.has([x + 1, y])) {
+    toPaint.push([x + 1, y, colour]);
+    seen.add([x + 1, y]);
+  }
+}
+
+function colourSpreadTop(
+  x: number,
+  y: number,
+  colour: Colour,
+  seen: MyTupleSet,
+  toPaint: [number, number, Colour][],
+  ) {
+  if (y > 0 && !seen.has([x, y - 1])) {
+    toPaint.push([x, y - 1, colour]);
+    seen.add([x, y - 1]);
+  }
+}
+
+function colourSpreadLeft(
+  x: number,
+  y: number,
+  colour: Colour,
+  seen: MyTupleSet,
+  toPaint: [number, number, Colour][],
+  ) {
+  if (x > 0 && !seen.has([x - 1, y])) {
+    toPaint.push([x - 1, y, colour]);
+    seen.add([x - 1, y]);
+  }
+}
+
+function colourSpreadTopLeft(
+  x: number,
+  y: number,
+  colour: Colour,
+  seen: MyTupleSet,
+  toPaint: [number, number, Colour][],
+  ) {
+  if (x > 0 && y > 0 && !seen.has([x - 1, y - 1])) {
+    toPaint.push([x - 1, y - 1, colour]);
+    seen.add([x - 1, y - 1]);
+  }
+}
+
+function colourSpreadBottomLeft(
+  x: number,
+  y: number,
+  colour: Colour,
+  seen: MyTupleSet,
+  toPaint: [number, number, Colour][],
+  ) {
+  if (x > 0 && y < h - 1 && !seen.has([x - 1, y + 1])) {
+    toPaint.push([x - 1, y + 1, colour]);
+    seen.add([x - 1, y + 1]);
+  }
+}
+
+function colourSpreadTopRight(
+  x: number,
+  y: number,
+  colour: Colour,
+  seen: MyTupleSet,
+  toPaint: [number, number, Colour][],
+  ) {
+  if (x < w - 1 && y > 0 && !seen.has([x + 1, y - 1])) {
+    toPaint.push([x + 1, y - 1, colour]);
+    seen.add([x + 1, y - 1]);
+  }
+}
+
+function colourSpreadBottomRight(
+  x: number,
+  y: number,
+  colour: Colour,
+  seen: MyTupleSet,
+  toPaint: [number, number, Colour][],
+  ) {
+  if (x < w - 1 && y < h - 1 && !seen.has([x + 1, y + 1])) {
+    toPaint.push([x + 1, y + 1, colour]);
+    seen.add([x + 1, y + 1]);
+  }
+}
+
+/*
+ * Colour appears drawn out from the starting point.
+*/
+function colourSpread8Dir(
+  x: number,
+  y: number,
+  colour: Colour,
+  seen: MyTupleSet,
+  toPaint: [number, number, Colour][],
+  mutationSpeed: number
+) {
+  let nextColour = mutateColour(colour, mutationSpeed);
+  
+  colourSpreadBottom(x, y, nextColour, seen, toPaint);
+  colourSpreadRight(x, y, nextColour, seen, toPaint);
+  colourSpreadTop(x, y, nextColour, seen, toPaint);
+  colourSpreadLeft(x, y, nextColour, seen, toPaint);
+  colourSpreadTopLeft(x, y, nextColour, seen, toPaint);
+  colourSpreadBottomLeft(x, y, nextColour, seen, toPaint);
+  colourSpreadTopRight(x, y, nextColour, seen, toPaint);
+  colourSpreadBottomRight(x, y, nextColour, seen, toPaint);
+}
+
+/*
+ * Colour appears drawn out from the starting point.
+*/
+function colourSpread8DirRandom(
   x: number,
   y: number,
   colour: Colour,
@@ -107,37 +237,21 @@ function colourSpread(
 ) {
   let nextColour = mutateColour(colour, mutationSpeed);
 
-  if (y < h - 1 && !seen.has([x, y + 1])) {
-    toPaint.push([x, y + 1, nextColour]);
-    seen.add([x, y + 1]);
+  let colourSpreads = [colourSpreadBottom, colourSpreadRight, colourSpreadTop, 
+    colourSpreadLeft, colourSpreadTopLeft, colourSpreadBottomLeft, colourSpreadTopRight, 
+    colourSpreadBottomRight];
+  // Randomise order of colour spread direction
+  shuffleArray(colourSpreads);
+
+  for (let colourSpread of colourSpreads) {
+    colourSpread(x, y, nextColour, seen, toPaint);
   }
-  if (x < w - 1 && !seen.has([x + 1, y])) {
-    toPaint.push([x + 1, y, nextColour]);
-    seen.add([x + 1, y]);
-  }
-  if (y > 0 && !seen.has([x, y - 1])) {
-    toPaint.push([x, y - 1, nextColour]);
-    seen.add([x, y - 1]);
-  }
-  if (x > 0 && !seen.has([x - 1, y])) {
-    toPaint.push([x - 1, y, nextColour]);
-    seen.add([x - 1, y]);
-  }
-  if (x > 0 && y > 0 && !seen.has([x - 1, y - 1])) {
-    toPaint.push([x - 1, y - 1, nextColour]);
-    seen.add([x - 1, y - 1]);
-  }
-  if (x > 0 && y < h - 1 && !seen.has([x - 1, y + 1])) {
-    toPaint.push([x - 1, y + 1, nextColour]);
-    seen.add([x - 1, y + 1]);
-  }
-  if (x < w - 1 && y > 0 && !seen.has([x + 1, y - 1])) {
-    toPaint.push([x + 1, y - 1, nextColour]);
-    seen.add([x + 1, y - 1]);
-  }
-  if (x < w - 1 && y < h - 1 && !seen.has([x + 1, y + 1])) {
-    toPaint.push([x + 1, y + 1, nextColour]);
-    seen.add([x + 1, y + 1]);
+}
+
+function shuffleArray(arr: Function[]) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
   }
 }
 
@@ -147,38 +261,41 @@ type Pixel = {
 };
 
 function colourSky(grid: Pixel[][][], skyConfig: SkyConfig) {
-  let start: [number, number] = [randInt(0, w - 1), randInt(0, h - 1)];
+  let seen = new MyTupleSet();
+  let toPaint: [number, number, Colour][] = [];
+
   let startColour: Colour = [
     ...skyConfig.properties.colour,
     skyConfig.properties.opacity,
   ];
 
-  let seen = new MyTupleSet();
-  let toPaint: [number, number, Colour][] = [];
-
+  let start: [number, number] = [randInt(0, w - 1), randInt(0, h - 1)];  
   toPaint.push([start[0], start[1], startColour]);
   seen.add(start);
 
-  let x: number;
-  let y: number;
-  let colour: Colour;
-  while (toPaint.length > 0) {
-    [x, y, colour] = nextPixel(toPaint);
-    grid[y][x] = [
-      {
-        type: "sky",
-        colour: colour,
-      },
-    ];
-    colourSpread(
-      x,
-      y,
-      colour,
-      seen,
-      toPaint,
-      skyConfig.properties.mutationSpeed
-    );
+  if (skyConfig.properties.mutationStyle == 'Colour spread') {
+    let x: number;
+    let y: number;
+    let colour: Colour;
+    while (toPaint.length > 0) {
+      [x, y, colour] = nextPixel(toPaint);
+      grid[y][x] = [
+        {
+          type: "sky",
+          colour: colour,
+        },
+      ];
+      colourSpread8Dir(
+        x,
+        y,
+        colour,
+        seen,
+        toPaint,
+        skyConfig.properties.mutationSpeed
+      );
+    }
   }
+
 }
 
 function inRange(cloudSize: number, sizeRange: [number, number]): boolean {

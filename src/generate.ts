@@ -35,6 +35,7 @@ function generateSky(): SkyConfig {
       colour: colour,
       opacity: 1,
       mutationSpeed: mutationSpeed,
+      mutationStyle: 'Colour spread'
     },
   };
 

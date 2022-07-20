@@ -7,6 +7,7 @@ let config: Config = {
       colour: [94, 122, 187],
       opacity: 1,
       mutationSpeed: 1,
+      mutationStyle: 'Colour spread'
     },
   },
   stars: {
@@ -323,7 +324,7 @@ function fadeExcluded() {
   }
 }
 
-function init() {
+function initDefaults() {
   fillSkyDefaults();
   fillStarsDefault();
   fillMoonDefault();
@@ -351,6 +352,8 @@ function collectSky() {
   config.sky.properties.mutationSpeed = parseInt(
     (<HTMLInputElement>document.getElementById("skyMutationSpeed")).value
   );
+  config.sky.properties.mutationStyle = 
+    (<HTMLInputElement>document.getElementById("skyMutationStyle")).value
 }
 
 function collectStars() {
@@ -475,4 +478,4 @@ let sunsetLayerCount = 0;
 let originalCloudLayer = document.getElementById("cloudsLayer");
 let cloudLayerCount = 0;
 
-init();
+initDefaults();

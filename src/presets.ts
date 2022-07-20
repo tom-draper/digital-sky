@@ -11,6 +11,7 @@ function defaultSky(colour: [number, number, number]) {
       pixelSize: 1,
       colour: colour,
       mutationSpeed: 1,
+      mutationStyle: '8 Directions',
       opacity: 1,
     },
   };
@@ -572,6 +573,7 @@ type SkyConfig = {
     pixelSize: number;
     colour: [number, number, number];
     mutationSpeed: number;
+    mutationStyle: string;
     opacity: number;
   };
 };
