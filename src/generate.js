@@ -32,7 +32,7 @@ function generateSky() {
             colour: colour,
             opacity: 1,
             mutationSpeed: mutationSpeed,
-            mutationStyle: '8 directions'
+            mutationStyle: 'Colour spread'
         },
     };
     return sky;

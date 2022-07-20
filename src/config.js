@@ -8,7 +8,7 @@ let config = {
             colour: [94, 122, 187],
             opacity: 1,
             mutationSpeed: 1,
-            mutationStyle: '8 directions'
+            mutationStyle: 'Colour spread'
         },
     },
     stars: {
