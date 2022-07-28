@@ -166,11 +166,8 @@ function colourSpread(grid, skyConfig) {
     let start = [randInt(0, w - 1), randInt(0, h - 1)];
     toPaint.push([start[0], start[1], startColour]);
     seen.add(start);
-    let x;
-    let y;
-    let colour;
     while (toPaint.length > 0) {
-        [x, y, colour] = nextPixel(toPaint);
+        let [x, y, colour] = nextPixel(toPaint);
         grid[y][x] = [
             {
                 type: "sky",
@@ -188,7 +185,6 @@ function colourRandom(grid, skyConfig) {
         }
     }
     shuffleArray(pixels);
-    console.log(pixels);
     let colour = [
         ...skyConfig.properties.colour,
         skyConfig.properties.opacity,
@@ -277,17 +273,14 @@ function addCloudToSky(grid, x, y, colour, layer) {
     }
 }
 function createCloudBase(grid, startColour, sizeRange, pH, pV) {
-    let start = [randInt(0, w - 1), randInt(0, h - 1)];
     let seen = new MyTupleSet();
     let toPaint = [];
+    let start = [randInt(0, w - 1), randInt(0, h - 1)];
     toPaint.push([start[0], start[1], startColour]);
     seen.add(start);
     let cloudSize = 1;
-    let x;
-    let y;
-    let colour;
     while (toPaint.length > 0) {
-        [x, y, colour] = nextPixel(toPaint);
+        let [x, y, colour] = nextPixel(toPaint);
         addCloudToSky(grid, x, y, colour, 0);
         cloudSize = cloudsSpread(x, y, colour, seen, toPaint, cloudSize, sizeRange, pH, pV);
     }
@@ -306,12 +299,9 @@ function addCloudLayer(grid, start, layer, startColour, sizeRange, pH, pV) {
     let toPaint = [];
     toPaint.push([start[0], start[1], startColour]);
     seen.add(start);
-    let x;
-    let y;
-    let colour;
     let currentSize = 1;
     while (toPaint.length > 0) {
-        [x, y, colour] = nextPixel(toPaint);
+        let [x, y, colour] = nextPixel(toPaint);
         addCloudToSky(grid, x, y, colour, layer);
         currentSize = cloudsSpread(x, y, colour, seen, toPaint, currentSize, sizeRange, pH, pV);
     }
@@ -429,12 +419,9 @@ function createSunsetLayer(grid, layerConfig) {
     const start = [randInt(0, w - 1), h - 1];
     toPaint.push([start[0], start[1], [...layerConfig.colour, 1]]);
     seen.add(start);
-    let x;
-    let y;
-    let colour;
     let scale;
     while (toPaint.length > 0) {
-        [x, y, colour] = nextPixel(toPaint);
+        let [x, y, colour] = nextPixel(toPaint);
         scale =
             1 -
                 warpedDistance(x, y, start[0], start[1], layerConfig.xStretch, layerConfig.yStretch) /
