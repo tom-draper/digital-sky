@@ -13,8 +13,10 @@ Hosted at: https://tom-draper.github.io/digital-sky/
 
 ![sky 3](https://user-images.githubusercontent.com/41476809/168876609-506a7dfe-3fba-4aa4-b1fd-80eacb5b7d68.png)
 
-![sky 4](https://user-images.githubusercontent.com/41476809/179978653-2b7e5a2f-5631-4db1-9acd-11e0ab48ff7a.png)
+![sky 4](https://user-images.githubusercontent.com/41476809/182639197-60dd4e05-a035-4bdb-9848-f354399b634d.png)
 
-![sky 5](https://user-images.githubusercontent.com/41476809/182632679-4641124a-f6b7-45d2-ae0d-71a53beaa05d.png)
+![sky 5](https://user-images.githubusercontent.com/41476809/179978653-2b7e5a2f-5631-4db1-9acd-11e0ab48ff7a.png)
 
-![sky 6](https://user-images.githubusercontent.com/41476809/182638556-ad0e804a-f59d-457d-ad53-1b8e67129723.png)
+![sky 6](https://user-images.githubusercontent.com/41476809/182632679-4641124a-f6b7-45d2-ae0d-71a53beaa05d.png)
+
+![sky 7](https://user-images.githubusercontent.com/41476809/182638556-ad0e804a-f59d-457d-ad53-1b8e67129723.png)
