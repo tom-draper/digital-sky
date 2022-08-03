@@ -277,7 +277,7 @@ function colourSpread(grid: Grid, skyConfig: SkyConfig) {
  * Picks a random starting pixel, and adds its 8 neighbours to the queue from 
  * a pixel is popped each iteration.
  */
-function colourSpread2(grid: Grid, skyConfig: SkyConfig) {
+function colourSpreadQueue(grid: Grid, skyConfig: SkyConfig) {
   let seen = new MyTupleSet();
   let toPaint: [number, number, Colour][] = [];
 
@@ -361,7 +361,7 @@ type Pixel = {
 function colourSky(grid: Grid, skyConfig: SkyConfig) {
   let mutationStyle = skyConfig.properties.mutationStyle;
   if (mutationStyle == 'Colour spread') {
-    colourSpread2(grid, skyConfig);
+    colourSpread(grid, skyConfig);
   } else if (mutationStyle == 'Random') {
     colourRandom(grid, skyConfig);
   }
