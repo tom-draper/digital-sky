@@ -432,9 +432,12 @@ function createCloudPixel(colour: Colour) {
 function nextPixel(
   toPaint: [x: number, y: number, colour?: Colour][]
 ): [x: number, y: number, colour?: Colour] {
+  /* Select and remove random pixel from toPaint list
+  Achieved by moving random element to the end and using .pop() -> for 720p 
+  image, found to be 10X faster than Array.splice on the random index. */
   const idx = Math.floor(Math.random() * toPaint.length);
-  let next = toPaint[idx];
-  toPaint.splice(idx, 1);
+  [toPaint[idx], toPaint[toPaint.length-1]] = [toPaint[toPaint.length-1], toPaint[idx]]
+  let next = toPaint.pop();
   return next;
 }
 
