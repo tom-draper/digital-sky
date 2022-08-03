@@ -223,25 +223,15 @@ function colourSpread8Dir(
   seen: MyTupleSet,
   toPaint: [number, number, Colour][],
 ) {
-
-  colourSpreadTop(x, y, colour, seen, toPaint);
-  colourSpreadTopRight(x, y, colour, seen, toPaint);
-  colourSpreadRight(x, y, colour, seen, toPaint);
   colourSpreadBottom(x, y, colour, seen, toPaint);
+  colourSpreadRight(x, y, colour, seen, toPaint);
+  colourSpreadTop(x, y, colour, seen, toPaint);
   colourSpreadLeft(x, y, colour, seen, toPaint);
   colourSpreadTopLeft(x, y, colour, seen, toPaint);
   colourSpreadBottomLeft(x, y, colour, seen, toPaint);
+  colourSpreadTopRight(x, y, colour, seen, toPaint);
   colourSpreadBottomRight(x, y, colour, seen, toPaint);
-  // colourSpreadBottom(x, y, colour, seen, toPaint);
-  // colourSpreadRight(x, y, colour, seen, toPaint);
-  // colourSpreadTop(x, y, colour, seen, toPaint);
-  // colourSpreadLeft(x, y, colour, seen, toPaint);
-  // colourSpreadTopLeft(x, y, colour, seen, toPaint);
-  // colourSpreadBottomLeft(x, y, colour, seen, toPaint);
-  // colourSpreadTopRight(x, y, colour, seen, toPaint);
-  // colourSpreadBottomRight(x, y, colour, seen, toPaint);
 }
-
 
 /*
  * Picks a random starting pixel, and adds its 8 neighbours to the pool of pixels 
