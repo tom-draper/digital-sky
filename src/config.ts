@@ -6,7 +6,7 @@ let config: Config = {
       pixelSize: 1,
       colour: [94, 122, 187],
       opacity: 1,
-      mutationSpeed: 0.5,
+      mutationSpeed: 0.4,
       mutationStyle: 'Colour spread'
     },
   },
@@ -21,7 +21,7 @@ let config: Config = {
     include: false,
     properties: {
       colour: [200, 200, 200],
-      radius: 10,
+      radius: 20,
       halfMoon: false,
       noise: 0.5,
     },
@@ -34,7 +34,7 @@ let config: Config = {
           colour: [254, 207, 199],
           maxOpacity: 0.7,
           proportion: 0.7,
-          mutationSpeed: 0.5,
+          mutationSpeed: 0.2,
           xStretch: 0.7,
           yStretch: 0.5,
         },
@@ -42,7 +42,7 @@ let config: Config = {
           colour: [253, 227, 228],
           maxOpacity: 0.5,
           proportion: 0.7,
-          mutationSpeed: 0.5,
+          mutationSpeed: 0.2,
           xStretch: 0.6,
           yStretch: 0.3,
         },
@@ -354,7 +354,6 @@ function collectSky() {
   );
   config.sky.properties.mutationStyle = 
     (<HTMLInputElement>document.getElementById("skyMutationStyle")).value
-    console.log(config.sky.properties)
 }
 
 function collectStars() {
@@ -464,11 +463,22 @@ function collectInputs() {
   collectClouds();
 }
 
+function lowerRandomMutationSpeed() {
+  // "Random" mutation style is much more sensitive to mutation speed
+  // -> works best with a much lower mutation speed
+  if (config.sky.properties.mutationStyle == "Random") {
+    console.log(config.sky.properties.mutationSpeed);
+    config.sky.properties.mutationSpeed /= 60;
+    console.log(config.sky.properties.mutationSpeed);
+  }
+}
+
 function run() {
   document.getElementById("generate-btn").style.display = "none";
   document.getElementById("loading-spinner").style.display = "grid";
   setTimeout(function () {
     collectInputs();
+    lowerRandomMutationSpeed();
     runSkyGeneration();
     document.getElementById("config").style.display = "none";
   }, 500);

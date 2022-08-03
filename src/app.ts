@@ -239,7 +239,7 @@ function colourSpread8Dir(
  * Picks a random starting pixel, and adds its 8 neighbours to the pool of pixels 
  * to be picked next iteration whilst mutating the brush colour each iteration.
  */
-function colourSpread(grid: Pixel[][][], skyConfig: SkyConfig) {
+function colourSpread(grid: Grid, skyConfig: SkyConfig) {
   let seen = new MyTupleSet();
   let toPaint: [number, number, Colour][] = [];
 
@@ -251,8 +251,6 @@ function colourSpread(grid: Pixel[][][], skyConfig: SkyConfig) {
   let start: [number, number] = [randInt(0, w - 1), randInt(0, h - 1)];
   toPaint.push([start[0], start[1], startColour]);
   seen.add(start);
-
-  console.log(skyConfig.properties.mutationSpeed)
 
   while (toPaint.length > 0) {
     let [x, y, colour] = nextPixel(toPaint);
@@ -278,10 +276,10 @@ function colourSpread(grid: Pixel[][][], skyConfig: SkyConfig) {
  * Pick random pixels across the entire image whilst mutating the brush colour
  * to creates a noise effect.
  */
-function colourRandom(grid: Pixel[][][], skyConfig: SkyConfig) {
+function colourRandom(grid: Grid, skyConfig: SkyConfig) {
   let pixels = [];
-  for (let y = 0; y < grid.length; y++) {
-    for (let x = 0; x < grid[y].length; x++) {
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
       pixels.push([x, y])
     }
   }
@@ -316,7 +314,7 @@ type Pixel = {
   colour: Colour;
 };
 
-function colourSky(grid: Pixel[][][], skyConfig: SkyConfig) {
+function colourSky(grid: Grid, skyConfig: SkyConfig) {
   let mutationStyle = skyConfig.properties.mutationStyle;
   if (mutationStyle == 'Colour spread') {
     colourSpread(grid, skyConfig);
@@ -399,7 +397,7 @@ function nextPixel(
 }
 
 function addCloudToSky(
-  grid: Pixel[][][],
+  grid: Grid,
   x: number,
   y: number,
   colour: Colour,
@@ -414,7 +412,7 @@ function addCloudToSky(
 }
 
 function createCloudBase(
-  grid: Pixel[][][],
+  grid: Grid,
   startColour: Colour,
   sizeRange: [number, number],
   pH: number,
@@ -459,7 +457,7 @@ function pixelHasType(pixel: Pixel[], type: string): [boolean, number] {
 }
 
 function addCloudLayer(
-  grid: Pixel[][][],
+  grid: Grid,
   start: [number, number],
   layer: number,
   startColour: Colour,
@@ -493,7 +491,7 @@ function addCloudLayer(
   }
 }
 
-function createCloud(grid: Pixel[][][], layers: CloudLayer[]) {
+function createCloud(grid: Grid, layers: CloudLayer[]) {
   let start = createCloudBase(
     grid,
     [...layers[0].colour, layers[0].opacity],
@@ -515,7 +513,7 @@ function createCloud(grid: Pixel[][][], layers: CloudLayer[]) {
   }
 }
 
-function createClouds(grid: Pixel[][][], cloudConfig: CloudsConfig) {
+function createClouds(grid: Grid, cloudConfig: CloudsConfig) {
   for (let i = 0; i < cloudConfig.properties.quantity; i++) {
     createCloud(grid, cloudConfig.properties.layers);
   }
@@ -536,10 +534,10 @@ function starColour(opacity: number): Colour {
   return [randInt(230, 255), randInt(210, 240), randInt(220, 255), opacity];
 }
 
-function createStar(x: number, y: number, grid: Pixel[][][], opacity: number) {
+function createStar(x: number, y: number, grid: Grid, opacity: number) {
   let colour = starColour(opacity);
 
-  grid[y][x].push({ type: "star", colour: colour });
+  grid[y][x].push({ type: "star", colour: colour } as Pixel);
 
   // Probabilistically add additional neighbouring star pixels
   let p = 0.1;
@@ -555,7 +553,7 @@ function createStar(x: number, y: number, grid: Pixel[][][], opacity: number) {
   });
 }
 
-function createStars(grid: Pixel[][][], starsConfig: StarsConfig) {
+function createStars(grid: Grid, starsConfig: StarsConfig) {
   let n = h * w * starsConfig.properties.density;
   for (let i = 0; i < n; i++) {
     let x = randInt(0, w - 1);
@@ -617,7 +615,7 @@ function combineColours(colour1: Colour, colour2: Colour): Colour {
 }
 
 function addSunsetToSky(
-  grid: Pixel[][][],
+  grid: Grid,
   x: number,
   y: number,
   colour: Colour
@@ -630,7 +628,7 @@ function addSunsetToSky(
   }
 }
 
-function createSunsetLayer(grid: Pixel[][][], layerConfig: SunsetLayer) {
+function createSunsetLayer(grid: Grid, layerConfig: SunsetLayer) {
   const maxD = h * layerConfig.proportion;
 
   let seen = new MyTupleSet();
@@ -663,7 +661,7 @@ function createSunsetLayer(grid: Pixel[][][], layerConfig: SunsetLayer) {
   }
 }
 
-function createSunset(grid: Pixel[][][], sunsetConfig: SunsetConfig) {
+function createSunset(grid: Grid, sunsetConfig: SunsetConfig) {
   for (let i = 0; i < sunsetConfig.properties.layers.length; i++) {
     createSunsetLayer(grid, sunsetConfig.properties.layers[i]);
   }
@@ -683,20 +681,21 @@ function createMoonPixel(colour: Colour): HTMLDivElement {
 }
 
 function fullMoon(
-  grid: Pixel[][][],
+  grid: Grid,
   toPaint: [number, number][],
   moonConfig: MoonConfig
 ) {
+  console.log(moonConfig);
   let colour: Colour = [...moonConfig.properties.colour, 1];
   while (toPaint.length > 0) {
     const [x, y] = nextPixel(toPaint);
     grid[y][x].push({ type: "moon", colour: colour });
-    mutateColourInPlace(colour, moonConfig.properties.noise);
+    colour = mutateColour(colour, moonConfig.properties.noise);
   }
 }
 
 function halfMoon(
-  grid: Pixel[][][],
+  grid: Grid,
   toPaint: [number, number][],
   moonConfig: MoonConfig,
   start: [number, number]
@@ -719,7 +718,7 @@ function halfMoon(
         type: "moon",
         colour: [colour[0], colour[1], colour[2], opacity],
       });
-      mutateColourInPlace(colour, moonConfig.properties.noise);
+      colour = mutateColour(colour, moonConfig.properties.noise);
     } else {
       // Remove any star pixels in the darkness of the half moon
       for (let i = 0; i < grid[y][x].length; i++) {
@@ -731,7 +730,7 @@ function halfMoon(
   }
 }
 
-function createMoon(grid: Pixel[][][], moonConfig: MoonConfig) {
+function createMoon(grid: Grid, moonConfig: MoonConfig) {
   const r = moonConfig.properties.radius;
 
   const border = Math.round(1.5 * r);
@@ -756,8 +755,20 @@ function createMoon(grid: Pixel[][][], moonConfig: MoonConfig) {
   }
 }
 
-function createSky(config: Config): Pixel[][][] {
-  let grid = createGrid(h, w);
+type Grid = {
+  number: {number: Pixel[]}
+}
+
+function createGrid2(h: number, w: number): Grid {
+  let grid: any = {};
+  for (let i = 0; i < h; i++) {
+    grid[i] = {};
+  }
+  return grid;
+}
+
+function createSky(config: Config): Grid {
+  let grid = createGrid2(h, w);
 
   console.log("Colouring sky...");
   colourSky(grid, config.sky);
@@ -803,7 +814,7 @@ function getCanvasContext(): CanvasRenderingContext2D {
   return context;
 }
 
-function buildCanvas(grid: Pixel[][][]) {
+function buildCanvas(grid: Grid) {
   let context = getCanvasContext();
   let imageData = context.createImageData(w, h);
   for (let y = 0; y < h; y++) {
@@ -826,12 +837,14 @@ let w: number;
 let h: number;
 
 function runSkyGeneration() {
-  console.log(config);
-
+  let start = Date.now();
+ 
   w = config.sky.properties.width;
   h = config.sky.properties.height;
 
   let grid = createSky(config);
   buildCanvas(grid);
-  console.log("Complete");
+
+  let end = Date.now();
+  console.log(`Completed in ${end - start}ms`);
 }
