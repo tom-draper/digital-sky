@@ -262,11 +262,10 @@ function colourSpread(grid: Grid, skyConfig: SkyConfig) {
       },
     ]);
 
-    colour = mutateColour(colour, mutationSpeed);
     colourSpread8Dir(
       x,
       y,
-      colour,
+      mutateColour(colour, mutationSpeed),
       seen,
       toPaint,
     );
@@ -303,11 +302,10 @@ function colourSpreadQueue(grid: Grid, skyConfig: SkyConfig) {
       },
     ]);
 
-    colour = mutateColour(colour, mutationSpeed);
     colourSpread8Dir(
       x,
       y,
-      colour,
+      mutateColour(colour, mutationSpeed),
       seen,
       toPaint,
     );
