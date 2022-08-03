@@ -21,7 +21,7 @@ let config: Config = {
     include: false,
     properties: {
       colour: [200, 200, 200],
-      radius: 20,
+      radius: 25,
       halfMoon: false,
       noise: 0.5,
     },
