@@ -6,7 +6,7 @@ let config: Config = {
       pixelSize: 1,
       colour: [94, 122, 187],
       opacity: 1,
-      mutationSpeed: 0.4,
+      mutationSpeed: 0.3,
       mutationStyle: 'Colour spread'
     },
   },
@@ -52,63 +52,55 @@ let config: Config = {
   clouds: {
     include: false,
     properties: {
-      quantity: 10,
+      quantity: 6,
       layers: [
         {
-          colour: [235, 235, 235],
-          opacity: 0.2,
-          minSize: 100,
-          maxSize: 10000,
-          pH: 0.7, // Probability of horizontal expansion
+          colour: [255, 255, 255],
+          opacity: 0.6,
+          minSize: 1000,
+          maxSize: 65000,
+          pH: 0.72, // Probability of horizontal expansion
           pV: 0.3, // Probability of vertical expansion
         },
         {
-          colour: [235, 235, 235],
-          opacity: 0.15,
-          minSize: 100,
-          maxSize: 10000,
-          pH: 0.7,
-          pV: 0.3,
+          colour: [245, 245, 245],
+          opacity: 0.6,
+          minSize: 1000,
+          maxSize: 65000,
+          pH: 0.72, // Probability of horizontal expansion
+          pV: 0.3, // Probability of vertical expansion
         },
         {
-          colour: [235, 235, 235],
-          opacity: 0.15,
-          minSize: 100,
-          maxSize: 10000,
-          pH: 0.7,
-          pV: 0.3,
+          colour: [255, 255, 255],
+          opacity: 0.6,
+          minSize: 1000,
+          maxSize: 65000,
+          pH: 0.72, // Probability of horizontal expansion
+          pV: 0.3, // Probability of vertical expansion
         },
         {
-          colour: [235, 235, 235],
-          opacity: 0.15,
-          minSize: 100,
-          maxSize: 10000,
-          pH: 0.7,
-          pV: 0.3,
+          colour: [245, 245, 245],
+          opacity: 0.6,
+          minSize: 1000,
+          maxSize: 65000,
+          pH: 0.72, // Probability of horizontal expansion
+          pV: 0.3, // Probability of vertical expansion
         },
         {
-          colour: [173, 216, 230],
-          opacity: 0.15,
-          minSize: 100,
-          maxSize: 10000,
-          pH: 0.6,
-          pV: 0.2,
+          colour: [225, 225, 225],
+          opacity: 0.5,
+          minSize: 1000,
+          maxSize: 65000,
+          pH: 0.72, // Probability of horizontal expansion
+          pV: 0.3, // Probability of vertical expansion
         },
         {
-          colour: [173, 216, 230],
-          opacity: 0.15,
-          minSize: 100,
-          maxSize: 10000,
-          pH: 0.6,
-          pV: 0.2,
-        },
-        {
-          colour: [240, 240, 240],
-          opacity: 0.2,
-          minSize: 100,
-          maxSize: 10000,
-          pH: 0.6,
-          pV: 0.2,
+          colour: [200, 200, 200],
+          opacity: 0.4,
+          minSize: 1000,
+          maxSize: 65000,
+          pH: 0.72, // Probability of horizontal expansion
+          pV: 0.3, // Probability of vertical expansion
         },
       ],
     },
@@ -431,10 +423,10 @@ function collectCloudsLayers() {
       opacity: parseFloat(
         (<HTMLInputElement>layer.children[3].children[0]).value
       ),
-      maxSize: parseInt(
+      minSize: parseInt(
         (<HTMLInputElement>layer.children[4].children[0]).value
       ),
-      minSize: parseInt(
+      maxSize: parseInt(
         (<HTMLInputElement>layer.children[5].children[0]).value
       ),
       pH: parseFloat((<HTMLInputElement>layer.children[6].children[0]).value),
@@ -467,9 +459,7 @@ function lowerRandomMutationSpeed() {
   // "Random" mutation style is much more sensitive to mutation speed
   // -> works best with a much lower mutation speed
   if (config.sky.properties.mutationStyle == "Random") {
-    console.log(config.sky.properties.mutationSpeed);
     config.sky.properties.mutationSpeed /= 60;
-    console.log(config.sky.properties.mutationSpeed);
   }
 }
 

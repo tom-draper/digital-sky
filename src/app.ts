@@ -332,7 +332,7 @@ function colourRandom(grid: Grid, skyConfig: SkyConfig) {
 
   let mutationSpeed = skyConfig.properties.mutationSpeed;
 
-  for (let i = 0; i < w*h; i++) {
+  for (let i = 0; i < w * h; i++) {
     let [x, y] = pixels.pop();
     grid.get(y).set(x, [
       {
@@ -436,7 +436,7 @@ function nextPixel(
   Achieved by moving random element to the end and using .pop() -> for 720p 
   image, found to be 10X faster than Array.splice on the random index. */
   const idx = Math.floor(Math.random() * toPaint.length);
-  [toPaint[idx], toPaint[toPaint.length-1]] = [toPaint[toPaint.length-1], toPaint[idx]]
+  [toPaint[idx], toPaint[toPaint.length - 1]] = [toPaint[toPaint.length - 1], toPaint[idx]]
   let next = toPaint.pop();
   return next;
 }
@@ -684,8 +684,9 @@ function createSunsetLayer(grid: Grid, layerConfig: SunsetLayer) {
   seen.add(start);
 
   let scale: number;
+  let x, y, colour;
   while (toPaint.length > 0) {
-    let [x, y, colour] = nextPixel(toPaint);
+    [x, y, colour] = nextPixel(toPaint);
     scale =
       1 -
       warpedDistance(
@@ -698,10 +699,17 @@ function createSunsetLayer(grid: Grid, layerConfig: SunsetLayer) {
       ) /
       maxD;
     if (scale > 0) {
-      colour[3] = layerConfig.maxOpacity * scale;
-      addSunsetToSky(grid, x, y, colour);
-      let nextColour = mutateColour(colour, layerConfig.mutationSpeed);
-      sunsetSpread(x, y, nextColour, toPaint, seen);
+      colour[3] = layerConfig.maxOpacity * scale;  // Adjust opacity
+      // addSunsetToSky(grid, x, y, colour);
+      grid.get(y).get(x).push({ type: "sunset", colour: colour });
+
+      sunsetSpread(
+        x,
+        y,
+        mutateColour(colour, layerConfig.mutationSpeed),
+        toPaint,
+        seen
+      );
     }
   }
 }
@@ -754,14 +762,16 @@ function halfMoon(
 
   const fadeMargin = randInt(0, 10);
   let colour: Colour = [...moonConfig.properties.colour, 1];
+
   while (toPaint.length > 0) {
     const [x, y] = nextPixel(toPaint);
     const d = distance(x, y, edge[0], edge[1]);
     if (d >= r) {
       const opacity = Math.min((d - r) / fadeMargin, 1);
+      colour[3] = opacity
       grid.get(y).get(x).push({
         type: "moon",
-        colour: [colour[0], colour[1], colour[2], opacity],
+        colour: colour,
       });
       colour = mutateColour(colour, moonConfig.properties.noise);
     } else {
@@ -810,30 +820,48 @@ function createGrid(h: number, w: number): Grid {
   return grid;
 }
 
-function createSky(config: Config): Grid {
+function showProgress() {
+  document.getElementById('progress-text').style.display = 'block';
+}
+
+function updateProgress(text: string) {
+  document.getElementById('progress-text').innerText = text;
+}
+
+function createSky(config: Config): Promise<Grid> {
   let grid = createGrid(h, w);
 
-  console.log("Colouring sky...");
-  colourSky(grid, config.sky);
+  return new Promise(function (res, err) {
+    console.log("Colouring sky...");
+    showProgress();
+    updateProgress("Colouring sky...");
+    colourSky(grid, config.sky);
 
-  if (config.sunset.include) {
-    console.log("Creating sunset...");
-    createSunset(grid, config.sunset);
-  }
-  if (config.stars.include) {
-    console.log("Creating stars...");
-    createStars(grid, config.stars);
-  }
-  if (config.moon.include) {
-    console.log("Creating moon...");
-    createMoon(grid, config.moon);
-  }
-  if (config.clouds.include) {
-    console.log("Creating clouds...");
-    createClouds(grid, config.clouds);
-  }
+    if (config.sunset.include) {
+      updateProgress("Creating sunset...");
+      console.log("Creating sunset...");
+      createSunset(grid, config.sunset);
+    }
 
-  return grid;
+    if (config.stars.include) {
+      updateProgress("Creating stars...");
+      console.log("Creating stars...");
+      createStars(grid, config.stars);
+    }
+
+    if (config.moon.include) {
+      updateProgress("Creating moon...");
+      console.log("Creating moon...");
+      createMoon(grid, config.moon);
+    }
+    
+    if (config.clouds.include) {
+      updateProgress("Creating clouds...");
+      console.log("Creating clouds...");
+      createClouds(grid, config.clouds);
+    }
+    res(grid);
+  })
 }
 
 function collapsePixel(pixel: Pixel[]) {
@@ -885,9 +913,10 @@ function runSkyGeneration() {
   w = config.sky.properties.width;
   h = config.sky.properties.height;
 
-  let grid = createSky(config);
-  buildCanvas(grid);
+  createSky(config).then(grid => {
+    buildCanvas(grid);
 
-  let end = Date.now();
-  console.log(`Completed in ${end - start}ms`);
+    let end = Date.now();
+    console.log(`Completed in ${end - start}ms`);
+  })
 }
