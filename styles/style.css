@@ -116,3 +116,10 @@ h4 {
     width: 55px;
     margin: 40px 15px 40px 0;
 }
+
+#progress-text {
+    margin-top: 25px;
+    font-size: 1;
+    color: #0b5ed7;
+    display: none;
+}
