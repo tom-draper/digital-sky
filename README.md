@@ -20,3 +20,5 @@ Hosted at: https://tom-draper.github.io/digital-sky/
 ![sky 6](https://user-images.githubusercontent.com/41476809/182632679-4641124a-f6b7-45d2-ae0d-71a53beaa05d.png)
 
 ![sky 7](https://user-images.githubusercontent.com/41476809/182638556-ad0e804a-f59d-457d-ad53-1b8e67129723.png)
+
+![sky 8](https://user-images.githubusercontent.com/41476809/182640461-c2c7291c-04c8-4c4f-94aa-c21708673b38.png)
