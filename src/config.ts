@@ -6,7 +6,7 @@ let config: Config = {
       pixelSize: 1,
       colour: [94, 122, 187],
       opacity: 1,
-      mutationSpeed: 1,
+      mutationSpeed: 0.5,
       mutationStyle: 'Colour spread'
     },
   },
@@ -23,7 +23,7 @@ let config: Config = {
       colour: [200, 200, 200],
       radius: 10,
       halfMoon: false,
-      noise: 2,
+      noise: 0.5,
     },
   },
   sunset: {
@@ -34,7 +34,7 @@ let config: Config = {
           colour: [254, 207, 199],
           maxOpacity: 0.7,
           proportion: 0.7,
-          mutationSpeed: 1,
+          mutationSpeed: 0.5,
           xStretch: 0.7,
           yStretch: 0.5,
         },
@@ -42,7 +42,7 @@ let config: Config = {
           colour: [253, 227, 228],
           maxOpacity: 0.5,
           proportion: 0.7,
-          mutationSpeed: 1,
+          mutationSpeed: 0.5,
           xStretch: 0.6,
           yStretch: 0.3,
         },
@@ -349,11 +349,12 @@ function collectSky() {
   config.sky.properties.opacity = parseFloat(
     (<HTMLInputElement>document.getElementById("skyOpacity")).value
   );
-  config.sky.properties.mutationSpeed = parseInt(
+  config.sky.properties.mutationSpeed = parseFloat(
     (<HTMLInputElement>document.getElementById("skyMutationSpeed")).value
   );
   config.sky.properties.mutationStyle = 
     (<HTMLInputElement>document.getElementById("skyMutationStyle")).value
+    console.log(config.sky.properties)
 }
 
 function collectStars() {
@@ -381,7 +382,7 @@ function collectMoon() {
   config.moon.properties.halfMoon = (<HTMLInputElement>(
     document.getElementById("moonHalfMoon")
   )).checked;
-  config.moon.properties.noise = parseInt(
+  config.moon.properties.noise = parseFloat(
     (<HTMLInputElement>document.getElementById("moonNoise")).value
   );
 }
@@ -399,7 +400,7 @@ function collectSunsetLayers() {
       proportion: parseFloat(
         (<HTMLInputElement>layer.children[4].children[0]).value
       ),
-      mutationSpeed: parseInt(
+      mutationSpeed: parseFloat(
         (<HTMLInputElement>layer.children[5].children[0]).value
       ),
       xStretch: parseFloat(
