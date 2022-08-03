@@ -224,14 +224,22 @@ function colourSpread8Dir(
   toPaint: [number, number, Colour][],
 ) {
 
-  colourSpreadBottom(x, y, colour, seen, toPaint);
-  colourSpreadRight(x, y, colour, seen, toPaint);
   colourSpreadTop(x, y, colour, seen, toPaint);
+  colourSpreadTopRight(x, y, colour, seen, toPaint);
+  colourSpreadRight(x, y, colour, seen, toPaint);
+  colourSpreadBottom(x, y, colour, seen, toPaint);
   colourSpreadLeft(x, y, colour, seen, toPaint);
   colourSpreadTopLeft(x, y, colour, seen, toPaint);
   colourSpreadBottomLeft(x, y, colour, seen, toPaint);
-  colourSpreadTopRight(x, y, colour, seen, toPaint);
   colourSpreadBottomRight(x, y, colour, seen, toPaint);
+  // colourSpreadBottom(x, y, colour, seen, toPaint);
+  // colourSpreadRight(x, y, colour, seen, toPaint);
+  // colourSpreadTop(x, y, colour, seen, toPaint);
+  // colourSpreadLeft(x, y, colour, seen, toPaint);
+  // colourSpreadTopLeft(x, y, colour, seen, toPaint);
+  // colourSpreadBottomLeft(x, y, colour, seen, toPaint);
+  // colourSpreadTopRight(x, y, colour, seen, toPaint);
+  // colourSpreadBottomRight(x, y, colour, seen, toPaint);
 }
 
 
@@ -243,6 +251,8 @@ function colourSpread(grid: Grid, skyConfig: SkyConfig) {
   let seen = new MyTupleSet();
   let toPaint: [number, number, Colour][] = [];
 
+  let mutationSpeed = skyConfig.properties.mutationSpeed;
+
   let startColour: Colour = [
     ...skyConfig.properties.colour,
     skyConfig.properties.opacity,
@@ -253,7 +263,7 @@ function colourSpread(grid: Grid, skyConfig: SkyConfig) {
   seen.add(start);
 
   let x, y, colour;
-  while (toPaint.length > 0) {
+  for (let i = 0; i < w * h; i++) {
     [x, y, colour] = nextPixel(toPaint);
     grid.get(y).set(x, [
       {
@@ -262,7 +272,48 @@ function colourSpread(grid: Grid, skyConfig: SkyConfig) {
       },
     ]);
 
-    colour = mutateColour(colour, skyConfig.properties.mutationSpeed);
+    colour = mutateColour(colour, mutationSpeed);
+    colourSpread8Dir(
+      x,
+      y,
+      colour,
+      seen,
+      toPaint,
+    );
+  }
+}
+
+/*
+ * Picks a random starting pixel, and adds its 8 neighbours to the queue from 
+ * a pixel is popped each iteration.
+ */
+function colourSpread2(grid: Grid, skyConfig: SkyConfig) {
+  let seen = new MyTupleSet();
+  let toPaint: [number, number, Colour][] = [];
+
+  let mutationSpeed = skyConfig.properties.mutationSpeed;
+
+  let startColour: Colour = [
+    ...skyConfig.properties.colour,
+    skyConfig.properties.opacity,
+  ];
+
+  let start: [number, number] = [randInt(0, w - 1), randInt(0, h - 1)];
+  toPaint.push([start[0], start[1], startColour]);
+  seen.add(start);
+
+  let x, y, colour;
+  for (let i = 0; i < w * h; i++) {
+    [x, y, colour] = toPaint.pop();
+
+    grid.get(y).set(x, [
+      {
+        type: "sky",
+        colour: colour,
+      },
+    ]);
+
+    colour = mutateColour(colour, mutationSpeed);
     colourSpread8Dir(
       x,
       y,
@@ -291,7 +342,9 @@ function colourRandom(grid: Grid, skyConfig: SkyConfig) {
     skyConfig.properties.opacity,
   ];
 
-  while (pixels.length > 0) {
+  let mutationSpeed = skyConfig.properties.mutationSpeed;
+
+  for (let i = 0; i < w*h; i++) {
     let [x, y] = pixels.pop();
     grid.get(y).set(x, [
       {
@@ -299,7 +352,7 @@ function colourRandom(grid: Grid, skyConfig: SkyConfig) {
         colour: colour,
       },
     ]);
-    colour = mutateColour(colour, skyConfig.properties.mutationSpeed)
+    colour = mutateColour(colour, mutationSpeed)
   }
 }
 
@@ -318,7 +371,7 @@ type Pixel = {
 function colourSky(grid: Grid, skyConfig: SkyConfig) {
   let mutationStyle = skyConfig.properties.mutationStyle;
   if (mutationStyle == 'Colour spread') {
-    colourSpread(grid, skyConfig);
+    colourSpread2(grid, skyConfig);
   } else if (mutationStyle == 'Random') {
     colourRandom(grid, skyConfig);
   }
