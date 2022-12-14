@@ -1,9 +1,9 @@
 # Digital Sky
 A configurable random sky image generator.
 
-To run locally, compile all <code>.ts</code> files in <code>/src</code> and then open <code>index.html</code> in a browser.
+Hosted at: https://tom-draper.github.io/digital-sky
 
-Hosted at: https://tom-draper.github.io/digital-sky/
+To run locally, run `tsc` to compile all `.ts` files and then open `index.html` in a browser.
 
 ## Gallary
 
