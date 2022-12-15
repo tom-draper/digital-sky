@@ -1075,7 +1075,7 @@ let h: number;
 
 function runSkyGeneration() {
   let start = Date.now();
-
+  
   w = config.sky.properties.width;
   h = config.sky.properties.height;
 

@@ -11,7 +11,7 @@ function defaultSky(colour: [number, number, number]) {
       pixelSize: 1,
       colour: colour,
       mutationSpeed: 1,
-      mutationStyle: '8 Directions',
+      mutationStyle: 'Colour spread',
       opacity: 1,
     },
   };
@@ -751,4 +751,104 @@ let presetCloudy = {
   moon: none,
   sunset: none,
   clouds: cloudsCloudy,
+};
+
+let presetSunset2: Config = {
+  sky: {
+    properties: {
+      height: 720,
+      width: 1280,
+      pixelSize: 1,
+      colour: [
+        98,
+        119,
+        158
+      ],
+      opacity: 1,
+      mutationSpeed: 0.3,
+      mutationStyle: "Colour spread"
+    }
+  },
+  stars: none,
+  moon: none,
+  sunset: {
+    include: true,
+    properties: {
+      layers: [
+        {
+          colour: [
+            144,
+            152,
+            171
+          ],
+          maxOpacity: 0.7,
+          proportion: 0.7,
+          mutationSpeed: 0.2,
+          xStretch: 0.8,
+          yStretch: 0.3
+        },
+        {
+          colour: [
+            220,
+            217,
+            222
+          ],
+          maxOpacity: 1,
+          proportion: 0.6,
+          mutationSpeed: 0.2,
+          xStretch: 0.9,
+          yStretch: 0.3
+        },
+        {
+          colour: [
+            233,
+            212,
+            193
+          ],
+          maxOpacity: 0.8,
+          proportion: 0.5,
+          mutationSpeed: 0.2,
+          xStretch: 0.9,
+          yStretch: 0.3
+        },
+        {
+          colour: [
+            225,
+            161,
+            117
+          ],
+          maxOpacity: 0.8,
+          proportion: 0.4,
+          mutationSpeed: 0.2,
+          xStretch: 1,
+          yStretch: 0.3
+        },
+        {
+          colour: [
+            190,
+            140,
+            111
+          ],
+          maxOpacity: 0.9,
+          proportion: 0.2,
+          mutationSpeed: 0.2,
+          xStretch: 1,
+          yStretch: 0.2
+        },
+        {
+          colour: [
+            220,
+            130,
+            101
+          ],
+          maxOpacity: 0.9,
+          proportion: 0.15,
+          mutationSpeed: 0.2,
+          xStretch: 1,
+          yStretch: 0.2
+        },
+      ]
+    }
+  },
+  clouds: none,
 };
