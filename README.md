@@ -7,6 +7,8 @@ To run locally, run `tsc` to compile all `.ts` files and then open `index.html` 
 
 ## Gallary
 
+![Sky 10](https://user-images.githubusercontent.com/41476809/207963824-12030d7a-7dba-42b2-95a1-15dc4448f824.png)
+
 ![sky 1](https://user-images.githubusercontent.com/41476809/162277455-fc3d8eb8-a651-4806-a110-12314f6fa3ea.png)
 
 ![sky 2](https://user-images.githubusercontent.com/41476809/168876786-bfa8969b-ed12-4f4f-bffa-da3983b3ce5d.png)
@@ -24,5 +26,3 @@ To run locally, run `tsc` to compile all `.ts` files and then open `index.html` 
 ![sky 8)](https://user-images.githubusercontent.com/41476809/182721474-79caf7d5-8ea9-4ff7-b6a1-da720fa67ca3.png)
 
 ![sky 9](https://user-images.githubusercontent.com/41476809/182638556-ad0e804a-f59d-457d-ad53-1b8e67129723.png)
-
-![Sky 10](https://user-images.githubusercontent.com/41476809/207963824-12030d7a-7dba-42b2-95a1-15dc4448f824.png)
