@@ -5,7 +5,7 @@ Hosted at: https://tom-draper.github.io/digital-sky
 
 To run locally, run `tsc` to compile all `.ts` files and then open `index.html` in a browser.
 
-## Gallary
+## Gallary ✨
 
 ![Sky 10](https://user-images.githubusercontent.com/41476809/207963824-12030d7a-7dba-42b2-95a1-15dc4448f824.png)
 
