@@ -3,7 +3,7 @@ A configurable, stochastic sky image generator.
 
 Hosted at: https://tom-draper.github.io/digital-sky
 
-To run locally, run `tsc` to compile all `.ts` files and then open `index.html` in a browser.
+To run locally, run `npm install` to install dependencies, then `npm run build` to compile, then open `index.html` in a browser.
 
 ## Gallary ✨
 

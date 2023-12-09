@@ -11,7 +11,7 @@ function randomSkyColourDay(): [number, number, number] {
 
 function randomSkyColour(): [number, number, number] {
   let colour: [number, number, number];
-  let pNight = 0.3;
+  const pNight = 0.3;
   if (Math.random() < pNight) {
     colour = randomSkyColourNight();
   } else {
@@ -20,14 +20,14 @@ function randomSkyColour(): [number, number, number] {
   return colour;
 }
 
-let res720 = [1280, 720];
-let res1080 = [1920, 1080];
+const res720 = [1280, 720];
+const res1080 = [1920, 1080];
 
 function generateSky(): SkyConfig {
-  let colour: [number, number, number] = randomSkyColour();
-  let mutationSpeed = randInt(1, 5);
+  const colour: [number, number, number] = randomSkyColour();
+  const mutationSpeed = randInt(1, 5);
 
-  let sky = {
+  const sky = {
     properties: {
       height: res720[1],
       width: res720[0],
@@ -48,8 +48,8 @@ function colourSum(colour: number[]): number {
 
 function generateStars(skyColour: number[]): StarsConfig {
   let stars: StarsConfig;
-  let p = 0.6;
-  let threshold = 120;
+  const p = 0.6;
+  const threshold = 120;
 
   if (Math.random() < p && colourSum(skyColour) < threshold) {
     stars = {
@@ -75,12 +75,12 @@ function randomMoonColour(): [number, number, number] {
 
 function generateMoon(skyColour: number[]): MoonConfig {
   let moon: MoonConfig;
-  let p = 0.5;
-  let threshold = 120;
-  let colour = randomMoonColour();
-  let radius = randInt(20, 60);
-  let halfMoon = Math.random() >= 0.5;
-  let noise = randInt(1, 5);
+  const p = 0.5;
+  const threshold = 120;
+  const colour = randomMoonColour();
+  const radius = randInt(20, 60);
+  const halfMoon = Math.random() >= 0.5;
+  const noise = randInt(1, 5);
 
   if (Math.random() < p && colourSum(skyColour) < threshold) {
     moon = {
@@ -111,10 +111,10 @@ function randFloat(min: number, max: number): number {
 }
 
 function generateSunsetLayers(): SunsetLayer[] {
-  let sunsetLayers: SunsetLayer[] = [];
-  let n = randInt(1, 10);
+  const sunsetLayers: SunsetLayer[] = [];
+  const n = randInt(1, 10);
   for (let i = 0; i < n; i++) {
-    let layer: SunsetLayer = {
+    const layer: SunsetLayer = {
       colour: randomSunsetColour(),
       maxOpacity: randFloat(0.2, 1),
       proportion: randFloat(0.2, 1),
@@ -129,10 +129,10 @@ function generateSunsetLayers(): SunsetLayer[] {
 
 function generateSunset(): SunsetConfig {
   let sunset: SunsetConfig;
-  let p = 1;
+  const p = 1;
 
   if (Math.random() < p) {
-    let sunsetLayers = generateSunsetLayers();
+    const sunsetLayers = generateSunsetLayers();
 
     sunset = {
       include: true,
@@ -155,10 +155,10 @@ function randomCloudColour(): [number, number, number] {
 }
 
 function generateCloudLayers(): CloudLayer[] {
-  let cloudLayers: CloudLayer[] = [];
-  let n = randInt(1, 25);
+  const cloudLayers: CloudLayer[] = [];
+  const n = randInt(1, 25);
   for (let i = 0; i < n; i++) {
-    let layer: CloudLayer = {
+    const layer: CloudLayer = {
       colour: randomCloudColour(),
       opacity: randFloat(0.05, 0.5),
       minSize: randInt(500, 1000),
@@ -173,7 +173,7 @@ function generateCloudLayers(): CloudLayer[] {
 
 function generateClouds(): CloudsConfig {
   let clouds: CloudsConfig;
-  let p = 1;
+  const p = 1;
 
   if (Math.random() < p) {
     clouds = {
@@ -193,13 +193,13 @@ function generateClouds(): CloudsConfig {
 }
 
 function generateConfig(): Config {
-  let sky = generateSky();
-  let stars = generateStars(sky.properties.colour);
-  let moon = generateMoon(sky.properties.colour);
-  let sunset = generateSunset();
-  let clouds = generateClouds();
+  const sky = generateSky();
+  const stars = generateStars(sky.properties.colour);
+  const moon = generateMoon(sky.properties.colour);
+  const sunset = generateSunset();
+  const clouds = generateClouds();
 
-  let config = {
+  const config = {
     sky: sky,
     stars: stars,
     moon: moon,

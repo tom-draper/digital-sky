@@ -1,4 +1,4 @@
-class MyTupleSet {
+class TupleSet {
   private data: Map<number, Set<number>>;
   private count: number;
 
@@ -40,7 +40,7 @@ class MyTupleSet {
 }
 
 function createGrid2(h: number, w: number): any[][] {
-  let grid = [...Array(h)].map((e) => Array(w));
+  const grid = [...Array(h)].map((e) => Array(w));
   return grid;
 }
 
@@ -56,7 +56,7 @@ type Colour = [number, number, number, number];
 
 function mutateColour(colour: Colour, p: number, step: number = 1): Colour {
   if (Math.random() < p) {
-    let mutatedColour = Object.values(colour) as Colour;
+    const mutatedColour = Object.values(colour) as Colour;
     switch (randInt(0, 5)) {
       case 0:
         mutatedColour[0] = Math.min(colour[0] + step, 255);
@@ -113,7 +113,7 @@ function colourSpreadBottom(
   x: number,
   y: number,
   colour: Colour,
-  seen: MyTupleSet,
+  seen: TupleSet,
   toPaint: [number, number, Colour][],
 ) {
   if (y < h - 1 && !seen.has([x, y + 1])) {
@@ -126,7 +126,7 @@ function colourSpreadRight(
   x: number,
   y: number,
   colour: Colour,
-  seen: MyTupleSet,
+  seen: TupleSet,
   toPaint: [number, number, Colour][],
 ) {
   if (x < w - 1 && !seen.has([x + 1, y])) {
@@ -139,7 +139,7 @@ function colourSpreadTop(
   x: number,
   y: number,
   colour: Colour,
-  seen: MyTupleSet,
+  seen: TupleSet,
   toPaint: [number, number, Colour][],
 ) {
   if (y > 0 && !seen.has([x, y - 1])) {
@@ -152,7 +152,7 @@ function colourSpreadLeft(
   x: number,
   y: number,
   colour: Colour,
-  seen: MyTupleSet,
+  seen: TupleSet,
   toPaint: [number, number, Colour][],
 ) {
   if (x > 0 && !seen.has([x - 1, y])) {
@@ -165,7 +165,7 @@ function colourSpreadTopLeft(
   x: number,
   y: number,
   colour: Colour,
-  seen: MyTupleSet,
+  seen: TupleSet,
   toPaint: [number, number, Colour][],
 ) {
   if (x > 0 && y > 0 && !seen.has([x - 1, y - 1])) {
@@ -178,7 +178,7 @@ function colourSpreadBottomLeft(
   x: number,
   y: number,
   colour: Colour,
-  seen: MyTupleSet,
+  seen: TupleSet,
   toPaint: [number, number, Colour][],
 ) {
   if (x > 0 && y < h - 1 && !seen.has([x - 1, y + 1])) {
@@ -191,7 +191,7 @@ function colourSpreadTopRight(
   x: number,
   y: number,
   colour: Colour,
-  seen: MyTupleSet,
+  seen: TupleSet,
   toPaint: [number, number, Colour][],
 ) {
   if (x < w - 1 && y > 0 && !seen.has([x + 1, y - 1])) {
@@ -204,7 +204,7 @@ function colourSpreadBottomRight(
   x: number,
   y: number,
   colour: Colour,
-  seen: MyTupleSet,
+  seen: TupleSet,
   toPaint: [number, number, Colour][],
 ) {
   if (x < w - 1 && y < h - 1 && !seen.has([x + 1, y + 1])) {
@@ -220,7 +220,7 @@ function colourSpread8Dir(
   x: number,
   y: number,
   colour: Colour,
-  seen: MyTupleSet,
+  seen: TupleSet,
   toPaint: [number, number, Colour][],
 ) {
   colourSpreadBottom(x, y, colour, seen, toPaint);
@@ -237,7 +237,7 @@ function colourSpread4Dir(
   x: number,
   y: number,
   colour: Colour,
-  seen: MyTupleSet,
+  seen: TupleSet,
   toPaint: [number, number, Colour][],
 ) {
   colourSpreadBottom(x, y, colour, seen, toPaint);
@@ -251,17 +251,17 @@ function colourSpread4Dir(
  * to be randomly selected next iteration whilst mutating the brush colour each iteration.
  */
 function colourSpread(grid: Grid, skyConfig: SkyConfig) {
-  let seen = new MyTupleSet();
-  let toPaint: [number, number, Colour][] = [];
+  const seen = new TupleSet();
+  const toPaint: [number, number, Colour][] = [];
 
-  let mutationSpeed = skyConfig.properties.mutationSpeed;
+  const mutationSpeed = skyConfig.properties.mutationSpeed;
 
-  let startColour: Colour = [
+  const startColour: Colour = [
     ...skyConfig.properties.colour,
     skyConfig.properties.opacity,
   ];
 
-  let start: [number, number] = [randInt(0, w - 1), randInt(0, h - 1)];
+  const start: [number, number] = [randInt(0, w - 1), randInt(0, h - 1)];
   toPaint.push([start[0], start[1], startColour]);
   seen.add(start);
 
@@ -290,22 +290,22 @@ function colourSpread(grid: Grid, skyConfig: SkyConfig) {
  * to be randomly selected next iteration whilst mutating the brush colour each iteration.
  */
 function colourPointSpreadWavy(grid: Grid, skyConfig: SkyConfig) {
-  let seen = new MyTupleSet();
-  let toPaint: [number, number, Colour][] = [];
+  const seen = new TupleSet();
+  const toPaint: [number, number, Colour][] = [];
 
-  let mutationSpeed = skyConfig.properties.mutationSpeed;
+  const mutationSpeed = skyConfig.properties.mutationSpeed;
 
   let colour: Colour = [
     ...skyConfig.properties.colour,
     skyConfig.properties.opacity,
   ];
 
-  let start: [number, number] = [randInt(0, w - 1), randInt(0, h - 1)];
+  const start: [number, number] = [randInt(0, w - 1), randInt(0, h - 1)];
   toPaint.push([start[0], start[1], colour]);
   seen.add(start);
 
   for (let i = 0; i < w * h; i++) {
-    let [x, y, _] = nextPixel(toPaint);
+    const [x, y, _] = nextPixel(toPaint);
     colour = mutateColour(colour, mutationSpeed)
     grid.get(y).set(x, [
       {
@@ -331,7 +331,7 @@ function nextClosestPixel(
   let idx = 0;
   let d = Number.POSITIVE_INFINITY
   for (let i = 0; i < toPaint.length; i++) {
-    let dist = distance(toPaint[i][0], toPaint[i][1], centre[0], centre[1]);
+    const dist = distance(toPaint[i][0], toPaint[i][1], centre[0], centre[1]);
     if (dist < d) {
       d = dist;
       idx = i;
@@ -342,7 +342,7 @@ function nextClosestPixel(
   Achieved by moving random element to the end and using .pop() -> for 720p 
   image, found to be 10X faster than Array.splice on the random index. */
   [toPaint[idx], toPaint[toPaint.length - 1]] = [toPaint[toPaint.length - 1], toPaint[idx]]
-  let next = toPaint.pop();
+  const next = toPaint.pop();
   return next;
 }
 
@@ -351,22 +351,22 @@ function nextClosestPixel(
  * to be selected next iteration. The closest pixel to the starting point is selected next.
  */
 function colourPointSpread(grid: Grid, skyConfig: SkyConfig) {
-  let seen = new MyTupleSet();
-  let toPaint: [number, number, null][] = [];
+  const seen = new TupleSet();
+  const toPaint: [number, number, null][] = [];
 
-  let mutationSpeed = skyConfig.properties.mutationSpeed;
+  const mutationSpeed = skyConfig.properties.mutationSpeed;
 
   let colour: Colour = [
     ...skyConfig.properties.colour,
     skyConfig.properties.opacity,
   ];
 
-  let start: [number, number] = [randInt(0, w - 1), randInt(0, h - 1)];
+  const start: [number, number] = [randInt(0, w - 1), randInt(0, h - 1)];
   toPaint.push([start[0], start[1], null]);
   seen.add(start);
 
   for (let i = 0; i < w * h; i++) {
-    let [x, y, _] = nextClosestPixel(toPaint, start);
+    const [x, y, _] = nextClosestPixel(toPaint, start);
     colour = mutateColour(colour, mutationSpeed);
     grid.get(y).set(x, [
       {
@@ -390,17 +390,17 @@ function colourPointSpread(grid: Grid, skyConfig: SkyConfig) {
  * a pixel is popped each iteration.
 */
 function colourSpreadQueue(grid: Grid, skyConfig: SkyConfig, colourSpreadFunc: Function) {
-  let seen = new MyTupleSet();
-  let toPaint: [number, number, Colour][] = [];
+  const seen = new TupleSet();
+  const toPaint: [number, number, Colour][] = [];
 
-  let mutationSpeed = skyConfig.properties.mutationSpeed;
+  const mutationSpeed = skyConfig.properties.mutationSpeed;
 
-  let startColour: Colour = [
+  const startColour: Colour = [
     ...skyConfig.properties.colour,
     skyConfig.properties.opacity,
   ];
 
-  let start: [number, number] = [randInt(0, w - 1), randInt(0, h - 1)];
+  const start: [number, number] = [randInt(0, w - 1), randInt(0, h - 1)];
   toPaint.push([start[0], start[1], startColour]);
   seen.add(start);
 
@@ -430,7 +430,7 @@ function colourSpreadQueue(grid: Grid, skyConfig: SkyConfig, colourSpreadFunc: F
  * to creates a noise effect.
  */
 function colourRandom(grid: Grid, skyConfig: SkyConfig) {
-  let pixels = [];
+  const pixels = [];
   for (let y = 0; y < h; y++) {
     for (let x = 0; x < w; x++) {
       pixels.push([x, y])
@@ -443,10 +443,10 @@ function colourRandom(grid: Grid, skyConfig: SkyConfig) {
     skyConfig.properties.opacity,
   ];
 
-  let mutationSpeed = skyConfig.properties.mutationSpeed;
+  const mutationSpeed = skyConfig.properties.mutationSpeed;
 
   for (let i = 0; i < w * h; i++) {
-    let [x, y] = pixels.pop();
+    const [x, y] = pixels.pop();
     grid.get(y).set(x, [
       {
         type: "sky",
@@ -473,7 +473,7 @@ function colourHorizontal(
   x: number,
   y: number,
   colour: Colour,
-  seen: MyTupleSet,
+  seen: TupleSet,
   toPaint: [number, number, Colour][],
 ) {
   colourSpreadTop(x, y, colour, seen, toPaint);
@@ -486,7 +486,7 @@ function colourDiagonal(
   x: number,
   y: number,
   colour: Colour,
-  seen: MyTupleSet,
+  seen: TupleSet,
   toPaint: [number, number, Colour][],
 ) {
   colourSpreadBottom(x, y, colour, seen, toPaint);
@@ -503,7 +503,7 @@ function colourVertical(
   x: number,
   y: number,
   colour: Colour,
-  seen: MyTupleSet,
+  seen: TupleSet,
   toPaint: [number, number, Colour][],
 ) {
   colourSpreadLeft(x, y, colour, seen, toPaint);
@@ -513,7 +513,7 @@ function colourVertical(
 }
 
 function colourSky(grid: Grid, skyConfig: SkyConfig) {
-  let mutationStyle = skyConfig.properties.mutationStyle;
+  const mutationStyle = skyConfig.properties.mutationStyle;
   if (mutationStyle == 'Colour spread') {
     colourSpread(grid, skyConfig);
   } else if (mutationStyle == 'Random') {
@@ -551,7 +551,7 @@ function cloudsSpread(
   x: number,
   y: number,
   colour: Colour,
-  seen: MyTupleSet,
+  seen: TupleSet,
   toPaint: [number, number, Colour][],
   cloudSize: number,
   sizeRange: [number, number],
@@ -589,7 +589,7 @@ function cloudsSpread(
 }
 
 function createCloudPixel(colour: Colour) {
-  let cloudPixel = document.createElement("div");
+  const cloudPixel = document.createElement("div");
   cloudPixel.className = "pixel cloud";
   cloudPixel.style.background = formatColour(...colour);
   return cloudPixel;
@@ -603,7 +603,7 @@ function nextPixel(
   image, found to be 10X faster than Array.splice on the random index. */
   const idx = Math.floor(Math.random() * toPaint.length);
   [toPaint[idx], toPaint[toPaint.length - 1]] = [toPaint[toPaint.length - 1], toPaint[idx]]
-  let next = toPaint.pop();
+  const next = toPaint.pop();
   return next;
 }
 
@@ -614,7 +614,7 @@ function addCloudToSky(
   colour: Colour,
   layer: number
 ) {
-  let [hasCloud, idx] = pixelHasType(grid.get(y).get(x), "cloud" + layer);
+  const [hasCloud, idx] = pixelHasType(grid.get(y).get(x), "cloud" + layer);
   if (hasCloud) {
     grid.get(y).get(x)[idx].colour = combineColours(colour, grid.get(y).get(x)[idx].colour);
   } else {
@@ -629,19 +629,19 @@ function createCloudBase(
   pH: number,
   pV: number
 ): [number, number] {
-  let seen = new MyTupleSet();
-  let toPaint: [number, number, Colour][] = [];
+  const seen = new TupleSet();
+  const toPaint: [number, number, Colour][] = [];
 
-  let start: [number, number] = [randInt(0, w - 1), randInt(0, h - 1)];
+  const start: [number, number] = [randInt(0, w - 1), randInt(0, h - 1)];
   toPaint.push([start[0], start[1], startColour]);
   seen.add(start);
 
   let cloudSize = 1;
   while (toPaint.length > 0) {
-    let [x, y, colour] = nextPixel(toPaint);
+    const [x, y, colour] = nextPixel(toPaint);
     addCloudToSky(grid, x, y, colour, 0);
 
-    let nextColour = mutateColour(colour, 0.9);
+    const nextColour = mutateColour(colour, 0.9);
     cloudSize = cloudsSpread(
       x,
       y,
@@ -676,18 +676,18 @@ function addCloudLayer(
   pH: number,
   pV: number
 ) {
-  let seen = new MyTupleSet();
-  let toPaint: [number, number, Colour][] = [];
+  const seen = new TupleSet();
+  const toPaint: [number, number, Colour][] = [];
 
   toPaint.push([start[0], start[1], startColour]);
   seen.add(start);
 
   let currentSize = 1;
   while (toPaint.length > 0) {
-    let [x, y, colour] = nextPixel(toPaint);
+    const [x, y, colour] = nextPixel(toPaint);
     addCloudToSky(grid, x, y, colour, layer);
 
-    let nextColour = mutateColour(colour, 0.9);
+    const nextColour = mutateColour(colour, 0.9);
     currentSize = cloudsSpread(
       x,
       y,
@@ -703,7 +703,7 @@ function addCloudLayer(
 }
 
 function createCloud(grid: Grid, layers: CloudLayer[]) {
-  let start = createCloudBase(
+  const start = createCloudBase(
     grid,
     [...layers[0].colour, layers[0].opacity],
     [layers[0].minSize, layers[0].maxSize],
@@ -731,7 +731,7 @@ function createClouds(grid: Grid, cloudConfig: CloudsConfig) {
 }
 
 function createStarPixel(colour: Colour): HTMLDivElement {
-  let starPixel = document.createElement("div");
+  const starPixel = document.createElement("div");
   starPixel.className = "pixel star";
   starPixel.style.background = formatColour(...colour);
   return starPixel;
@@ -746,12 +746,12 @@ function starColour(opacity: number): Colour {
 }
 
 function createStar(x: number, y: number, grid: Grid, opacity: number) {
-  let colour = starColour(opacity);
+  const colour = starColour(opacity);
 
   grid.get(y).get(x).push({ type: "star", colour: colour } as Pixel);
 
   // Probabilistically add additional neighbouring star pixels
-  let p = 0.1;
+  const p = 0.1;
   [
     [x + 1, y],
     [x, y + 1],
@@ -765,23 +765,23 @@ function createStar(x: number, y: number, grid: Grid, opacity: number) {
 }
 
 function createStars(grid: Grid, starsConfig: StarsConfig) {
-  let n = h * w * starsConfig.properties.density;
+  const n = h * w * starsConfig.properties.density;
   for (let i = 0; i < n; i++) {
-    let x = randInt(0, w - 1);
-    let y = randInt(0, h - 1);
+    const x = randInt(0, w - 1);
+    const y = randInt(0, h - 1);
     createStar(x, y, grid, starsConfig.properties.opacity);
   }
 }
 
 function createSunsetPixel(colour: Colour): HTMLDivElement {
-  let sunsetPixel = document.createElement("div");
+  const sunsetPixel = document.createElement("div");
   sunsetPixel.className = "pixel sunset";
   sunsetPixel.style.background = formatColour(...colour);
   return sunsetPixel;
 }
 
 function getRGBValues(str: string): [number, number, number] {
-  let vals = str.substring(str.indexOf("(") + 1, str.length - 1).split(", ");
+  const vals = str.substring(str.indexOf("(") + 1, str.length - 1).split(", ");
   return [parseInt(vals[0]), parseInt(vals[1]), parseInt(vals[2])];
 }
 
@@ -790,7 +790,7 @@ function sunsetSpread(
   y: number,
   colour: Colour,
   toPaint: [number, number, Colour][],
-  seen: any,
+  seen: TupleSet,
 ) {
 
   colourSpreadBottom(x, y, colour, seen, toPaint)
@@ -807,16 +807,16 @@ function warpedDistance(
   xStretch: number,
   yStretch: number
 ): number {
-  let x = (y2 - y1) * (1 - yStretch);
-  let y = (x2 - x1) * (1 - xStretch);
+  const x = (y2 - y1) * (1 - yStretch);
+  const y = (x2 - x1) * (1 - xStretch);
   return Math.sqrt(x * x + y * y);
 }
 
 function combineColours(colour1: Colour, colour2: Colour): Colour {
-  let a1 = colour1[3];
-  let a2 = colour2[3];
-  let a = a1 + a2 * (1 - a1);
-  let colour: Colour = [
+  const a1 = colour1[3];
+  const a2 = colour2[3];
+  const a = a1 + a2 * (1 - a1);
+  const colour: Colour = [
     (colour1[0] * a1 + colour2[0] * a2 * (1 - a1)) / a,
     (colour1[1] * a1 + colour2[1] * a2 * (1 - a1)) / a,
     (colour1[2] * a1 + colour2[2] * a2 * (1 - a1)) / a,
@@ -831,7 +831,7 @@ function addSunsetToSky(
   y: number,
   colour: Colour
 ) {
-  let [hasSunset, idx] = pixelHasType(grid.get(y).get(x), "sunset");
+  const [hasSunset, idx] = pixelHasType(grid.get(y).get(x), "sunset");
   if (hasSunset) {
     grid.get(y).get(x)[idx].colour = combineColours(colour, grid.get(y).get(x)[idx].colour);
   } else {
@@ -842,8 +842,8 @@ function addSunsetToSky(
 function createSunsetLayer(grid: Grid, layerConfig: SunsetLayer) {
   const maxD = h * layerConfig.proportion;
 
-  let seen = new MyTupleSet();
-  let toPaint: [number, number, Colour][] = [];
+  const seen = new TupleSet();
+  const toPaint: [number, number, Colour][] = [];
 
   const start: [number, number] = [randInt(0, w - 1), h - 1];
   toPaint.push([start[0], start[1], [...layerConfig.colour, 1]]);
@@ -893,7 +893,7 @@ function distance(x1: number, y1: number, x2: number, y2: number): number {
 }
 
 function createMoonPixel(colour: Colour): HTMLDivElement {
-  let moonPixel = document.createElement("div");
+  const moonPixel = document.createElement("div");
   moonPixel.className = "pixel moon";
   moonPixel.style.background = formatColour(...colour);
   return moonPixel;
@@ -960,7 +960,7 @@ function createMoon(grid: Grid, moonConfig: MoonConfig) {
     randInt(border, h - 1 - border),
   ];
 
-  let toPaint: [number, number][] = [];
+  const toPaint: [number, number][] = [];
   for (let y = start[1] - r; y < start[1] + r; y++) {
     for (let x = start[0] - r; x < start[0] + r; x++) {
       if (distance(x, y, start[0], start[1]) < r && onSky(x, y)) {
@@ -979,7 +979,7 @@ function createMoon(grid: Grid, moonConfig: MoonConfig) {
 type Grid = Map<number, Map<number, Pixel[]>>
 
 function createGrid(h: number, w: number): Grid {
-  let grid: any = new Map();
+  const grid: any = new Map();
   for (let i = 0; i < h; i++) {
     grid.set(i, new Map());
   }
@@ -995,7 +995,7 @@ function updateProgress(text: string) {
 }
 
 function createSky(config: Config): Promise<Grid> {
-  let grid = createGrid(h, w);
+  const grid = createGrid(h, w);
 
   return new Promise(function (res, err) {
     console.log("Colouring sky...");
@@ -1044,16 +1044,16 @@ type Canvas = HTMLCanvasElement & {
 };
 
 function getCanvasContext(): CanvasRenderingContext2D {
-  let canvas: Canvas = document.getElementById("canvas") as Canvas;
+  const canvas: Canvas = document.getElementById("canvas") as Canvas;
   canvas.width = w;
   canvas.height = h;
-  let context = canvas.getContext("2d");
+  const context = canvas.getContext("2d");
   return context;
 }
 
 function buildCanvas(grid: Grid) {
-  let context = getCanvasContext();
-  let imageData = context.createImageData(w, h);
+  const context = getCanvasContext();
+  const imageData = context.createImageData(w, h);
   for (let y = 0; y < h; y++) {
     for (let x = 0; x < w; x++) {
       // Index 1D array as 2D array with a step of 4 (for rgba elements)
@@ -1074,7 +1074,7 @@ let w: number;
 let h: number;
 
 function runSkyGeneration() {
-  let start = Date.now();
+  const start = Date.now();
   
   w = config.sky.properties.width;
   h = config.sky.properties.height;
@@ -1082,7 +1082,7 @@ function runSkyGeneration() {
   createSky(config).then(grid => {
     buildCanvas(grid);
 
-    let end = Date.now();
+    const end = Date.now();
     console.log(`Completed in ${end - start}ms`);
   })
 }

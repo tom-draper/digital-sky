@@ -1,4 +1,4 @@
-let config: Config = {
+const config: Config = {
   sky: {
     properties: {
       height: 720,
@@ -108,7 +108,7 @@ let config: Config = {
 };
 
 function componentToHex(c: number) {
-  var hex = c.toString(16);
+  const hex = c.toString(16);
   return hex.length == 1 ? "0" + hex : hex;
 }
 
@@ -117,7 +117,7 @@ function rgbToHex(r: number, g: number, b: number) {
 }
 
 function hexToRGB(hex: string): [number, number, number] {
-  let r = parseInt(hex.slice(1, 3), 16),
+  const r = parseInt(hex.slice(1, 3), 16),
     g = parseInt(hex.slice(3, 5), 16),
     b = parseInt(hex.slice(5, 7), 16);
   return [r, g, b];
@@ -175,17 +175,17 @@ function fillMoonDefault() {
 }
 
 function renameLayers(layersID: string) {
-  let layers = document.getElementById(layersID);
+  const layers = document.getElementById(layersID);
   for (let i = 0; i < layers.children.length; i++) {
     layers.children[i].children[0].textContent = "Layer " + (i + 1);
   }
 }
 
 function createSunsetLayers() {
-  let layers = document.getElementById("sunsetLayers")
+  const layers = document.getElementById("sunsetLayers")
   layers.removeChild(originalSunsetLayer);
   for (let i = 0; i < config.sunset.properties.layers.length; i++) {
-    let layer: any = originalSunsetLayer.cloneNode(true);
+    const layer: any = originalSunsetLayer.cloneNode(true);
     layer.removeAttribute("id");
 
     layer.children[0].textContent = "Layer " + (i + 1);
@@ -215,7 +215,7 @@ function createSunsetLayers() {
 }
 
 function addSunsetLayer() {
-  let layers = document.getElementById("sunsetLayers");
+  const layers = document.getElementById("sunsetLayers");
   let layer: any;
   if (layers.children.length > 0) {
     // Take previous sunset layer as template
@@ -245,7 +245,7 @@ function fillSunsetDefault() {
 function createCloudsLayers() {
   document.getElementById("cloudsLayers").removeChild(originalCloudLayer);
   for (let i = 0; i < config.clouds.properties.layers.length; i++) {
-    let layer: any = originalCloudLayer.cloneNode(true);
+    const layer: any = originalCloudLayer.cloneNode(true);
     layer.removeAttribute("id");
     layer.children[0].textContent = "Layer " + (i + 1);
     layer.children[1].onclick = function () {
@@ -272,7 +272,7 @@ function createCloudsLayers() {
 }
 
 function addCloudsLayer() {
-  let layers = document.getElementById("cloudsLayers");
+  const layers = document.getElementById("cloudsLayers");
   let layer: any;
   if (layers.children.length > 0) {
     // Take previous cloud layer as template
@@ -379,11 +379,11 @@ function collectMoon() {
 }
 
 function collectSunsetLayers() {
-  let layers = document.getElementById("sunsetLayers");
-  let configLayers: SunsetLayer[] = [];
+  const layers = document.getElementById("sunsetLayers");
+  const configLayers: SunsetLayer[] = [];
   for (let i = 0; i < layers.children.length; i++) {
-    let layer = layers.children[i];
-    let configLayer: SunsetLayer = {
+    const layer = layers.children[i];
+    const configLayer: SunsetLayer = {
       colour: hexToRGB((<HTMLInputElement>layer.children[2].children[1]).value),
       maxOpacity: parseFloat(
         (<HTMLInputElement>layer.children[3].children[0]).value
@@ -414,11 +414,11 @@ function collectSunset() {
 }
 
 function collectCloudsLayers() {
-  let layers = document.getElementById("cloudsLayers");
-  let configLayers: CloudLayer[] = [];
+  const layers = document.getElementById("cloudsLayers");
+  const configLayers: CloudLayer[] = [];
   for (let i = 0; i < layers.children.length; i++) {
-    let layer = layers.children[i];
-    let configLayer: CloudLayer = {
+    const layer = layers.children[i];
+    const configLayer: CloudLayer = {
       colour: hexToRGB((<HTMLInputElement>layer.children[2].children[1]).value),
       opacity: parseFloat(
         (<HTMLInputElement>layer.children[3].children[0]).value
@@ -474,9 +474,9 @@ function run() {
   }, 500);
 }
 
-let originalSunsetLayer = document.getElementById("sunsetLayer");
+const originalSunsetLayer = document.getElementById("sunsetLayer");
 let sunsetLayerCount = 0;
-let originalCloudLayer = document.getElementById("cloudsLayer");
+const originalCloudLayer = document.getElementById("cloudsLayer");
 let cloudLayerCount = 0;
 
 initDefaults();
