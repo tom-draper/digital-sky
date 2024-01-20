@@ -1,114 +1,117 @@
-let config: Config = {
-  sky: {
-    properties: {
-      height: 720,
-      width: 1280,
-      pixelSize: 1,
-      colour: [94, 122, 187],
-      opacity: 1,
-      mutationSpeed: 0.3,
-      mutationStyle: 'Colour spread'
+function defaultConfig() {
+  const config: Config = {
+    sky: {
+      properties: {
+        height: 720,
+        width: 1280,
+        pixelSize: 1,
+        colour: [94, 122, 187],
+        opacity: 1,
+        mutationSpeed: 0.3,
+        mutationStyle: "Colour spread",
+      },
     },
-  },
-  stars: {
-    include: false,
-    properties: {
-      opacity: 1,
-      density: 0.005,
+    stars: {
+      include: false,
+      properties: {
+        opacity: 1,
+        density: 0.005,
+      },
     },
-  },
-  moon: {
-    include: false,
-    properties: {
-      colour: [200, 200, 200],
-      radius: 25,
-      halfMoon: false,
-      noise: 0.5,
+    moon: {
+      include: false,
+      properties: {
+        colour: [200, 200, 200],
+        radius: 25,
+        halfMoon: false,
+        noise: 0.5,
+      },
     },
-  },
-  sunset: {
-    include: true,
-    properties: {
-      layers: [
-        {
-          colour: [254, 207, 199],
-          maxOpacity: 0.7,
-          proportion: 0.7,
-          mutationSpeed: 0.2,
-          xStretch: 0.7,
-          yStretch: 0.5,
-        },
-        {
-          colour: [253, 227, 228],
-          maxOpacity: 0.5,
-          proportion: 0.7,
-          mutationSpeed: 0.2,
-          xStretch: 0.6,
-          yStretch: 0.3,
-        },
-      ],
+    sunset: {
+      include: true,
+      properties: {
+        layers: [
+          {
+            colour: [254, 207, 199],
+            maxOpacity: 0.7,
+            proportion: 0.7,
+            mutationSpeed: 0.2,
+            xStretch: 0.7,
+            yStretch: 0.5,
+          },
+          {
+            colour: [253, 227, 228],
+            maxOpacity: 0.5,
+            proportion: 0.7,
+            mutationSpeed: 0.2,
+            xStretch: 0.6,
+            yStretch: 0.3,
+          },
+        ],
+      },
     },
-  },
-  clouds: {
-    include: false,
-    properties: {
-      quantity: 6,
-      layers: [
-        {
-          colour: [255, 255, 255],
-          opacity: 0.6,
-          minSize: 1000,
-          maxSize: 65000,
-          pH: 0.72, // Probability of horizontal expansion
-          pV: 0.3, // Probability of vertical expansion
-        },
-        {
-          colour: [245, 245, 245],
-          opacity: 0.6,
-          minSize: 1000,
-          maxSize: 65000,
-          pH: 0.72, // Probability of horizontal expansion
-          pV: 0.3, // Probability of vertical expansion
-        },
-        {
-          colour: [255, 255, 255],
-          opacity: 0.6,
-          minSize: 1000,
-          maxSize: 65000,
-          pH: 0.72, // Probability of horizontal expansion
-          pV: 0.3, // Probability of vertical expansion
-        },
-        {
-          colour: [245, 245, 245],
-          opacity: 0.6,
-          minSize: 1000,
-          maxSize: 65000,
-          pH: 0.72, // Probability of horizontal expansion
-          pV: 0.3, // Probability of vertical expansion
-        },
-        {
-          colour: [225, 225, 225],
-          opacity: 0.5,
-          minSize: 1000,
-          maxSize: 65000,
-          pH: 0.72, // Probability of horizontal expansion
-          pV: 0.3, // Probability of vertical expansion
-        },
-        {
-          colour: [200, 200, 200],
-          opacity: 0.4,
-          minSize: 1000,
-          maxSize: 65000,
-          pH: 0.72, // Probability of horizontal expansion
-          pV: 0.3, // Probability of vertical expansion
-        },
-      ],
+    clouds: {
+      include: false,
+      properties: {
+        quantity: 6,
+        layers: [
+          {
+            colour: [255, 255, 255],
+            opacity: 0.6,
+            minSize: 1000,
+            maxSize: 65000,
+            pH: 0.72, // Probability of horizontal expansion
+            pV: 0.3, // Probability of vertical expansion
+          },
+          {
+            colour: [245, 245, 245],
+            opacity: 0.6,
+            minSize: 1000,
+            maxSize: 65000,
+            pH: 0.72, // Probability of horizontal expansion
+            pV: 0.3, // Probability of vertical expansion
+          },
+          {
+            colour: [255, 255, 255],
+            opacity: 0.6,
+            minSize: 1000,
+            maxSize: 65000,
+            pH: 0.72, // Probability of horizontal expansion
+            pV: 0.3, // Probability of vertical expansion
+          },
+          {
+            colour: [245, 245, 245],
+            opacity: 0.6,
+            minSize: 1000,
+            maxSize: 65000,
+            pH: 0.72, // Probability of horizontal expansion
+            pV: 0.3, // Probability of vertical expansion
+          },
+          {
+            colour: [225, 225, 225],
+            opacity: 0.5,
+            minSize: 1000,
+            maxSize: 65000,
+            pH: 0.72, // Probability of horizontal expansion
+            pV: 0.3, // Probability of vertical expansion
+          },
+          {
+            colour: [200, 200, 200],
+            opacity: 0.4,
+            minSize: 1000,
+            maxSize: 65000,
+            pH: 0.72, // Probability of horizontal expansion
+            pV: 0.3, // Probability of vertical expansion
+          },
+        ],
+      },
     },
-  },
-};
+  };
+  return config;
+}
 
 function componentToHex(c: number) {
-  var hex = c.toString(16);
+  const hex = c.toString(16);
   return hex.length == 1 ? "0" + hex : hex;
 }
 
@@ -117,13 +120,13 @@ function rgbToHex(r: number, g: number, b: number) {
 }
 
 function hexToRGB(hex: string): [number, number, number] {
-  let r = parseInt(hex.slice(1, 3), 16),
+  const r = parseInt(hex.slice(1, 3), 16),
     g = parseInt(hex.slice(3, 5), 16),
     b = parseInt(hex.slice(5, 7), 16);
   return [r, g, b];
 }
 
-function fillSkyDefaults() {
+function initSkyDefaults(config: Config) {
   (<HTMLInputElement>document.getElementById("skyWidth")).value =
     config.sky.properties.width.toString();
   (<HTMLInputElement>document.getElementById("skyHeight")).value =
@@ -141,7 +144,7 @@ function fillSkyDefaults() {
     config.sky.properties.mutationSpeed.toString();
 }
 
-function fillStarsDefault() {
+function initStarsDefaults(config: Config) {
   (<HTMLInputElement>document.getElementById("starsInclude")).checked =
     config.stars.include;
   (<HTMLInputElement>document.getElementById("starsOpacity")).value =
@@ -158,7 +161,7 @@ function toggleProperties(checkboxId: string, propertiesId: string) {
   }
 }
 
-function fillMoonDefault() {
+function initMoonDefaults(config: Config) {
   (<HTMLInputElement>document.getElementById("moonInclude")).checked =
     config.moon.include;
   (<HTMLInputElement>document.getElementById("moonColour")).value = rgbToHex(
@@ -175,17 +178,17 @@ function fillMoonDefault() {
 }
 
 function renameLayers(layersID: string) {
-  let layers = document.getElementById(layersID);
+  const layers = document.getElementById(layersID);
   for (let i = 0; i < layers.children.length; i++) {
     layers.children[i].children[0].textContent = "Layer " + (i + 1);
   }
 }
 
-function createSunsetLayers() {
-  let layers = document.getElementById("sunsetLayers")
+function createSunsetLayers(config: Config) {
+  const layers = document.getElementById("sunsetLayers");
   layers.removeChild(originalSunsetLayer);
   for (let i = 0; i < config.sunset.properties.layers.length; i++) {
-    let layer: any = originalSunsetLayer.cloneNode(true);
+    const layer: any = originalSunsetLayer.cloneNode(true);
     layer.removeAttribute("id");
 
     layer.children[0].textContent = "Layer " + (i + 1);
@@ -215,17 +218,17 @@ function createSunsetLayers() {
 }
 
 function addSunsetLayer() {
-  let layers = document.getElementById("sunsetLayers");
+  const layers = document.getElementById("sunsetLayers");
   let layer: any;
   if (layers.children.length > 0) {
     // Take previous sunset layer as template
-    layer = layers.children[layers.children.length-1].cloneNode(true);
+    layer = layers.children[layers.children.length - 1].cloneNode(true);
   } else {
     // Revert to default template
     layer = originalSunsetLayer.cloneNode(true);
     layer.removeAttribute("id");
   }
-  
+
   sunsetLayerCount += 1;
   layer.children[0].textContent = "Layer " + sunsetLayerCount;
   layer.children[1].onclick = function () {
@@ -236,16 +239,16 @@ function addSunsetLayer() {
   layers.appendChild(layer);
 }
 
-function fillSunsetDefault() {
+function initSunsetDefaults(config: Config) {
   (<HTMLInputElement>document.getElementById("sunsetInclude")).checked =
     config.sunset.include;
-  createSunsetLayers();
+  createSunsetLayers(config);
 }
 
-function createCloudsLayers() {
+function createCloudsLayers(config: Config) {
   document.getElementById("cloudsLayers").removeChild(originalCloudLayer);
   for (let i = 0; i < config.clouds.properties.layers.length; i++) {
-    let layer: any = originalCloudLayer.cloneNode(true);
+    const layer: any = originalCloudLayer.cloneNode(true);
     layer.removeAttribute("id");
     layer.children[0].textContent = "Layer " + (i + 1);
     layer.children[1].onclick = function () {
@@ -272,11 +275,11 @@ function createCloudsLayers() {
 }
 
 function addCloudsLayer() {
-  let layers = document.getElementById("cloudsLayers");
+  const layers = document.getElementById("cloudsLayers");
   let layer: any;
   if (layers.children.length > 0) {
     // Take previous cloud layer as template
-    layer = layers.children[layers.children.length-1].cloneNode(true);
+    layer = layers.children[layers.children.length - 1].cloneNode(true);
   } else {
     // Revert to default template
     layer = originalCloudLayer.cloneNode(true);
@@ -293,15 +296,15 @@ function addCloudsLayer() {
   layers.appendChild(layer);
 }
 
-function fillCloudsDefault() {
+function initCloudsDefaults(config: Config) {
   (<HTMLInputElement>document.getElementById("cloudsInclude")).checked =
     config.clouds.include;
   (<HTMLInputElement>document.getElementById("cloudsQuantity")).value =
     config.clouds.properties.quantity.toString();
-  createCloudsLayers();
+  createCloudsLayers(config);
 }
 
-function fadeExcluded() {
+function hideExcluded(config: Config) {
   if (!config.stars.include) {
     document.getElementById("starsProperties").style.display = "none";
   }
@@ -309,7 +312,7 @@ function fadeExcluded() {
     document.getElementById("moonProperties").style.display = "none";
   }
   if (!config.sunset.include) {
-    document.getElementById("sunsetProperties").style.display = "nonw";
+    document.getElementById("sunsetProperties").style.display = "none";
   }
   if (!config.clouds.include) {
     document.getElementById("cloudsProperties").style.display = "none";
@@ -317,73 +320,103 @@ function fadeExcluded() {
 }
 
 function initDefaults() {
-  fillSkyDefaults();
-  fillStarsDefault();
-  fillMoonDefault();
-  fillSunsetDefault();
-  fillCloudsDefault();
-  fadeExcluded();
+  const config = defaultConfig();
+  initSkyDefaults(config);
+  initStarsDefaults(config);
+  initMoonDefaults(config);
+  initSunsetDefaults(config);
+  initCloudsDefaults(config);
+  hideExcluded(config);
 }
 
-function collectSky() {
-  config.sky.properties.width = parseInt(
-    (<HTMLInputElement>document.getElementById("skyWidth")).value
-  );
-  config.sky.properties.height = parseInt(
-    (<HTMLInputElement>document.getElementById("skyHeight")).value
-  );
-  config.sky.properties.pixelSize = parseInt(
-    (<HTMLInputElement>document.getElementById("skyPixelSize")).value
-  );
-  config.sky.properties.colour = hexToRGB(
-    (<HTMLInputElement>document.getElementById("skyColour")).value
-  );
-  config.sky.properties.opacity = parseFloat(
-    (<HTMLInputElement>document.getElementById("skyOpacity")).value
-  );
-  config.sky.properties.mutationSpeed = parseFloat(
-    (<HTMLInputElement>document.getElementById("skyMutationSpeed")).value
-  );
-  config.sky.properties.mutationStyle = 
-    (<HTMLInputElement>document.getElementById("skyMutationStyle")).value
+function userSky() {
+  const sky: SkyConfig = {
+    properties: {
+      height: parseInt(
+        (<HTMLInputElement>document.getElementById("skyHeight")).value
+      ),
+      width: parseInt(
+        (<HTMLInputElement>document.getElementById("skyWidth")).value
+      ),
+      pixelSize: parseInt(
+        (<HTMLInputElement>document.getElementById("skyPixelSize")).value
+      ),
+      colour: hexToRGB(
+        (<HTMLInputElement>document.getElementById("skyColour")).value
+      ),
+      opacity: parseFloat(
+        (<HTMLInputElement>document.getElementById("skyOpacity")).value
+      ),
+      mutationSpeed: parseFloat(
+        (<HTMLInputElement>document.getElementById("skyMutationSpeed")).value
+      ),
+      mutationStyle: (<HTMLInputElement>(
+        document.getElementById("skyMutationStyle")
+      )).value
+    },
+  }
+  return sky
 }
 
-function collectStars() {
-  config.stars.include = (<HTMLInputElement>(
-    document.getElementById("starsInclude")
-  )).checked;
-  config.stars.properties.opacity = parseFloat(
-    (<HTMLInputElement>document.getElementById("starsOpacity")).value
-  );
-  config.stars.properties.density = parseFloat(
-    (<HTMLInputElement>document.getElementById("starsDensity")).value
-  );
+function userStars() {
+  const stars: StarsConfig = {
+    include: (<HTMLInputElement>(
+      document.getElementById("starsInclude")
+    )).checked,
+    properties: {
+      opacity: parseFloat(
+        (<HTMLInputElement>document.getElementById("starsOpacity")).value
+      ),
+      density: parseFloat(
+        (<HTMLInputElement>document.getElementById("starsDensity")).value
+      )
+    }
+  }
+  return stars
 }
 
-function collectMoon() {
-  config.moon.include = (<HTMLInputElement>(
-    document.getElementById("moonInclude")
-  )).checked;
-  config.moon.properties.colour = hexToRGB(
-    (<HTMLInputElement>document.getElementById("moonColour")).value
-  );
-  config.moon.properties.radius = parseInt(
-    (<HTMLInputElement>document.getElementById("moonRadius")).value
-  );
-  config.moon.properties.halfMoon = (<HTMLInputElement>(
-    document.getElementById("moonHalfMoon")
-  )).checked;
-  config.moon.properties.noise = parseFloat(
-    (<HTMLInputElement>document.getElementById("moonNoise")).value
-  );
+function userMoon() {
+  const moon: MoonConfig = {
+    include: (<HTMLInputElement>(
+      document.getElementById("moonInclude")
+    )).checked,
+    properties: {
+      colour: hexToRGB(
+        (<HTMLInputElement>document.getElementById("moonColour")).value
+      ),
+      radius: parseInt(
+        (<HTMLInputElement>document.getElementById("moonRadius")).value
+      ),
+      halfMoon: (<HTMLInputElement>(
+        document.getElementById("moonHalfMoon")
+      )).checked,
+      noise: parseFloat(
+        (<HTMLInputElement>document.getElementById("moonNoise")).value
+      ),
+    }
+  }
+  return moon
 }
 
-function collectSunsetLayers() {
-  let layers = document.getElementById("sunsetLayers");
-  let configLayers: SunsetLayer[] = [];
+function userSunset() {
+  const sunsetLayers = userSunsetLayers();
+  const config = {
+    include: (<HTMLInputElement>(
+      document.getElementById("sunsetInclude")
+    )).checked,
+    properties: {
+      layers: sunsetLayers,
+    },
+  }
+  return config
+}
+
+function userSunsetLayers() {
+  const layers = document.getElementById("sunsetLayers");
+  const configLayers: SunsetLayer[] = [];
   for (let i = 0; i < layers.children.length; i++) {
-    let layer = layers.children[i];
-    let configLayer: SunsetLayer = {
+    const layer = layers.children[i];
+    const configLayer: SunsetLayer = {
       colour: hexToRGB((<HTMLInputElement>layer.children[2].children[1]).value),
       maxOpacity: parseFloat(
         (<HTMLInputElement>layer.children[3].children[0]).value
@@ -403,22 +436,15 @@ function collectSunsetLayers() {
     };
     configLayers.push(configLayer);
   }
-  config.sunset.properties.layers = configLayers;
+  return configLayers
 }
 
-function collectSunset() {
-  config.sunset.include = (<HTMLInputElement>(
-    document.getElementById("sunsetInclude")
-  )).checked;
-  collectSunsetLayers();
-}
-
-function collectCloudsLayers() {
-  let layers = document.getElementById("cloudsLayers");
-  let configLayers: CloudLayer[] = [];
+function userCloudLayers() {
+  const layers = document.getElementById("cloudsLayers");
+  const cloudLayers: CloudLayer[] = [];
   for (let i = 0; i < layers.children.length; i++) {
-    let layer = layers.children[i];
-    let configLayer: CloudLayer = {
+    const layer = layers.children[i];
+    const configLayer: CloudLayer = {
       colour: hexToRGB((<HTMLInputElement>layer.children[2].children[1]).value),
       opacity: parseFloat(
         (<HTMLInputElement>layer.children[3].children[0]).value
@@ -432,30 +458,38 @@ function collectCloudsLayers() {
       pH: parseFloat((<HTMLInputElement>layer.children[6].children[0]).value),
       pV: parseFloat((<HTMLInputElement>layer.children[7].children[0]).value),
     };
-    configLayers.push(configLayer);
+    cloudLayers.push(configLayer);
   }
-  config.clouds.properties.layers = configLayers;
+  return cloudLayers;
 }
 
-function collectClouds() {
-  config.clouds.include = (<HTMLInputElement>(
-    document.getElementById("cloudsInclude")
-  )).checked;
-  config.clouds.properties.quantity = parseInt(
-    (<HTMLInputElement>document.getElementById("cloudsQuantity")).value
-  );
-  collectCloudsLayers();
+function userClouds() {
+  const clouds: CloudsConfig = {
+    include: (<HTMLInputElement>(
+      document.getElementById("cloudsInclude")
+    )).checked,
+    properties: {
+      quantity: parseInt(
+        (<HTMLInputElement>document.getElementById("cloudsQuantity")).value
+      ),
+      layers: userCloudLayers(),
+    },
+  }
+  return clouds
 }
 
-function collectInputs() {
-  collectSky();
-  collectStars();
-  collectMoon();
-  collectSunset();
-  collectClouds();
+function userConfig() {
+  const config = {
+    sky: userSky(),
+    stars: userStars(),
+    moon: userMoon(),
+    sunset: userSunset(),
+    clouds: userClouds(),
+  }
+  return config;
 }
 
-function lowerRandomMutationSpeed() {
+function lowerRandomMutationSpeed(config: Config) {
   // "Random" mutation style is much more sensitive to mutation speed
   // -> works best with a much lower mutation speed
   if (config.sky.properties.mutationStyle == "Random") {
@@ -463,20 +497,21 @@ function lowerRandomMutationSpeed() {
   }
 }
 
-function run() {
+function run(random: boolean) {
   document.getElementById("generate-btn").style.display = "none";
   document.getElementById("loading-spinner").style.display = "grid";
   setTimeout(function () {
-    collectInputs();
-    lowerRandomMutationSpeed();
-    runSkyGeneration();
-    document.getElementById("config").style.display = "none";
-  }, 500);
+    const config = random ? randConfig() : userConfig();
+    lowerRandomMutationSpeed(config);
+    generateSky(config).then(() => {
+      document.getElementById("config").style.display = "none";
+    });
+  }, 10);
 }
 
-let originalSunsetLayer = document.getElementById("sunsetLayer");
+const originalSunsetLayer = document.getElementById("sunsetLayer");
 let sunsetLayerCount = 0;
-let originalCloudLayer = document.getElementById("cloudsLayer");
+const originalCloudLayer = document.getElementById("cloudsLayer");
 let cloudLayerCount = 0;
 
 initDefaults();

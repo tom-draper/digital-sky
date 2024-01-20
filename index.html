@@ -384,7 +384,7 @@
               </div>
             </div>
           </div>
-          <button onclick="run()" id="generate-btn" class="btn btn-primary">
+          <button onclick="run(false)" id="generate-btn" class="btn btn-primary">
             Generate
           </button>
           <div
@@ -394,13 +394,17 @@
           >
             <span class="sr-only"></span>
           </div>
-          <div id="progress-text">Colouring sky...</div>
+
+          <button onclick="run(true)" id="generate-btn" class="random-btn">
+            Random
+          </button>
         </div>
       </div>
       <canvas id="canvas"></canvas>
     </div>
-    <script type="text/javascript" src="public/config.js"></script>
-    <script type="text/javascript" src="public/presets.js"></script>
-    <script type="text/javascript" src="public/app.js"></script>
+    <script type="text/javascript" src="dist/config.js"></script>
+    <script type="text/javascript" src="dist/presets.js"></script>
+    <script type="text/javascript" src="dist/app.js"></script>
+    <script type="text/javascript" src="dist/generate.js"></script>
   </body>
 </html>

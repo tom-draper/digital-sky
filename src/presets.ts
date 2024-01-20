@@ -1,7 +1,5 @@
-// let defaultHeight = 1080;
-// let defaultWidth = 1920;
-let defaultHeight = 720;
-let defaultWidth = 1280;
+const defaultHeight = 720;
+const defaultWidth = 1280;
 
 function defaultSky(colour: [number, number, number]) {
   return {
@@ -11,32 +9,32 @@ function defaultSky(colour: [number, number, number]) {
       pixelSize: 1,
       colour: colour,
       mutationSpeed: 1,
-      mutationStyle: '8 Directions',
+      mutationStyle: 'Colour spread',
       opacity: 1,
     },
   };
 }
 
-let none: None = {
+const none: None = {
   include: false,
   properties: null,
 };
 
-let stars1 = {
+const stars1 = {
   include: true,
   properties: {
     opacity: 1,
     density: 0.005,
   },
 };
-let starsDense = {
+const starsDense = {
   include: true,
   properties: {
     opacity: 1,
     density: 0.01,
   },
 };
-let starsFaint = {
+const starsFaint = {
   include: true,
   properties: {
     opacity: 0.5,
@@ -44,7 +42,7 @@ let starsFaint = {
   },
 };
 
-let moon1 = {
+const moon1 = {
   include: true,
   properties: {
     colour: [248, 250, 244],
@@ -54,7 +52,7 @@ let moon1 = {
   },
 };
 
-let sunset1 = {
+const sunset1 = {
   include: true,
   properties: {
     layers: [
@@ -79,7 +77,7 @@ let sunset1 = {
     ],
   },
 };
-let sunset2 = {
+const sunset2 = {
   include: true,
   properties: {
     layers: [
@@ -121,7 +119,7 @@ let sunset2 = {
   },
 };
 
-let clouds1 = {
+const clouds1 = {
   include: true,
   properties: {
     quantity: 10,
@@ -186,8 +184,8 @@ let clouds1 = {
     ],
   },
 };
-let c = [160, 170, 190];
-let clouds2 = {
+const c = [160, 170, 190];
+const clouds2 = {
   include: true,
   properties: {
     quantity: 4,
@@ -236,7 +234,7 @@ let clouds2 = {
     ],
   },
 };
-let cloudsBig = {
+const cloudsBig = {
   include: true,
   properties: {
     quantity: 10,
@@ -301,7 +299,7 @@ let cloudsBig = {
     ],
   },
 };
-let cloudsCloudy = {
+const cloudsCloudy = {
   include: true,
   properties: {
     quantity: 30,
@@ -358,7 +356,7 @@ let cloudsCloudy = {
     ],
   },
 };
-let cloudsMild = {
+const cloudsMild = {
   include: true,
   properties: {
     quantity: 6,
@@ -434,7 +432,7 @@ let cloudsMild = {
 
 // ----------------------- PRESETS -----------------------
 
-let presetLightDay = {
+const presetLightDay = {
   sky: defaultSky([135, 206, 235]),
   stars: none,
   moon: none,
@@ -442,7 +440,7 @@ let presetLightDay = {
   clouds: clouds1,
 };
 
-let presetSunset = {
+const presetSunset = {
   sky: defaultSky([135, 206, 235]),
   stars: starsFaint,
   moon: false,
@@ -450,7 +448,7 @@ let presetSunset = {
   clouds: clouds1,
 };
 
-let presetMoonAndStars = {
+const presetMoonAndStars = {
   sky: defaultSky([8, 43, 94]),
   stars: starsFaint,
   moon: moon1,
@@ -458,7 +456,7 @@ let presetMoonAndStars = {
   clouds: none,
 };
 
-let presetLateEvening = {
+const presetLateEvening = {
   sky: defaultSky([8, 43, 94]),
   stars: starsFaint,
   moon: none,
@@ -466,7 +464,7 @@ let presetLateEvening = {
   clouds: cloudsBig,
 };
 
-let presetLateEvening2 = {
+const presetLateEvening2 = {
   sky: defaultSky([8, 43, 94]),
   stars: starsFaint,
   moon: moon1,
@@ -474,7 +472,7 @@ let presetLateEvening2 = {
   clouds: none,
 };
 
-let presetLateEvening3: Config = {
+const presetLateEvening3: Config = {
   sky: defaultSky([94, 122, 187]),
   stars: none,
   moon: none,
@@ -504,7 +502,7 @@ let presetLateEvening3: Config = {
   clouds: none,
 };
 
-let presetPinkSky = {
+const presetPinkSky = {
   sky: defaultSky([255, 192, 203]),
   stars: none,
   moon: none,
@@ -512,7 +510,7 @@ let presetPinkSky = {
   clouds: clouds1,
 };
 
-let presetPinkSky2 = {
+const presetPinkSky2 = {
   sky: defaultSky([255, 182, 193]),
   stars: none,
   moon: none,
@@ -641,7 +639,7 @@ type Config = {
   clouds: CloudsConfig | None;
 };
 
-let presetLightDayCloudy: Config = {
+const presetLightDayCloudy: Config = {
   sky: defaultSky([135, 206, 235]),
   stars: none,
   moon: none,
@@ -729,7 +727,7 @@ let presetLightDayCloudy: Config = {
   },
 };
 
-let presetLightDayStarry = {
+const presetLightDayStarry = {
   sky: defaultSky([135, 206, 235]),
   stars: stars1,
   moon: none,
@@ -737,7 +735,7 @@ let presetLightDayStarry = {
   clouds: clouds1,
 };
 
-let presetNight = {
+const presetNight = {
   sky: defaultSky([40, 30, 45]),
   stars: stars1,
   moon: none,
@@ -745,10 +743,110 @@ let presetNight = {
   clouds: cloudsMild,
 };
 
-let presetCloudy = {
+const presetCloudy = {
   sky: defaultSky([115, 160, 200]),
   stars: starsDense,
   moon: none,
   sunset: none,
   clouds: cloudsCloudy,
+};
+
+const presetSunset2: Config = {
+  sky: {
+    properties: {
+      height: 720,
+      width: 1280,
+      pixelSize: 1,
+      colour: [
+        98,
+        119,
+        158
+      ],
+      opacity: 1,
+      mutationSpeed: 0.3,
+      mutationStyle: "Colour spread"
+    }
+  },
+  stars: none,
+  moon: none,
+  sunset: {
+    include: true,
+    properties: {
+      layers: [
+        {
+          colour: [
+            144,
+            152,
+            171
+          ],
+          maxOpacity: 0.7,
+          proportion: 0.7,
+          mutationSpeed: 0.2,
+          xStretch: 0.8,
+          yStretch: 0.3
+        },
+        {
+          colour: [
+            220,
+            217,
+            222
+          ],
+          maxOpacity: 1,
+          proportion: 0.6,
+          mutationSpeed: 0.2,
+          xStretch: 0.9,
+          yStretch: 0.3
+        },
+        {
+          colour: [
+            233,
+            212,
+            193
+          ],
+          maxOpacity: 0.8,
+          proportion: 0.5,
+          mutationSpeed: 0.2,
+          xStretch: 0.9,
+          yStretch: 0.3
+        },
+        {
+          colour: [
+            225,
+            161,
+            117
+          ],
+          maxOpacity: 0.8,
+          proportion: 0.4,
+          mutationSpeed: 0.2,
+          xStretch: 1,
+          yStretch: 0.3
+        },
+        {
+          colour: [
+            190,
+            140,
+            111
+          ],
+          maxOpacity: 0.9,
+          proportion: 0.2,
+          mutationSpeed: 0.2,
+          xStretch: 1,
+          yStretch: 0.2
+        },
+        {
+          colour: [
+            220,
+            130,
+            101
+          ],
+          maxOpacity: 0.9,
+          proportion: 0.15,
+          mutationSpeed: 0.2,
+          xStretch: 1,
+          yStretch: 0.2
+        },
+      ]
+    }
+  },
+  clouds: none,
 };
