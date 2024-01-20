@@ -26,3 +26,5 @@ To run locally, run `npm install` to install dependencies, then `npm run build` 
 ![sky 8)](https://user-images.githubusercontent.com/41476809/182721474-79caf7d5-8ea9-4ff7-b6a1-da720fa67ca3.png)
 
 ![sky 9](https://user-images.githubusercontent.com/41476809/182638556-ad0e804a-f59d-457d-ad53-1b8e67129723.png)
+
+![sky 10](https://gist.github.com/assets/41476809/80ea7b34-99cb-4367-80e6-5cb431c2b60b)
