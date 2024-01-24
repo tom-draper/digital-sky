@@ -49,3 +49,13 @@ ts-node scripts/main -n <count>
 ```
 
 For more extreme skies, modify the random config generator function `randConfig()` in `src/config.ts` to your liking.
+
+## Contributions
+
+Contributions, issues and feature requests are welcome.
+
+- Fork it (https://github.com/tom-draper/digital-sky)
+- Create your feature branch (`git checkout -b my-new-feature`)
+- Commit your changes (`git commit -am 'Add some feature'`)
+- Push to the branch (`git push origin my-new-feature`)
+- Create a new Pull Request

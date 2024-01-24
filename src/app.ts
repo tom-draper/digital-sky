@@ -823,14 +823,10 @@ function createStar(
 ) {
   const color = starColor(opacity);
 
-  try {
-    grid
-      .get(y)
-      .get(x)
-      .push({ type: "star", color: color } as Pixel);
-  } catch (e) {
-    console.log(x, y, e);
-  }
+  grid
+    .get(y)
+    .get(x)
+    .push({ type: "star", color: color } as Pixel);
 
   // Probabilistically add additional neighbouring star pixels
   const p = 0.1;
@@ -961,11 +957,7 @@ function createSunsetLayer(
       continue;
     }
     color[3] = layerConfig.maxOpacity * scale; // Adjust opacity
-    try {
-      grid.get(y).get(x).push({ type: "sunset", color: color });
-    } catch (e) {
-      console.log("sunset", x, y, e);
-    }
+    grid.get(y).get(x).push({ type: "sunset", color: color });
 
     sunsetSpread(
       x,
