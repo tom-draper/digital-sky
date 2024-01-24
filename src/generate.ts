@@ -8,7 +8,7 @@ export function randInt(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function randomSunsetColour(): [number, number, number] {
+function randomSunsetColor(): [number, number, number] {
   return [randInt(100, 255), randInt(100, 240), randInt(100, 255)];
 }
 
@@ -17,7 +17,7 @@ export function randSunsetLayers(): SunsetLayer[] {
   const n = randInt(1, 10);
   for (let i = 0; i < n; i++) {
     const layer: SunsetLayer = {
-      colour: randomSunsetColour(),
+      color: randomSunsetColor(),
       maxOpacity: randFloat(0.2, 1),
       proportion: randFloat(0.2, 1),
       mutationSpeed: randInt(1, 3),
@@ -29,7 +29,7 @@ export function randSunsetLayers(): SunsetLayer[] {
   return sunsetLayers;
 }
 
-function randomCloudColour(): [number, number, number] {
+function randomCloudColor(): [number, number, number] {
   return [randInt(200, 255), randInt(200, 255), randInt(200, 255)];
 }
 
@@ -38,7 +38,7 @@ export function randCloudLayers(): CloudLayer[] {
   const n = randInt(1, 25);
   for (let i = 0; i < n; i++) {
     const layer: CloudLayer = {
-      colour: randomCloudColour(),
+      color: randomCloudColor(),
       opacity: randFloat(0.05, 0.5),
       minSize: randInt(500, 1000),
       maxSize: randInt(5000, 50000),
@@ -56,7 +56,7 @@ export function randBool() {
 
 export function randMutationStyle() {
   const styles = [
-    "Colour spread",
+    "Color spread",
     "Random",
     "Point spread",
     "Point spread wavy",
@@ -64,5 +64,5 @@ export function randMutationStyle() {
     "Vertical",
     "Diagonal",
   ];
-  return styles[randInt(0, styles.length)];
+  return styles[randInt(0, styles.length - 1)];
 }

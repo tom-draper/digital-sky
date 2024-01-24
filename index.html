@@ -4,9 +4,15 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="author" content="Tom Draper">
-    <meta name="description" content="A stochastic, configurable sky image generator.">
-    <meta name="keywords" content="art, sky, JavaScript, image generator, generative">
+    <meta name="author" content="Tom Draper" />
+    <meta
+      name="description"
+      content="A stochastic, configurable sky image generator."
+    />
+    <meta
+      name="keywords"
+      content="art, sky, JavaScript, image generator, generative"
+    />
     <title>Digital Sky</title>
     <link rel="icon" type="image/x-icon" href="public/img/cloud.png" />
     <link href="public/style.css" rel="stylesheet" />
@@ -57,9 +63,9 @@
                   step="1"
                 />
               </div>
-              <div class="component sky-colours same-line component-margin">
-                <div class="colour-text">Colour:</div>
-                <input type="color" id="skyColour" class="colour-picker" />
+              <div class="component sky-colors same-line component-margin">
+                <div class="color-text">Color:</div>
+                <input type="color" id="skyColor" class="color-picker" />
               </div>
               <div class="component sky-opacity">
                 Opacity:
@@ -74,7 +80,7 @@
                 />
               </div>
               <div class="component sky-mutation-speed">
-                Colour mutation speed:
+                Color mutation speed:
                 <input
                   type="range"
                   class="form-range"
@@ -86,12 +92,18 @@
                 />
               </div>
               <div class="component component-margin">
-                <label for="mutation-styles">Colour mutation style:&nbsp</label>
+                <label for="mutation-styles">Color mutation style:&nbsp</label>
                 <select name="mutation-styles" id="skyMutationStyle">
-                  <option value="Colour spread">Colour spread (watercolour)</option>
+                  <option value="Color spread">
+                    Color spread (watercolor)
+                  </option>
                   <option value="Random">Random (grainy)</option>
-                  <option value="Point spread">Point spread (semi-abstract)</option>
-                  <option value="Point spread wavy">Point spread wavy (semi-abstract)</option>
+                  <option value="Point spread">
+                    Point spread (semi-abstract)
+                  </option>
+                  <option value="Point spread wavy">
+                    Point spread wavy (semi-abstract)
+                  </option>
                   <option value="Horizontal">Horizontal (abstract)</option>
                   <option value="Vertical">Vertical (abstract)</option>
                   <option value="Diagonal">Diagonal (abstract)</option>
@@ -152,9 +164,9 @@
                 />
               </div>
               <div id="moonProperties">
-                <div class="component moon-colour same-line component-margin">
-                  <div class="colour-text">Colour:</div>
-                  <input type="color" id="moonColour" class="colour-picker" />
+                <div class="component moon-color same-line component-margin">
+                  <div class="color-text">Color:</div>
+                  <input type="color" id="moonColor" class="color-picker" />
                 </div>
                 <div class="component moon-density">
                   Radius:
@@ -206,11 +218,13 @@
                     <button class="btn btn-outline-danger delete-sunset-layer">
                       Delete
                     </button>
-                    <div class="component sunset-colour same-line component-margin">
-                      <div class="colour-text">Colour:</div>
+                    <div
+                      class="component sunset-color same-line component-margin"
+                    >
+                      <div class="color-text">Color:</div>
                       <input
                         type="color"
-                        class="colour-picker"
+                        class="color-picker"
                         value="#FFFFFF"
                       />
                     </div>
@@ -239,7 +253,7 @@
                       />
                     </div>
                     <div class="component sunset-mutation-speed">
-                      Colour mutation speed:
+                      Color mutation speed:
                       <input
                         type="range"
                         class="form-range"
@@ -312,9 +326,11 @@
                     <button class="btn btn-outline-danger delete-clouds-layer">
                       Delete
                     </button>
-                    <div class="component clouds-colour same-line component-margin">
-                      <div class="colour-text">Colour:</div>
-                      <input type="color" class="colour-picker" />
+                    <div
+                      class="component clouds-color same-line component-margin"
+                    >
+                      <div class="color-text">Color:</div>
+                      <input type="color" class="color-picker" />
                     </div>
                     <div class="component clouds-max-opacity">
                       Opacity:
@@ -387,7 +403,11 @@
               </div>
             </div>
           </div>
-          <button onclick="window.run(false)" id="generate-btn" class="btn btn-primary">
+          <button
+            onclick="window.run(false)"
+            id="generate-btn"
+            class="btn btn-primary"
+          >
             Generate
           </button>
           <div
@@ -398,7 +418,11 @@
             <span class="sr-only"></span>
           </div>
 
-          <button onclick="window.run(true)" id="generate-btn" class="random-btn">
+          <button
+            onclick="window.run(true)"
+            id="generate-btn"
+            class="random-btn"
+          >
             Random
           </button>
         </div>

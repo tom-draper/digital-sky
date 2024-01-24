@@ -7,9 +7,7 @@ import {
   randSunsetLayers,
 } from "./generate";
 
-const originalSunsetLayer = document.getElementById("sunsetLayer");
 let sunsetLayerCount = 0;
-const originalCloudLayer = document.getElementById("cloudsLayer");
 let cloudLayerCount = 0;
 
 export type StarsConfig = {
@@ -23,14 +21,14 @@ export type StarsConfig = {
 export type MoonConfig = {
   include: boolean;
   properties: {
-    colour: [number, number, number];
+    color: [number, number, number];
     radius: number;
     halfMoon: boolean;
     noise: number;
   };
 };
 export type SunsetLayer = {
-  colour: [number, number, number];
+  color: [number, number, number];
   maxOpacity: number;
   proportion: number;
   mutationSpeed: number;
@@ -46,7 +44,7 @@ export type SunsetConfig = {
 };
 
 export type CloudLayer = {
-  colour: [number, number, number];
+  color: [number, number, number];
   opacity: number;
   minSize: number;
   maxSize: number;
@@ -71,7 +69,7 @@ export type SkyConfig = {
   properties: {
     dimensions: CanvasDimensions;
     pixelSize: number;
-    colour: [number, number, number];
+    color: [number, number, number];
     mutationSpeed: number;
     mutationStyle: string;
     opacity: number;
@@ -100,10 +98,10 @@ function defaultConfig() {
           height: 720,
         },
         pixelSize: 1,
-        colour: [94, 122, 187],
+        color: [94, 122, 187],
         opacity: 1,
         mutationSpeed: 0.3,
-        mutationStyle: "Colour spread",
+        mutationStyle: "Color spread",
       },
     },
     stars: {
@@ -116,7 +114,7 @@ function defaultConfig() {
     moon: {
       include: false,
       properties: {
-        colour: [200, 200, 200],
+        color: [200, 200, 200],
         radius: 25,
         halfMoon: false,
         noise: 0.5,
@@ -127,7 +125,7 @@ function defaultConfig() {
       properties: {
         layers: [
           {
-            colour: [254, 207, 199],
+            color: [254, 207, 199],
             maxOpacity: 0.7,
             proportion: 0.7,
             mutationSpeed: 0.2,
@@ -135,7 +133,7 @@ function defaultConfig() {
             yStretch: 0.5,
           },
           {
-            colour: [253, 227, 228],
+            color: [253, 227, 228],
             maxOpacity: 0.5,
             proportion: 0.7,
             mutationSpeed: 0.2,
@@ -151,7 +149,7 @@ function defaultConfig() {
         quantity: 6,
         layers: [
           {
-            colour: [255, 255, 255],
+            color: [255, 255, 255],
             opacity: 0.6,
             minSize: 1000,
             maxSize: 65000,
@@ -159,7 +157,7 @@ function defaultConfig() {
             pV: 0.3, // Probability of vertical expansion
           },
           {
-            colour: [245, 245, 245],
+            color: [245, 245, 245],
             opacity: 0.6,
             minSize: 1000,
             maxSize: 65000,
@@ -167,7 +165,7 @@ function defaultConfig() {
             pV: 0.3, // Probability of vertical expansion
           },
           {
-            colour: [255, 255, 255],
+            color: [255, 255, 255],
             opacity: 0.6,
             minSize: 1000,
             maxSize: 65000,
@@ -175,7 +173,7 @@ function defaultConfig() {
             pV: 0.3, // Probability of vertical expansion
           },
           {
-            colour: [245, 245, 245],
+            color: [245, 245, 245],
             opacity: 0.6,
             minSize: 1000,
             maxSize: 65000,
@@ -183,7 +181,7 @@ function defaultConfig() {
             pV: 0.3, // Probability of vertical expansion
           },
           {
-            colour: [225, 225, 225],
+            color: [225, 225, 225],
             opacity: 0.5,
             minSize: 1000,
             maxSize: 65000,
@@ -191,7 +189,7 @@ function defaultConfig() {
             pV: 0.3, // Probability of vertical expansion
           },
           {
-            colour: [200, 200, 200],
+            color: [200, 200, 200],
             opacity: 0.4,
             minSize: 1000,
             maxSize: 65000,
@@ -228,10 +226,10 @@ function initSkyDefaults(config: Config) {
     config.sky.properties.dimensions.height.toString();
   (<HTMLInputElement>document.getElementById("skyPixelSize")).value =
     config.sky.properties.pixelSize.toString();
-  (<HTMLInputElement>document.getElementById("skyColour")).value = rgbToHex(
-    config.sky.properties.colour[0],
-    config.sky.properties.colour[1],
-    config.sky.properties.colour[2]
+  (<HTMLInputElement>document.getElementById("skyColor")).value = rgbToHex(
+    config.sky.properties.color[0],
+    config.sky.properties.color[1],
+    config.sky.properties.color[2]
   );
   (<HTMLInputElement>document.getElementById("skyOpacity")).value =
     config.sky.properties.opacity.toString();
@@ -259,10 +257,10 @@ export function toggleProperties(checkboxId: string, propertiesId: string) {
 function initMoonDefaults(config: Config) {
   (<HTMLInputElement>document.getElementById("moonInclude")).checked =
     config.moon.include;
-  (<HTMLInputElement>document.getElementById("moonColour")).value = rgbToHex(
-    config.moon.properties.colour[0],
-    config.moon.properties.colour[1],
-    config.moon.properties.colour[2]
+  (<HTMLInputElement>document.getElementById("moonColor")).value = rgbToHex(
+    config.moon.properties.color[0],
+    config.moon.properties.color[1],
+    config.moon.properties.color[2]
   );
   (<HTMLInputElement>document.getElementById("moonRadius")).value =
     config.moon.properties.radius.toString();
@@ -280,6 +278,7 @@ function renameLayers(layersID: string) {
 }
 
 function createSunsetLayers(config: Config) {
+  const originalSunsetLayer = document.getElementById("sunsetLayer");
   const layers = document.getElementById("sunsetLayers");
   layers.removeChild(originalSunsetLayer);
   for (let i = 0; i < config.sunset.properties.layers.length; i++) {
@@ -293,9 +292,9 @@ function createSunsetLayers(config: Config) {
       renameLayers("sunsetLayers");
     };
     layer.children[2].children[1].value = rgbToHex(
-      config.sunset.properties.layers[i].colour[0],
-      config.sunset.properties.layers[i].colour[1],
-      config.sunset.properties.layers[i].colour[2]
+      config.sunset.properties.layers[i].color[0],
+      config.sunset.properties.layers[i].color[1],
+      config.sunset.properties.layers[i].color[2]
     );
     layer.children[3].children[0].value =
       config.sunset.properties.layers[i].maxOpacity;
@@ -313,6 +312,7 @@ function createSunsetLayers(config: Config) {
 }
 
 export function addSunsetLayer() {
+  const originalSunsetLayer = document.getElementById("sunsetLayer");
   const layers = document.getElementById("sunsetLayers");
   let layer: any;
   if (layers.children.length > 0) {
@@ -341,6 +341,7 @@ function initSunsetDefaults(config: Config) {
 }
 
 function createCloudsLayers(config: Config) {
+  const originalCloudLayer = document.getElementById("cloudsLayer");
   document.getElementById("cloudsLayers").removeChild(originalCloudLayer);
   for (let i = 0; i < config.clouds.properties.layers.length; i++) {
     const layer: any = originalCloudLayer.cloneNode(true);
@@ -352,9 +353,9 @@ function createCloudsLayers(config: Config) {
       renameLayers("cloudsLayers");
     };
     layer.children[2].children[1].value = rgbToHex(
-      config.clouds.properties.layers[i].colour[0],
-      config.clouds.properties.layers[i].colour[1],
-      config.clouds.properties.layers[i].colour[2]
+      config.clouds.properties.layers[i].color[0],
+      config.clouds.properties.layers[i].color[1],
+      config.clouds.properties.layers[i].color[2]
     );
     layer.children[3].children[0].value =
       config.clouds.properties.layers[i].opacity;
@@ -370,6 +371,7 @@ function createCloudsLayers(config: Config) {
 }
 
 export function addCloudsLayer() {
+  const originalCloudLayer = document.getElementById("cloudsLayer");
   const layers = document.getElementById("cloudsLayers");
   let layer: any;
   if (layers.children.length > 0) {
@@ -438,8 +440,8 @@ function userSky() {
       pixelSize: parseInt(
         (<HTMLInputElement>document.getElementById("skyPixelSize")).value
       ),
-      colour: hexToRGB(
-        (<HTMLInputElement>document.getElementById("skyColour")).value
+      color: hexToRGB(
+        (<HTMLInputElement>document.getElementById("skyColor")).value
       ),
       opacity: parseFloat(
         (<HTMLInputElement>document.getElementById("skyOpacity")).value
@@ -475,8 +477,8 @@ function userMoon() {
   const moon: MoonConfig = {
     include: (<HTMLInputElement>document.getElementById("moonInclude")).checked,
     properties: {
-      colour: hexToRGB(
-        (<HTMLInputElement>document.getElementById("moonColour")).value
+      color: hexToRGB(
+        (<HTMLInputElement>document.getElementById("moonColor")).value
       ),
       radius: parseInt(
         (<HTMLInputElement>document.getElementById("moonRadius")).value
@@ -509,7 +511,7 @@ function userSunsetLayers() {
   for (let i = 0; i < layers.children.length; i++) {
     const layer = layers.children[i];
     const configLayer: SunsetLayer = {
-      colour: hexToRGB((<HTMLInputElement>layer.children[2].children[1]).value),
+      color: hexToRGB((<HTMLInputElement>layer.children[2].children[1]).value),
       maxOpacity: parseFloat(
         (<HTMLInputElement>layer.children[3].children[0]).value
       ),
@@ -537,7 +539,7 @@ function userCloudLayers() {
   for (let i = 0; i < layers.children.length; i++) {
     const layer = layers.children[i];
     const configLayer: CloudLayer = {
-      colour: hexToRGB((<HTMLInputElement>layer.children[2].children[1]).value),
+      color: hexToRGB((<HTMLInputElement>layer.children[2].children[1]).value),
       opacity: parseFloat(
         (<HTMLInputElement>layer.children[3].children[0]).value
       ),
@@ -590,7 +592,7 @@ export function randConfig() {
           width: 1280,
         },
         pixelSize: randInt(1, 5),
-        colour: [randInt(0, 255), randInt(0, 255), randInt(0, 255)],
+        color: [randInt(0, 255), randInt(0, 255), randInt(0, 255)],
         opacity: randFloat(0.5, 1),
         mutationSpeed: randFloat(0.1, 0.5),
         mutationStyle: randMutationStyle(),
@@ -606,7 +608,7 @@ export function randConfig() {
     moon: {
       include: randBool(),
       properties: {
-        colour: [randInt(0, 255), randInt(0, 255), randInt(0, 255)],
+        color: [randInt(0, 255), randInt(0, 255), randInt(0, 255)],
         radius: randInt(10, 50),
         halfMoon: randBool(),
         noise: randFloat(0, 1),

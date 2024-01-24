@@ -9,7 +9,11 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, './build'),
-    filename: "app.js"
+    filename: "app.js",
+    // library: "app",
+    // libraryTarget: 'umd',
+    // umdNamedDefine: true,
+    // globalObject: 'this'
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js"],
