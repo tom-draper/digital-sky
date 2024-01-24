@@ -1,15 +1,19 @@
+import { Config, None } from "./config";
+
 const defaultHeight = 720;
 const defaultWidth = 1280;
 
-function defaultSky(colour: [number, number, number]) {
+function defaultSky(color: [number, number, number]) {
   return {
     properties: {
-      height: defaultHeight,
-      width: defaultWidth,
+      dimensions: {
+        height: defaultHeight,
+        width: defaultWidth,
+      },
       pixelSize: 1,
-      colour: colour,
+      color: color,
       mutationSpeed: 1,
-      mutationStyle: 'Colour spread',
+      mutationStyle: "Color spread",
       opacity: 1,
     },
   };
@@ -45,7 +49,7 @@ const starsFaint = {
 const moon1 = {
   include: true,
   properties: {
-    colour: [248, 250, 244],
+    color: [248, 250, 244],
     radius: 40,
     halfMoon: true,
     noise: 2,
@@ -57,17 +61,17 @@ const sunset1 = {
   properties: {
     layers: [
       {
-        colour: [253, 94, 83],
+        color: [253, 94, 83],
         maxOpacity: 0.45,
         // The proportion of the height used as the max distance that the sunset travels
         proportion: 0.7,
-        // Magnitude of the inc/dec of one rgb value with each colour step
+        // Magnitude of the inc/dec of one rgb value with each color step
         mutationSpeed: 1,
         xStretch: 0.5, // >1 (thinner), <1 (wider)
         yStretch: 0, // >1 (shorter), <1 (taller)
       },
       {
-        colour: [255, 201, 34],
+        color: [255, 201, 34],
         maxOpacity: 0.4,
         proportion: 0.7,
         mutationSpeed: 1,
@@ -82,7 +86,7 @@ const sunset2 = {
   properties: {
     layers: [
       {
-        colour: [99, 197, 218],
+        color: [99, 197, 218],
         maxOpacity: 0.25,
         proportion: 0.6,
         mutationSpeed: 1,
@@ -90,7 +94,7 @@ const sunset2 = {
         yStretch: 0.5,
       },
       {
-        colour: [33, 89, 136],
+        color: [33, 89, 136],
         maxOpacity: 0.4,
         proportion: 0.9,
         mutationSpeed: 3,
@@ -98,17 +102,17 @@ const sunset2 = {
         yStretch: 0.6,
       },
       {
-        colour: [253, 94, 83],
+        color: [253, 94, 83],
         maxOpacity: 0.45,
         // The proportion of the height used as the max distance that the sunset travels
         proportion: 0.7,
-        // Magnitude of the inc/dec of one rgb value with each colour step
+        // Magnitude of the inc/dec of one rgb value with each color step
         mutationSpeed: 1,
         xStretch: 0.5, // >1 (thinner), <1 (wider)
         yStretch: 0, // >1 (shorter), <1 (taller)
       },
       {
-        colour: [255, 201, 34],
+        color: [255, 201, 34],
         maxOpacity: 0.4,
         proportion: 0.7,
         mutationSpeed: 1,
@@ -126,7 +130,7 @@ const clouds1 = {
     // Cloud layers are created in order
     layers: [
       {
-        colour: [235, 235, 235],
+        color: [235, 235, 235],
         opacity: 0.2,
         minSize: 100,
         maxSize: 10000,
@@ -134,7 +138,7 @@ const clouds1 = {
         pV: 0.3, // Probability of vertical expansion
       },
       {
-        colour: [235, 235, 235],
+        color: [235, 235, 235],
         opacity: 0.15,
         minSize: 100,
         maxSize: 10000,
@@ -142,7 +146,7 @@ const clouds1 = {
         pV: 0.3,
       },
       {
-        colour: [235, 235, 235],
+        color: [235, 235, 235],
         opacity: 0.15,
         minSize: 100,
         maxSize: 10000,
@@ -150,7 +154,7 @@ const clouds1 = {
         pV: 0.3,
       },
       {
-        colour: [235, 235, 235],
+        color: [235, 235, 235],
         opacity: 0.15,
         minSize: 100,
         maxSize: 10000,
@@ -158,7 +162,7 @@ const clouds1 = {
         pV: 0.3,
       },
       {
-        colour: [173, 216, 230],
+        color: [173, 216, 230],
         opacity: 0.15,
         minSize: 100,
         maxSize: 10000,
@@ -166,7 +170,7 @@ const clouds1 = {
         pV: 0.2,
       },
       {
-        colour: [173, 216, 230],
+        color: [173, 216, 230],
         opacity: 0.15,
         minSize: 100,
         maxSize: 10000,
@@ -174,7 +178,7 @@ const clouds1 = {
         pV: 0.2,
       },
       {
-        colour: [240, 240, 240],
+        color: [240, 240, 240],
         opacity: 0.2,
         minSize: 100,
         maxSize: 10000,
@@ -192,7 +196,7 @@ const clouds2 = {
     // Cloud layers are created in order
     layers: [
       {
-        colour: c,
+        color: c,
         opacity: 0.15,
         minSize: 100,
         maxSize: 20000,
@@ -200,7 +204,7 @@ const clouds2 = {
         pV: 0.25,
       },
       {
-        colour: c,
+        color: c,
         opacity: 0.15,
         minSize: 100,
         maxSize: 20000,
@@ -208,7 +212,7 @@ const clouds2 = {
         pV: 0.25,
       },
       {
-        colour: c,
+        color: c,
         opacity: 0.15,
         minSize: 100,
         maxSize: 20000,
@@ -216,7 +220,7 @@ const clouds2 = {
         pV: 0.25,
       },
       {
-        colour: c,
+        color: c,
         opacity: 0.15,
         minSize: 100,
         maxSize: 20000,
@@ -224,7 +228,7 @@ const clouds2 = {
         pV: 0.25,
       },
       {
-        colour: c,
+        color: c,
         opacity: 0.15,
         minSize: 100,
         maxSize: 20000,
@@ -241,7 +245,7 @@ const cloudsBig = {
     // Cloud layers are created in order
     layers: [
       {
-        colour: [235, 235, 235],
+        color: [235, 235, 235],
         opacity: 0.2,
         minSize: 100,
         maxSize: 20000,
@@ -249,7 +253,7 @@ const cloudsBig = {
         pV: 0.3, // Probability of vertical expansion
       },
       {
-        colour: [235, 235, 235],
+        color: [235, 235, 235],
         opacity: 0.15,
         minSize: 100,
         maxSize: 20000,
@@ -257,7 +261,7 @@ const cloudsBig = {
         pV: 0.3,
       },
       {
-        colour: [235, 235, 235],
+        color: [235, 235, 235],
         opacity: 0.15,
         minSize: 100,
         maxSize: 20000,
@@ -265,7 +269,7 @@ const cloudsBig = {
         pV: 0.3,
       },
       {
-        colour: [235, 235, 235],
+        color: [235, 235, 235],
         opacity: 0.15,
         minSize: 100,
         maxSize: 20000,
@@ -273,7 +277,7 @@ const cloudsBig = {
         pV: 0.3,
       },
       {
-        colour: [173, 216, 230],
+        color: [173, 216, 230],
         opacity: 0.15,
         minSize: 100,
         maxSize: 20000,
@@ -281,7 +285,7 @@ const cloudsBig = {
         pV: 0.2,
       },
       {
-        colour: [173, 216, 230],
+        color: [173, 216, 230],
         opacity: 0.15,
         minSize: 100,
         maxSize: 20000,
@@ -289,7 +293,7 @@ const cloudsBig = {
         pV: 0.2,
       },
       {
-        colour: [240, 240, 240],
+        color: [240, 240, 240],
         opacity: 0.2,
         minSize: 100,
         maxSize: 20000,
@@ -306,7 +310,7 @@ const cloudsCloudy = {
     // Cloud layers are created in order
     layers: [
       {
-        colour: [183, 183, 178],
+        color: [183, 183, 178],
         opacity: 0.8,
         minSize: 100,
         maxSize: 50000,
@@ -314,7 +318,7 @@ const cloudsCloudy = {
         pV: 0.5, // Probability of vertical expansion
       },
       {
-        colour: [183, 183, 178],
+        color: [183, 183, 178],
         opacity: 0.7,
         minSize: 100,
         maxSize: 50000,
@@ -322,7 +326,7 @@ const cloudsCloudy = {
         pV: 0.5,
       },
       {
-        colour: [183, 183, 178],
+        color: [183, 183, 178],
         opacity: 0.15,
         minSize: 100,
         maxSize: 10000,
@@ -330,7 +334,7 @@ const cloudsCloudy = {
         pV: 0.3,
       },
       {
-        colour: [183, 183, 178],
+        color: [183, 183, 178],
         opacity: 0.3,
         minSize: 100,
         maxSize: 10000,
@@ -338,7 +342,7 @@ const cloudsCloudy = {
         pV: 0.3,
       },
       {
-        colour: [183, 183, 178],
+        color: [183, 183, 178],
         opacity: 0.3,
         minSize: 100,
         maxSize: 10000,
@@ -346,7 +350,7 @@ const cloudsCloudy = {
         pV: 0.3,
       },
       {
-        colour: [183, 183, 178],
+        color: [183, 183, 178],
         opacity: 0.3,
         minSize: 100,
         maxSize: 10000,
@@ -363,7 +367,7 @@ const cloudsMild = {
     // Cloud layers are created in order
     layers: [
       {
-        colour: [200, 200, 200],
+        color: [200, 200, 200],
         opacity: 0.2,
         minSize: 100,
         maxSize: 30000,
@@ -371,7 +375,7 @@ const cloudsMild = {
         pV: 0.3, // Probability of vertical expansion
       },
       {
-        colour: [235, 235, 235],
+        color: [235, 235, 235],
         opacity: 0.15,
         minSize: 100,
         maxSize: 30000,
@@ -379,7 +383,7 @@ const cloudsMild = {
         pV: 0.3,
       },
       {
-        colour: [235, 235, 235],
+        color: [235, 235, 235],
         opacity: 0.15,
         minSize: 100,
         maxSize: 30000,
@@ -387,7 +391,7 @@ const cloudsMild = {
         pV: 0.3,
       },
       {
-        colour: [235, 235, 235],
+        color: [235, 235, 235],
         opacity: 0.15,
         minSize: 100,
         maxSize: 10000,
@@ -395,7 +399,7 @@ const cloudsMild = {
         pV: 0.3,
       },
       {
-        colour: [240, 211, 201],
+        color: [240, 211, 201],
         opacity: 0.3,
         minSize: 100,
         maxSize: 10000,
@@ -403,7 +407,7 @@ const cloudsMild = {
         pV: 0.2,
       },
       {
-        colour: [240, 211, 201],
+        color: [240, 211, 201],
         opacity: 0.15,
         minSize: 100,
         maxSize: 10000,
@@ -411,7 +415,7 @@ const cloudsMild = {
         pV: 0.2,
       },
       {
-        colour: [173, 216, 230],
+        color: [173, 216, 230],
         opacity: 0.1,
         minSize: 100,
         maxSize: 10000,
@@ -419,7 +423,7 @@ const cloudsMild = {
         pV: 0.2,
       },
       {
-        colour: [173, 216, 230],
+        color: [173, 216, 230],
         opacity: 0.1,
         minSize: 100,
         maxSize: 10000,
@@ -481,7 +485,7 @@ const presetLateEvening3: Config = {
     properties: {
       layers: [
         {
-          colour: [254, 207, 199],
+          color: [254, 207, 199],
           maxOpacity: 0.7,
           proportion: 0.7,
           mutationSpeed: 1,
@@ -489,7 +493,7 @@ const presetLateEvening3: Config = {
           yStretch: 0.5,
         },
         {
-          colour: [253, 227, 228],
+          color: [253, 227, 228],
           maxOpacity: 0.5,
           proportion: 0.7,
           mutationSpeed: 1,
@@ -519,7 +523,7 @@ const presetPinkSky2 = {
     properties: {
       layers: [
         {
-          colour: [253, 240, 240], // White
+          color: [253, 240, 240], // White
           maxOpacity: 0.3,
           proportion: 0.7,
           mutationSpeed: 1,
@@ -527,7 +531,7 @@ const presetPinkSky2 = {
           yStretch: 0,
         },
         {
-          colour: [252, 210, 102], // Yellow
+          color: [252, 210, 102], // Yellow
           maxOpacity: 0.3,
           proportion: 0.7,
           mutationSpeed: 1,
@@ -535,7 +539,7 @@ const presetPinkSky2 = {
           yStretch: 0,
         },
         {
-          colour: [255, 227, 115], // Yellow
+          color: [255, 227, 115], // Yellow
           maxOpacity: 0.35,
           proportion: 0.6,
           mutationSpeed: 1,
@@ -543,7 +547,7 @@ const presetPinkSky2 = {
           yStretch: 0,
         },
         {
-          colour: [252, 156, 84], // Sandy brown
+          color: [252, 156, 84], // Sandy brown
           maxOpacity: 0.4,
           proportion: 0.5,
           mutationSpeed: 1,
@@ -551,7 +555,7 @@ const presetPinkSky2 = {
           yStretch: 0,
         },
         {
-          colour: [253, 94, 83], // Sunset orange
+          color: [253, 94, 83], // Sunset orange
           maxOpacity: 0.45,
           proportion: 0.5,
           mutationSpeed: 1,
@@ -564,80 +568,6 @@ const presetPinkSky2 = {
   clouds: none,
 };
 
-type SkyConfig = {
-  properties: {
-    height: number;
-    width: number;
-    pixelSize: number;
-    colour: [number, number, number];
-    mutationSpeed: number;
-    mutationStyle: string;
-    opacity: number;
-  };
-};
-
-type StarsConfig = {
-  include: boolean;
-  properties: {
-    opacity: number;
-    density: number;
-  };
-};
-
-type MoonConfig = {
-  include: boolean;
-  properties: {
-    colour: [number, number, number];
-    radius: number;
-    halfMoon: boolean;
-    noise: number;
-  };
-};
-type SunsetLayer = {
-  colour: [number, number, number];
-  maxOpacity: number;
-  proportion: number;
-  mutationSpeed: number;
-  xStretch: number;
-  yStretch: number;
-};
-
-type SunsetConfig = {
-  include: boolean;
-  properties: {
-    layers: SunsetLayer[];
-  };
-};
-
-type CloudLayer = {
-  colour: [number, number, number];
-  opacity: number;
-  minSize: number;
-  maxSize: number;
-  pH: number;
-  pV: number;
-};
-
-type CloudsConfig = {
-  include: boolean;
-  properties: {
-    quantity: number;
-    layers: CloudLayer[];
-  };
-};
-
-type None = {
-  include: boolean;
-  properties: null;
-};
-
-type Config = {
-  sky: SkyConfig;
-  stars: StarsConfig | None;
-  moon: MoonConfig | None;
-  sunset: SunsetConfig | None;
-  clouds: CloudsConfig | None;
-};
 
 const presetLightDayCloudy: Config = {
   sky: defaultSky([135, 206, 235]),
@@ -651,7 +581,7 @@ const presetLightDayCloudy: Config = {
       // cloud layers are created in order
       layers: [
         {
-          colour: [235, 235, 235],
+          color: [235, 235, 235],
           opacity: 0.5,
           minSize: 100,
           maxSize: 10000,
@@ -659,7 +589,7 @@ const presetLightDayCloudy: Config = {
           pV: 0.3, // probability of vertical expansion
         },
         {
-          colour: [235, 235, 235],
+          color: [235, 235, 235],
           opacity: 0.4,
           minSize: 100,
           maxSize: 10000,
@@ -667,7 +597,7 @@ const presetLightDayCloudy: Config = {
           pV: 0.3,
         },
         {
-          colour: [235, 235, 235],
+          color: [235, 235, 235],
           opacity: 0.4,
           minSize: 100,
           maxSize: 10000,
@@ -675,7 +605,7 @@ const presetLightDayCloudy: Config = {
           pV: 0.3,
         },
         {
-          colour: [235, 235, 235],
+          color: [235, 235, 235],
           opacity: 0.4,
           minSize: 100,
           maxSize: 10000,
@@ -683,7 +613,7 @@ const presetLightDayCloudy: Config = {
           pV: 0.3,
         },
         {
-          colour: [240, 211, 201],
+          color: [240, 211, 201],
           opacity: 0.4,
           minSize: 100,
           maxSize: 2000,
@@ -691,7 +621,7 @@ const presetLightDayCloudy: Config = {
           pV: 0.2,
         },
         {
-          colour: [240, 211, 201],
+          color: [240, 211, 201],
           opacity: 0.4,
           minSize: 100,
           maxSize: 2000,
@@ -699,7 +629,7 @@ const presetLightDayCloudy: Config = {
           pV: 0.2,
         },
         {
-          colour: [173, 216, 230],
+          color: [173, 216, 230],
           opacity: 0.4,
           minSize: 100,
           maxSize: 1000,
@@ -707,7 +637,7 @@ const presetLightDayCloudy: Config = {
           pV: 0.2,
         },
         {
-          colour: [173, 216, 230],
+          color: [173, 216, 230],
           opacity: 0.15,
           minSize: 100,
           maxSize: 1000,
@@ -715,7 +645,7 @@ const presetLightDayCloudy: Config = {
           pV: 0.2,
         },
         {
-          colour: [240, 240, 240],
+          color: [240, 240, 240],
           opacity: 0.2,
           minSize: 100,
           maxSize: 1000,
@@ -754,18 +684,16 @@ const presetCloudy = {
 const presetSunset2: Config = {
   sky: {
     properties: {
-      height: 720,
-      width: 1280,
+      dimensions: {
+        height: 720,
+        width: 1280,
+      },
       pixelSize: 1,
-      colour: [
-        98,
-        119,
-        158
-      ],
+      color: [98, 119, 158],
       opacity: 1,
       mutationSpeed: 0.3,
-      mutationStyle: "Colour spread"
-    }
+      mutationStyle: "Color spread",
+    },
   },
   stars: none,
   moon: none,
@@ -774,79 +702,55 @@ const presetSunset2: Config = {
     properties: {
       layers: [
         {
-          colour: [
-            144,
-            152,
-            171
-          ],
+          color: [144, 152, 171],
           maxOpacity: 0.7,
           proportion: 0.7,
           mutationSpeed: 0.2,
           xStretch: 0.8,
-          yStretch: 0.3
+          yStretch: 0.3,
         },
         {
-          colour: [
-            220,
-            217,
-            222
-          ],
+          color: [220, 217, 222],
           maxOpacity: 1,
           proportion: 0.6,
           mutationSpeed: 0.2,
           xStretch: 0.9,
-          yStretch: 0.3
+          yStretch: 0.3,
         },
         {
-          colour: [
-            233,
-            212,
-            193
-          ],
+          color: [233, 212, 193],
           maxOpacity: 0.8,
           proportion: 0.5,
           mutationSpeed: 0.2,
           xStretch: 0.9,
-          yStretch: 0.3
+          yStretch: 0.3,
         },
         {
-          colour: [
-            225,
-            161,
-            117
-          ],
+          color: [225, 161, 117],
           maxOpacity: 0.8,
           proportion: 0.4,
           mutationSpeed: 0.2,
           xStretch: 1,
-          yStretch: 0.3
+          yStretch: 0.3,
         },
         {
-          colour: [
-            190,
-            140,
-            111
-          ],
+          color: [190, 140, 111],
           maxOpacity: 0.9,
           proportion: 0.2,
           mutationSpeed: 0.2,
           xStretch: 1,
-          yStretch: 0.2
+          yStretch: 0.2,
         },
         {
-          colour: [
-            220,
-            130,
-            101
-          ],
+          color: [220, 130, 101],
           maxOpacity: 0.9,
           proportion: 0.15,
           mutationSpeed: 0.2,
           xStretch: 1,
-          yStretch: 0.2
+          yStretch: 0.2,
         },
-      ]
-    }
+      ],
+    },
   },
   clouds: none,
 };

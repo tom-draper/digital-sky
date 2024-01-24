@@ -1,3 +1,7 @@
+@font-face {
+  font-family: 'Geist';
+  src: url("./fonts/GeistVariableVF.woff2") format("woff2");
+}
 
 body {
     margin: 0;
@@ -6,6 +10,8 @@ body {
 #main {
     display: grid;
     height: 100vh;
+    font-family: 'Geist';
+    font-size: 0.9em;
 }
 
 #sky {
@@ -49,6 +55,7 @@ body {
 }
 .card-body {
     padding: 2em !important;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 .btn {
     margin-top: 30px;
@@ -120,11 +127,11 @@ h4 {
     margin-bottom: 20px !important;
 }
 
-.colour-picker {
+.color-picker {
     border: none;
     padding: 0;
 }
-.colour-text {
+.color-text {
     margin: auto 15px auto 0;
 }
 .same-line {
@@ -136,7 +143,8 @@ h4 {
     flex-direction: row-reverse;
 }
 .title {
-    margin: 40px 20px 40px 0;
+    margin: 40px 40px 40px 0;
+    align-self: center;
 }
 .cloud-img {
     height: 55px;

@@ -4,6 +4,15 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Tom Draper" />
+    <meta
+      name="description"
+      content="A stochastic, configurable sky image generator."
+    />
+    <meta
+      name="keywords"
+      content="art, sky, JavaScript, image generator, generative"
+    />
     <title>Digital Sky</title>
     <link rel="icon" type="image/x-icon" href="public/img/cloud.png" />
     <link href="public/style.css" rel="stylesheet" />
@@ -54,9 +63,9 @@
                   step="1"
                 />
               </div>
-              <div class="component sky-colours same-line component-margin">
-                <div class="colour-text">Colour:</div>
-                <input type="color" id="skyColour" class="colour-picker" />
+              <div class="component sky-colors same-line component-margin">
+                <div class="color-text">Color:</div>
+                <input type="color" id="skyColor" class="color-picker" />
               </div>
               <div class="component sky-opacity">
                 Opacity:
@@ -71,7 +80,7 @@
                 />
               </div>
               <div class="component sky-mutation-speed">
-                Colour mutation speed:
+                Color mutation speed:
                 <input
                   type="range"
                   class="form-range"
@@ -83,12 +92,18 @@
                 />
               </div>
               <div class="component component-margin">
-                <label for="mutation-styles">Colour mutation style:&nbsp</label>
+                <label for="mutation-styles">Color mutation style:&nbsp</label>
                 <select name="mutation-styles" id="skyMutationStyle">
-                  <option value="Colour spread">Colour spread (watercolour)</option>
+                  <option value="Color spread">
+                    Color spread (watercolor)
+                  </option>
                   <option value="Random">Random (grainy)</option>
-                  <option value="Point spread">Point spread (semi-abstract)</option>
-                  <option value="Point spread wavy">Point spread wavy (semi-abstract)</option>
+                  <option value="Point spread">
+                    Point spread (semi-abstract)
+                  </option>
+                  <option value="Point spread wavy">
+                    Point spread wavy (semi-abstract)
+                  </option>
                   <option value="Horizontal">Horizontal (abstract)</option>
                   <option value="Vertical">Vertical (abstract)</option>
                   <option value="Diagonal">Diagonal (abstract)</option>
@@ -105,7 +120,7 @@
                 <input
                   id="starsInclude"
                   type="checkbox"
-                  onclick="toggleProperties('starsInclude', 'starsProperties')"
+                  onclick="window.toggleProperties('starsInclude', 'starsProperties')"
                 />
               </div>
               <div id="starsProperties">
@@ -145,13 +160,13 @@
                 <input
                   id="moonInclude"
                   type="checkbox"
-                  onclick="toggleProperties('moonInclude', 'moonProperties')"
+                  onclick="window.toggleProperties('moonInclude', 'moonProperties')"
                 />
               </div>
               <div id="moonProperties">
-                <div class="component moon-colour same-line component-margin">
-                  <div class="colour-text">Colour:</div>
-                  <input type="color" id="moonColour" class="colour-picker" />
+                <div class="component moon-color same-line component-margin">
+                  <div class="color-text">Color:</div>
+                  <input type="color" id="moonColor" class="color-picker" />
                 </div>
                 <div class="component moon-density">
                   Radius:
@@ -192,7 +207,7 @@
                 <input
                   id="sunsetInclude"
                   type="checkbox"
-                  onclick="toggleProperties('sunsetInclude', 'sunsetProperties')"
+                  onclick="window.toggleProperties('sunsetInclude', 'sunsetProperties')"
                 />
               </div>
 
@@ -203,11 +218,13 @@
                     <button class="btn btn-outline-danger delete-sunset-layer">
                       Delete
                     </button>
-                    <div class="component sunset-colour same-line component-margin">
-                      <div class="colour-text">Colour:</div>
+                    <div
+                      class="component sunset-color same-line component-margin"
+                    >
+                      <div class="color-text">Color:</div>
                       <input
                         type="color"
-                        class="colour-picker"
+                        class="color-picker"
                         value="#FFFFFF"
                       />
                     </div>
@@ -236,7 +253,7 @@
                       />
                     </div>
                     <div class="component sunset-mutation-speed">
-                      Colour mutation speed:
+                      Color mutation speed:
                       <input
                         type="range"
                         class="form-range"
@@ -277,7 +294,7 @@
                 <div class="add-sunset-layer-container">
                   <button
                     class="btn btn-outline-primary add-sunset-layer"
-                    onclick="addSunsetLayer()"
+                    onclick="window.addSunsetLayer()"
                   >
                     Add layer
                   </button>
@@ -294,7 +311,7 @@
                 <input
                   id="cloudsInclude"
                   type="checkbox"
-                  onclick="toggleProperties('cloudsInclude', 'cloudsProperties')"
+                  onclick="window.toggleProperties('cloudsInclude', 'cloudsProperties')"
                 />
               </div>
               <div id="cloudsProperties">
@@ -309,9 +326,11 @@
                     <button class="btn btn-outline-danger delete-clouds-layer">
                       Delete
                     </button>
-                    <div class="component clouds-colour same-line component-margin">
-                      <div class="colour-text">Colour:</div>
-                      <input type="color" class="colour-picker" />
+                    <div
+                      class="component clouds-color same-line component-margin"
+                    >
+                      <div class="color-text">Color:</div>
+                      <input type="color" class="color-picker" />
                     </div>
                     <div class="component clouds-max-opacity">
                       Opacity:
@@ -376,7 +395,7 @@
                 <div class="add-clouds-layer-container">
                   <button
                     class="btn btn-outline-primary add-clouds-layer"
-                    onclick="addCloudsLayer()"
+                    onclick="window.addCloudsLayer()"
                   >
                     Add layer
                   </button>
@@ -384,7 +403,11 @@
               </div>
             </div>
           </div>
-          <button onclick="run(false)" id="generate-btn" class="btn btn-primary">
+          <button
+            onclick="window.run(false)"
+            id="generate-btn"
+            class="btn btn-primary"
+          >
             Generate
           </button>
           <div
@@ -395,16 +418,17 @@
             <span class="sr-only"></span>
           </div>
 
-          <button onclick="run(true)" id="generate-btn" class="random-btn">
+          <button
+            onclick="window.run(true)"
+            id="generate-btn"
+            class="random-btn"
+          >
             Random
           </button>
         </div>
       </div>
       <canvas id="canvas"></canvas>
     </div>
-    <script type="text/javascript" src="dist/config.js"></script>
-    <script type="text/javascript" src="dist/presets.js"></script>
-    <script type="text/javascript" src="dist/app.js"></script>
-    <script type="text/javascript" src="dist/generate.js"></script>
+    <script type="text/javascript" src="build/app.js"></script>
   </body>
 </html>
