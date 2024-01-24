@@ -8,9 +8,8 @@ import path from "path";
   const count = getCount();
   console.log(`☁️  Generating ${count} ${count == 1 ? 'sky' : 'skies'}...`);
   for (let i = 0; i < count; i++) {
-    console.log(`Generating sky ${i + 1}...`);
+    console.log(`\nGenerating sky ${i + 1}...`);
     await generateSky(randConfig());
-    console.log();
   }
 })();
 
