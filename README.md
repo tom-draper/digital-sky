@@ -50,6 +50,10 @@ ts-node scripts/main -n <count>
 
 For more extreme skies, modify the random config generator function `randConfig()` in `src/config.ts` to your liking.
 
+## Public Gallery
+
+Post some of your favourite generations to the <a href="https://gist.github.com/tom-draper/ca5a0aae574a0f4e399080595b9c19a5" target="_blank">public gallery</a>.
+
 ## Contributions
 
 Contributions, issues and feature requests are welcome.
