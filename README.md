@@ -48,7 +48,7 @@ Then run `scripts/main.ts` with `ts-node`. The number of skies can be specified 
 ts-node scripts/main -n <count>
 ```
 
-For more extreme skies, modify the random config generator function `randConfig()` in `src/config.ts` to your liking.
+For more extreme skies, modify the random config generator function `randConfig()` in `src/config.ts` to your preference.
 
 ## Public Gallery
 
