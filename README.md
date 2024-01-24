@@ -1,11 +1,12 @@
 # Digital Sky
+
 A configurable, stochastic sky image generator.
 
 Hosted at: https://tom-draper.github.io/digital-sky
 
 To run locally, run `npm install` to install dependencies, then `npm run build` to compile, then open `index.html` in a browser.
 
-## Gallary ✨
+## Gallery ✨
 
 ![Sky 10](https://user-images.githubusercontent.com/41476809/207963824-12030d7a-7dba-42b2-95a1-15dc4448f824.png)
 

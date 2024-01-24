@@ -1,15 +1,19 @@
+import { Config, None } from "./config";
+
 const defaultHeight = 720;
 const defaultWidth = 1280;
 
 function defaultSky(colour: [number, number, number]) {
   return {
     properties: {
-      height: defaultHeight,
-      width: defaultWidth,
+      dimensions: {
+        height: defaultHeight,
+        width: defaultWidth,
+      },
       pixelSize: 1,
       colour: colour,
       mutationSpeed: 1,
-      mutationStyle: 'Colour spread',
+      mutationStyle: "Colour spread",
       opacity: 1,
     },
   };
@@ -564,80 +568,6 @@ const presetPinkSky2 = {
   clouds: none,
 };
 
-type SkyConfig = {
-  properties: {
-    height: number;
-    width: number;
-    pixelSize: number;
-    colour: [number, number, number];
-    mutationSpeed: number;
-    mutationStyle: string;
-    opacity: number;
-  };
-};
-
-type StarsConfig = {
-  include: boolean;
-  properties: {
-    opacity: number;
-    density: number;
-  };
-};
-
-type MoonConfig = {
-  include: boolean;
-  properties: {
-    colour: [number, number, number];
-    radius: number;
-    halfMoon: boolean;
-    noise: number;
-  };
-};
-type SunsetLayer = {
-  colour: [number, number, number];
-  maxOpacity: number;
-  proportion: number;
-  mutationSpeed: number;
-  xStretch: number;
-  yStretch: number;
-};
-
-type SunsetConfig = {
-  include: boolean;
-  properties: {
-    layers: SunsetLayer[];
-  };
-};
-
-type CloudLayer = {
-  colour: [number, number, number];
-  opacity: number;
-  minSize: number;
-  maxSize: number;
-  pH: number;
-  pV: number;
-};
-
-type CloudsConfig = {
-  include: boolean;
-  properties: {
-    quantity: number;
-    layers: CloudLayer[];
-  };
-};
-
-type None = {
-  include: boolean;
-  properties: null;
-};
-
-type Config = {
-  sky: SkyConfig;
-  stars: StarsConfig | None;
-  moon: MoonConfig | None;
-  sunset: SunsetConfig | None;
-  clouds: CloudsConfig | None;
-};
 
 const presetLightDayCloudy: Config = {
   sky: defaultSky([135, 206, 235]),
@@ -754,18 +684,16 @@ const presetCloudy = {
 const presetSunset2: Config = {
   sky: {
     properties: {
-      height: 720,
-      width: 1280,
+      dimensions: {
+        height: 720,
+        width: 1280,
+      },
       pixelSize: 1,
-      colour: [
-        98,
-        119,
-        158
-      ],
+      colour: [98, 119, 158],
       opacity: 1,
       mutationSpeed: 0.3,
-      mutationStyle: "Colour spread"
-    }
+      mutationStyle: "Colour spread",
+    },
   },
   stars: none,
   moon: none,
@@ -774,79 +702,55 @@ const presetSunset2: Config = {
     properties: {
       layers: [
         {
-          colour: [
-            144,
-            152,
-            171
-          ],
+          colour: [144, 152, 171],
           maxOpacity: 0.7,
           proportion: 0.7,
           mutationSpeed: 0.2,
           xStretch: 0.8,
-          yStretch: 0.3
+          yStretch: 0.3,
         },
         {
-          colour: [
-            220,
-            217,
-            222
-          ],
+          colour: [220, 217, 222],
           maxOpacity: 1,
           proportion: 0.6,
           mutationSpeed: 0.2,
           xStretch: 0.9,
-          yStretch: 0.3
+          yStretch: 0.3,
         },
         {
-          colour: [
-            233,
-            212,
-            193
-          ],
+          colour: [233, 212, 193],
           maxOpacity: 0.8,
           proportion: 0.5,
           mutationSpeed: 0.2,
           xStretch: 0.9,
-          yStretch: 0.3
+          yStretch: 0.3,
         },
         {
-          colour: [
-            225,
-            161,
-            117
-          ],
+          colour: [225, 161, 117],
           maxOpacity: 0.8,
           proportion: 0.4,
           mutationSpeed: 0.2,
           xStretch: 1,
-          yStretch: 0.3
+          yStretch: 0.3,
         },
         {
-          colour: [
-            190,
-            140,
-            111
-          ],
+          colour: [190, 140, 111],
           maxOpacity: 0.9,
           proportion: 0.2,
           mutationSpeed: 0.2,
           xStretch: 1,
-          yStretch: 0.2
+          yStretch: 0.2,
         },
         {
-          colour: [
-            220,
-            130,
-            101
-          ],
+          colour: [220, 130, 101],
           maxOpacity: 0.9,
           proportion: 0.15,
           mutationSpeed: 0.2,
           xStretch: 1,
-          yStretch: 0.2
+          yStretch: 0.2,
         },
-      ]
-    }
+      ],
+    },
   },
   clouds: none,
 };
