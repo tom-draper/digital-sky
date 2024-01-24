@@ -1,6 +1,6 @@
 # Digital Sky
 
-A configurable, stochastic sky image generator.
+A configurable and stochastic sky image generator.
 
 Hosted at: https://tom-draper.github.io/digital-sky
 
